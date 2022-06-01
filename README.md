@@ -1,6 +1,7 @@
 # Ledger VTB App
 
 [![Build](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/main.yml/badge.svg)](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/main.yml)
+[![CI](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/ledger.yml/badge.svg)](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/ledger.yml)
 ---
 
 This project contains the VTB app (https://polkadot.network/) for Ledger Nano S and X.
