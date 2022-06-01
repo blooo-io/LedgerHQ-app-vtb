@@ -1,18 +1,9 @@
-# Ledger Polkadot App
+# Ledger VTB App
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GithubActions](https://github.com/zondax/ledger-polkadot/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-polkadot/blob/main/.github/workflows/main.yaml)
-
+[![Build](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/main.yml/badge.svg)](https://github.com/blooo-io/LedgerHQ-app-vtb/actions/workflows/main.yml)
 ---
 
-![zondax_light](docs/zondax_light.png#gh-light-mode-only)
-![zondax_dark](docs/zondax_dark.png#gh-dark-mode-only)
-
-_Please visit our website at [zondax.ch](https://www.zondax.ch)_
-
----
-
-This project contains the Polkadot app (https://polkadot.network/) for Ledger Nano S and X.
+This project contains the VTB app (https://polkadot.network/) for Ledger Nano S and X.
 
 - Ledger Nano S/X BOLOS app
 - Specs / Documentation
