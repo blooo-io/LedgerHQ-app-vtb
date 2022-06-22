@@ -24,6 +24,11 @@
 #include <zxformat.h>
 #include <zxmacros.h>
 
+parser_error_t _buyVTBC_V12(parser_context_t* c, pd_CryptoAmount_V12_t* v){
+    CHECK_INPUT();
+    return parser_ok;
+}
+
 parser_error_t _readAccountId_V12(parser_context_t* c, pd_AccountId_V12_t* v) {
     GEN_DEF_READARRAY(32)
 }
@@ -1030,6 +1035,37 @@ parser_error_t _toStringConviction_V12(
         return parser_print_not_supported;
     }
 
+    return parser_ok;
+}
+
+parser_error_t _toStringLookupCryptoTokenType_V11(
+    const pd_LookupCryptoTokenType_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    switch (v->value) {
+    case 0: // EOS
+        return parser_ok;
+        //CHECK_ERROR(_toStringAccountId_V11(&v->id, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 1: // ETH
+        return parser_ok;
+        //CHECK_ERROR(_toStringCompactAccountIndex_V11(&v->index, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 2: // VTBC
+        return parser_ok;
+        //CHECK_ERROR(_toStringBytes(&v->raw, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 3: // VTBT
+        return parser_ok;
+        //GEN_DEF_TOSTRING_ARRAY(32)
+
+    default:
+        return parser_unexpected_address_type;
+    }
     return parser_ok;
 }
 

@@ -20,6 +20,7 @@ extern "C" {
 #endif
 
 // Modules names
+static const char* STR_MO_VTBDEX = "VtbDex";
 static const char* STR_MO_SYSTEM = "System";
 static const char* STR_MO_PREIMAGE = "Preimage";
 static const char* STR_MO_TIMESTAMP = "Timestamp";
@@ -54,6 +55,8 @@ static const char* STR_MO_AUCTIONS = "Auctions";
 static const char* STR_MO_CROWDLOAN = "Crowdloan";
 
 // Methods names
+static const char* STR_ME_CANCEL_SELL_VTBC = "Cancel sell Vtbc";
+static const char* STR_ME_BUY_VTBC = "Buy Vtbc";
 static const char* STR_ME_FILL_BLOCK = "Fill block";
 static const char* STR_ME_REMARK = "Remark";
 static const char* STR_ME_SET_HEAP_PAGES = "Set heap pages";
@@ -258,6 +261,9 @@ static const char* STR_ME_POKE = "Poke";
 static const char* STR_ME_CONTRIBUTE_ALL = "Contribute all";
 
 // Items names
+static const char* STR_IT_crypto_amount = "Crypto amount";
+static const char* STR_IT_crypto_type = "Crypto type";
+static const char* STR_IT_order_id = "Order id";
 static const char* STR_IT_ratio = "Ratio";
 static const char* STR_IT_remark = "Remark";
 static const char* STR_IT_pages = "Pages";

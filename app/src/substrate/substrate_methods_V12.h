@@ -59,6 +59,17 @@ extern "C" {
 #define PD_CALL_AUCTIONS_V12 72
 #define PD_CALL_CROWDLOAN_V12 73
 
+#define PD_BUY_VTBC_V12 2054
+typedef struct {
+    pd_CryptoAmount_V12_t crypto_amount;
+    pd_LookupCryptoTokenType_V12_t crypto_type;
+} pd_buy_vtbc_V12_t;
+
+#define PD_CANCEL_SELL_VTBC_V12 2057
+typedef struct {
+    pd_Vecu8_t order_id;
+} pd_cancel_sell_vtbc_V12_t;
+
 #define PD_CALL_BALANCES_TRANSFER_ALL_V12 4
 typedef struct {
     pd_LookupasStaticLookupSource_V12_t dest;
@@ -1183,6 +1194,8 @@ typedef struct {
 #endif
 
 typedef union {
+    pd_buy_vtbc_V12_t buy_vtbc_V12;
+    pd_cancel_sell_vtbc_V12_t cancel_sell_vtbc_V12;
     pd_balances_transfer_all_V12_t balances_transfer_all_V12;
     pd_staking_bond_V12_t staking_bond_V12;
     pd_staking_bond_extra_V12_t staking_bond_extra_V12;

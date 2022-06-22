@@ -19,6 +19,20 @@
 #include "zxmacros.h"
 #include <stdint.h>
 
+__Z_INLINE parser_error_t _readMethod_buy_VTBC_V12(
+    parser_context_t* c, pd_buy_vtbc_V12_t* m)
+{
+    CHECK_ERROR(_buyVTBC_V12(c, &m->crypto_amount))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_V12(
+    parser_context_t* c, pd_cancel_sell_vtbc_V12_t* m)
+{
+    CHECK_ERROR(_readVecu8(c, &m->order_id))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_balances_transfer_V12(
     parser_context_t* c, pd_balances_transfer_V12_t* m)
 {
@@ -1684,7 +1698,12 @@ parser_error_t _readMethod_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-
+    case 2057: /* module 8 call 9 */
+        CHECK_ERROR(_readMethod_cancel_sell_vtbc_V12(c, &method->basic.cancel_sell_vtbc_V12))
+        break;
+    case 2054: /* module 8 call 6 */
+        CHECK_ERROR(_readMethod_buy_VTBC_V12(c, &method->basic.buy_vtbc_V12))
+        break;
     case 1280: /* module 5 call 0 */
         CHECK_ERROR(_readMethod_balances_transfer_V12(c, &method->nested.balances_transfer_V12))
         break;
@@ -2364,6 +2383,8 @@ const char* _getMethod_ModuleName_V12(uint8_t moduleIdx)
         return STR_MO_BALANCES;
     case 7:
         return STR_MO_STAKING;
+    case 8:
+        return STR_MO_VTBDEX;
     case 9:
         return STR_MO_SESSION;
     case 26:
@@ -2438,6 +2459,10 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
+    case 2057: /* module 8 call 9 */
+        return STR_ME_CANCEL_SELL_VTBC;
+    case 2054: /* module 8 call 6 */
+        return STR_ME_BUY_VTBC;
     case 1280: /* module 5 call 0 */
         return STR_ME_TRANSFER;
     case 1282: /* module 5 call 2 */
@@ -2900,6 +2925,10 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
+    case 2057: /* module 8 call 9 */
+        return 1;
+    case 2054: /* module 8 call 6 */
+        return 2;
     case 1280: /* module 5 call 0 */
         return 2;
     case 1282: /* module 5 call 2 */
@@ -3352,6 +3381,22 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
+    case 2054: /* module 8 call 6 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_crypto_type;
+        case 1:
+            return STR_IT_crypto_amount;
+        default:
+            return NULL;
+        }
+    case 2057: /* module 8 call 9 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_order_id;
+        default:
+            return NULL;
+        }
     case 1280: /* module 5 call 0 */
         switch (itemIdx) {
         case 0:
@@ -5143,6 +5188,33 @@ parser_error_t _getMethod_ItemValue_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
+    case 2054: /* module 8 call 6 */
+        switch (itemIdx) {
+        case 0: /* balances_transfer_V11 - dest */;
+            return parser_ok;
+            // return _toStringLookupCryptoTokenType_V11(
+            //     &m->basic.buy_vtbc_V11.crypto_type,
+            //     outValue, outValueLen,
+            //     pageIdx, pageCount);
+        case 1: /* balances_transfer_V11 - amount */;
+            return parser_ok;
+            // return _toStringCompactBalance(
+            //     &m->basic.buy_vtbc_V11.crypto_amount,
+            //     outValue, outValueLen,
+            //     pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 2057: /* module 8 call 9 */
+        switch (itemIdx) {
+        case 0: /* cancel_sell_vtbc_V11 - order_id */;
+            return _toStringVecu8(
+                &m->basic.cancel_sell_vtbc_V12.order_id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
     case 1280: /* module 5 call 0 */
         switch (itemIdx) {
         case 0: /* balances_transfer_V12 - dest */;

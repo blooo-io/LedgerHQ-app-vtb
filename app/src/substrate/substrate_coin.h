@@ -19,13 +19,13 @@
 extern "C" {
 #endif
 
-#define COIN_ADDR_TYPE 0
-#define CLA 0x90
+#define COIN_ADDR_TYPE 42 // change 0 to 42 for general
+#define CLA 0x90 //change 0x90 to 0xa4
 
 #define HDPATH_LEN_DEFAULT 5
 #define HDPATH_0_DEFAULT (0x80000000 | 0x2c)
-#define HDPATH_1_DEFAULT (0x80000000 | 0x162)
-#define HDPATH_1_RECOVERY (0x80000000 | 0x1b2)
+#define HDPATH_1_DEFAULT (0x80000000 | 0x2b6) //change from 0x162 to 0x2a9
+#define HDPATH_1_RECOVERY (0x80000000 | 0x2b6) //change from 0x1b2 to 0x2a9
 
 #define HDPATH_2_DEFAULT (0x80000000u | 0u)
 #define HDPATH_3_DEFAULT (0u)
@@ -55,18 +55,18 @@ typedef enum {
 #define SUPPORTED_SPEC_VERSION (LEDGER_MINOR_VERSION + 0)
 #define SUPPORTED_MINIMUM_SPEC_VERSION 9000
 
-#define COIN_AMOUNT_DECIMAL_PLACES 10
-
-#define COIN_GENESIS_HASH "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3"
-#define COIN_NAME "Polkadot"
-#define COIN_TICKER "DOT "
+#define COIN_AMOUNT_DECIMAL_PLACES 12 // change 10 to 12
+#define COIN_GENESIS_HASH "cb2d6ea2af1b0c81aa70b6d0cae813b0c76d68899ec86e3a344cb2bfdfa53a60"
+// #define COIN_GENESIS_HASH "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3"
+#define COIN_NAME "VTB"
+#define COIN_TICKER "VTB "
 
 #define COIN_SECRET_REQUIRED_CLICKS 10
 
-#define MENU_MAIN_APP_LINE1 "Polkadot"
+#define MENU_MAIN_APP_LINE1 "VTB"
 #define MENU_MAIN_APP_LINE2 "Ready"
-#define MENU_MAIN_APP_LINE2_SECRET "DOT RECOVERY"
-#define APPVERSION_LINE1 "Polkadot"
+#define MENU_MAIN_APP_LINE2_SECRET "VTB RECOVERY"
+#define APPVERSION_LINE1 "VTB"
 #define APPVERSION_LINE2 "v" APPVERSION
 
 #ifdef __cplusplus

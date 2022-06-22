@@ -27,6 +27,27 @@ extern "C" {
 // https://github.com/paritytech/substrate/blob/master/node/primitives/src/lib.rs
 
 typedef struct {
+    const uint16_t* _ptr;
+} pd_CryptoAmount_V12_t;
+
+typedef struct {
+    uint8_t value;
+    union {
+        const uint8_t EOS;
+        const uint8_t ETH;
+        const uint8_t VTBC;
+        const uint8_t VTBT;
+    };
+} pd_LookupCryptoTokenType_V12_t;
+
+typedef enum {
+    EOS,
+    ETH,
+    VTBC,
+    VTBT
+} pd_TokenType_V12_t;
+
+typedef struct {
     const uint8_t* _ptr;
 } pd_AccountId_V12_t;
 

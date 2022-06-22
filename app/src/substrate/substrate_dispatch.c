@@ -19,6 +19,20 @@
 #include "zxmacros.h"
 #include <stdint.h>
 
+__Z_INLINE parser_error_t _readMethod_buy_VTBC_V12(
+    parser_context_t* c, pd_buy_vtbc_V12_t* m)
+{
+    CHECK_ERROR(_buyVTBC_V12(c, &m->crypto_amount))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_V12(
+    parser_context_t* c, pd_cancel_sell_vtbc_V12_t* m)
+{
+    CHECK_ERROR(_readVecu8(c, &m->order_id))
+    return parser_ok;
+}
+
 parser_error_t _readMethod(
     parser_context_t* c,
     uint8_t moduleIdx,

@@ -62,27 +62,27 @@ $(info ************ FULL PARSER ENABLED ************)
 endif
 
 ifndef COIN
-COIN=DOT
+COIN=VTB
 endif
 
 include $(CURDIR)/Makefile.version
 
 $(info COIN  = [$(COIN)])
 
-ifeq ($(COIN),DOT)
+ifeq ($(COIN),VTB)
 # Main app configuration
 DEFINES += APP_STANDARD
 ifneq ($(TARGET_NAME),TARGET_NANOS)
 DEFINES += SUBSTRATE_PARSER_FULL
 endif
-APPNAME = "Polkadot"
-APPPATH = "44'/354'"  --path "44'/434'"
+APPNAME = "VTB"
+APPPATH = "44'/694'"  --path "44'/694'"
 
-else ifeq ($(COIN),DOT_XL)
+else ifeq ($(COIN),VTB_XL)
 # XL app configuration
 DEFINES += APP_STANDARD SUBSTRATE_PARSER_FULL
-APPNAME = "Polkadot XL"
-APPPATH = "44'/354'"  --path "44'/434'"
+APPNAME = "VTB XL"
+APPPATH = "44'/694'"  --path "44'/694'"
 
 else
 define error_message
@@ -106,21 +106,21 @@ OUTPUT_ELF ?= $(CURDIR)/output/app_s.elf
 OUTPUT_INSTALLER := $(CURDIR)/pkg/installer_s.sh
 endif
 
-ifeq ($(TARGET_NAME),TARGET_NANOX)
-APP_LOAD_PARAMS += --appFlags 0x200
-SCRIPT_LD:=$(CURDIR)/script_x.ld
-ICONNAME:=$(CURDIR)/nanox_icon.gif
-OUTPUT_ELF ?= $(CURDIR)/output/app_x.elf
-OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_x.sh
-endif
+# ifeq ($(TARGET_NAME),TARGET_NANOX)
+# APP_LOAD_PARAMS += --appFlags 0x200
+# SCRIPT_LD:=$(CURDIR)/script_x.ld
+# ICONNAME:=$(CURDIR)/nanox_icon.gif
+# OUTPUT_ELF ?= $(CURDIR)/output/app_x.elf
+# OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_x.sh
+# endif
 
-ifeq ($(TARGET_NAME),TARGET_NANOS2)
-APP_LOAD_PARAMS += --appFlags 0x000
-SCRIPT_LD:=$(CURDIR)/script_s2.ld
-ICONNAME:=$(CURDIR)/nanox_icon.gif
-OUTPUT_ELF ?= $(CURDIR)/output/app_s2.elf
-OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_s2.sh
-endif
+# ifeq ($(TARGET_NAME),TARGET_NANOS2)
+# APP_LOAD_PARAMS += --appFlags 0x000
+# SCRIPT_LD:=$(CURDIR)/script_s2.ld
+# ICONNAME:=$(CURDIR)/nanox_icon.gif
+# OUTPUT_ELF ?= $(CURDIR)/output/app_s2.elf
+# OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_s2.sh
+# endif
 
 $(info TARGET_NAME  = [$(TARGET_NAME)])
 $(info ICONNAME  = [$(ICONNAME)])
@@ -164,13 +164,13 @@ DEFINES       += HAVE_BAGL_FONT_OPEN_SANS_LIGHT_16PX
 DEFINES       += HAVE_UX_FLOW
 endif
 
-ifeq ($(TARGET_NAME),TARGET_NANOX)
-# X specific
-DEFINES       += HAVE_BLE
-DEFINES       += HAVE_BLE_APDU BLE_COMMAND_TIMEOUT_MS=2000
+# ifeq ($(TARGET_NAME),TARGET_NANOX)
+# # X specific
+# DEFINES       += HAVE_BLE
+# DEFINES       += HAVE_BLE_APDU BLE_COMMAND_TIMEOUT_MS=2000
 
-SDK_SOURCE_PATH  += lib_blewbxx lib_blewbxx_impl
-endif
+# SDK_SOURCE_PATH  += lib_blewbxx lib_blewbxx_impl
+# endif
 
 # App specific
 
@@ -255,9 +255,9 @@ dep/%.d: %.c Makefile
 .PHONY: listvariants
 listvariants:
 ifeq ($(TARGET_NAME),TARGET_NANOS)
-	@echo VARIANTS COIN DOT DOT_XL
+	@echo VARIANTS COIN VTB VTB_XL
 else
-	@echo VARIANTS COIN DOT
+	@echo VARIANTS COIN VTB
 endif
 
 .PHONY: version

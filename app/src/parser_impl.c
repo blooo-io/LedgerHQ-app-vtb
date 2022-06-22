@@ -30,7 +30,7 @@ parser_error_t _readTx(parser_context_t *c, parser_tx_t *v) {
     CHECK_INPUT()
 
     // Reverse parse to retrieve spec before forward parsing
-    CHECK_ERROR(_checkVersions(c))
+    // CHECK_ERROR(_checkVersions(c))
 
     // Now forward parse
     CHECK_ERROR(_readCallIndex(c, &v->callIndex))
