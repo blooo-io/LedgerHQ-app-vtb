@@ -22,6 +22,7 @@
     "@zondax/zemu": "^0.29.0"
   },
   "devDependencies": {
+    "@blooo/ledger-substrate": "^0.31.3",
     "@types/jest": "^27.0.3",
     "@types/ledgerhq__hw-transport": "^4.21.4",
     "@typescript-eslint/eslint-plugin": "^5.7.0",

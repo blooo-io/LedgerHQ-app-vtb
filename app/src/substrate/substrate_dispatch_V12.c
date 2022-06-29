@@ -22,7 +22,9 @@
 __Z_INLINE parser_error_t _readMethod_buy_VTBC_V12(
     parser_context_t* c, pd_buy_vtbc_V12_t* m)
 {
-    CHECK_ERROR(_buyVTBC_V12(c, &m->crypto_amount))
+    CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->crypto_amount))
     return parser_ok;
 }
 
@@ -5190,18 +5192,18 @@ parser_error_t _getMethod_ItemValue_V12(
     switch (callPrivIdx) {
     case 2054: /* module 8 call 6 */
         switch (itemIdx) {
-        case 0: /* balances_transfer_V11 - dest */;
+        case 0: /* balances_transfer_V12 - dest */;
             return parser_ok;
-            // return _toStringLookupCryptoTokenType_V11(
-            //     &m->basic.buy_vtbc_V11.crypto_type,
-            //     outValue, outValueLen,
-            //     pageIdx, pageCount);
-        case 1: /* balances_transfer_V11 - amount */;
+            return _toStringLookupCryptoTokenType_V12(
+                &m->basic.buy_vtbc_V12.crypto_type,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* balances_transfer_V12 - amount */;
             return parser_ok;
-            // return _toStringCompactBalance(
-            //     &m->basic.buy_vtbc_V11.crypto_amount,
-            //     outValue, outValueLen,
-            //     pageIdx, pageCount);
+            return _toStringCompactBalance(
+                &m->basic.buy_vtbc_V12.crypto_amount,
+                outValue, outValueLen,
+                pageIdx, pageCount);
         default:
             return parser_no_data;
         }

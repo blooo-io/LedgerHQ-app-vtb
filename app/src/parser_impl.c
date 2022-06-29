@@ -30,18 +30,18 @@ parser_error_t _readTx(parser_context_t *c, parser_tx_t *v) {
     CHECK_INPUT()
 
     // Reverse parse to retrieve spec before forward parsing
-    // CHECK_ERROR(_checkVersions(c))
+    CHECK_ERROR(_checkVersions(c))
 
     // Now forward parse
     CHECK_ERROR(_readCallIndex(c, &v->callIndex))
     CHECK_ERROR(_readMethod(c, v->callIndex.moduleIdx, v->callIndex.idx, &v->method))
-    CHECK_ERROR(_readEra(c, &v->era))
-    CHECK_ERROR(_readCompactIndex(c, &v->nonce))
-    CHECK_ERROR(_readCompactBalance(c, &v->tip))
-    CHECK_ERROR(_readUInt32(c, &v->specVersion))
-    CHECK_ERROR(_readUInt32(c, &v->transactionVersion))
-    CHECK_ERROR(_readHash(c, &v->genesisHash))
-    CHECK_ERROR(_readHash(c, &v->blockHash))
+    // CHECK_ERROR(_readEra(c, &v->era))
+    // CHECK_ERROR(_readCompactIndex(c, &v->nonce))
+    // CHECK_ERROR(_readCompactBalance(c, &v->tip))
+    // CHECK_ERROR(_readUInt32(c, &v->specVersion))
+    // CHECK_ERROR(_readUInt32(c, &v->transactionVersion))
+    // CHECK_ERROR(_readHash(c, &v->genesisHash))
+    // CHECK_ERROR(_readHash(c, &v->blockHash))
 
     if (c->offset < c->bufferLen) {
         return parser_unexpected_unparsed_bytes;

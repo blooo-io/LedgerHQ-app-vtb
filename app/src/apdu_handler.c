@@ -187,7 +187,6 @@ __Z_INLINE void handleSignEd25519(volatile uint32_t *flags, volatile uint32_t *t
         *tx += (error_msg_length);
         THROW(APDU_CODE_DATA_INVALID);
     }
-
     view_review_init(tx_getItem, tx_getNumItems, app_sign_ed25519);
     view_review_show();
     *flags |= IO_ASYNCH_REPLY;
