@@ -129,8 +129,8 @@ parser_error_t _readBool(parser_context_t *c, pd_bool_t *v) {
 parser_error_t _readCompactInt(parser_context_t *c, compactInt_t *v) {
     CHECK_INPUT()
 
-    v->ptr = c->buffer + c->offset;
-    const uint8_t mode = *v->ptr & 0x03u;      // get mode from two least significant bits
+    v->_ptr = c->buffer + c->offset;
+    const uint8_t mode = *v->_ptr & 0x03u;      // get mode from two least significant bits
 
     uint64_t tmp;
     switch (mode) {
@@ -150,7 +150,7 @@ parser_error_t _readCompactInt(parser_context_t *c, compactInt_t *v) {
             _getValue(v, &tmp);
             break;
         case 3:         // bigint
-            v->len = (*v->ptr >> 2u) + 4 + 1;
+            v->len = (*v->_ptr >> 2u) + 4 + 1;
             CTX_CHECK_AND_ADVANCE(c, v->len)
             break;
         default:
@@ -166,20 +166,20 @@ parser_error_t _getValue(const compactInt_t *c, uint64_t *v) {
 
     switch (c->len) {
         case 1:
-            *v = (*c->ptr) >> 2u;
+            *v = (*c->_ptr) >> 2u;
             break;
         case 2:
-            *v = (*c->ptr) >> 2u;
-            *v += *(c->ptr + 1) << 6u;
+            *v = (*c->_ptr) >> 2u;
+            *v += *(c->_ptr + 1) << 6u;
             if (*v < 64) {
                 return parser_value_out_of_range;
             }
             break;
         case 4:
-            *v = (*c->ptr) >> 2u;
-            *v += *(c->ptr + 1) << 6u;
-            *v += *(c->ptr + 2) << (8u + 6u);
-            *v += *(c->ptr + 3) << (16u + 6u);
+            *v = (*c->_ptr) >> 2u;
+            *v += *(c->_ptr + 1) << 6u;
+            *v += *(c->_ptr + 2) << (8u + 6u);
+            *v += *(c->_ptr + 3) << (16u + 6u);
             if (*v < 16383) {
                 return parser_value_out_of_range;
             }
@@ -213,7 +213,7 @@ parser_error_t _toStringCompactInt(const compactInt_t *c,
         uint8_t bcdOut[100];
         const uint16_t bcdOutLen = sizeof(bcdOut);
 
-        bignumLittleEndian_to_bcd(bcdOut, bcdOutLen, c->ptr + 1, c->len - 1);
+        bignumLittleEndian_to_bcd(bcdOut, bcdOutLen, c->_ptr + 1, c->len - 1);
         if (!bignumLittleEndian_bcdprint(bufferUI, sizeof(bufferUI), bcdOut, bcdOutLen))
             return parser_unexpected_buffer_end;
     }
@@ -305,6 +305,17 @@ parser_error_t _toStringCompactBalance(const pd_CompactBalance_t *v,
                                        uint8_t pageIdx, uint8_t *pageCount) {
     CHECK_ERROR(_toStringCompactInt(
             &v->value,
+            COIN_AMOUNT_DECIMAL_PLACES, "", COIN_TICKER,
+            outValue, outValueLen, pageIdx, pageCount))
+    number_inplace_trimming(outValue, 1);
+    return parser_ok;
+}
+
+parser_error_t _toStringCompactAmount(const compactInt_t *v,
+                                       char *outValue, uint16_t outValueLen,
+                                       uint8_t pageIdx, uint8_t *pageCount) {
+    CHECK_ERROR(_toStringCompactInt(
+            v,
             COIN_AMOUNT_DECIMAL_PLACES, "", COIN_TICKER,
             outValue, outValueLen, pageIdx, pageCount))
     number_inplace_trimming(outValue, 1);

@@ -30,7 +30,7 @@ include $(CURDIR)/deps/ledger-zxlib/dockerized_build.mk
 
 else
 default:
-	$(MAKE) -C app
+	$(MAKE) -C app DEBUG=$(DEBUG)
 %:
 	$(info "Calling app Makefile for target $@")
 	COIN=$(COIN) $(MAKE) -C app $@

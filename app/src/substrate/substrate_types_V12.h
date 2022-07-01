@@ -28,16 +28,11 @@ extern "C" {
 
 typedef struct {
     const uint8_t* _ptr;
+    uint8_t len;
 } pd_CryptoAmount_V12_t;
 
 typedef struct {
     uint8_t value;
-    union Network {
-        const uint8_t* EOS;
-        const uint8_t* ETH;
-        const uint8_t* VTBC;
-        const uint8_t* VTBT;
-    } network;
 } pd_LookupCryptoTokenType_V12_t;
 
 typedef enum {

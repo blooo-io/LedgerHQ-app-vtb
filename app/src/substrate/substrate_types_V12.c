@@ -678,7 +678,23 @@ parser_error_t _toStringLookupCryptoTokenType_V12(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringu8(&v->value, outValue, outValueLen, pageIdx, pageCount);
+    switch (v->value)
+    {
+    case EOS:
+        pageString(outValue, outValueLen, "EOS", pageIdx, pageCount);
+        return parser_ok;
+    case ETH:
+        pageString(outValue, outValueLen, "ETH", pageIdx, pageCount);
+        return parser_ok;
+    case VTBC:
+        pageString(outValue, outValueLen, "VTBC", pageIdx, pageCount);
+        return parser_ok;
+    case VTBT:
+        pageString(outValue, outValueLen, "VTBT", pageIdx, pageCount);
+        return parser_ok;
+    default:
+        return parser_unexpected_address_type;
+    }
 }
 
 parser_error_t _toStringAccountIndex_V12(
@@ -1050,7 +1066,8 @@ parser_error_t _toStringConviction_V12(
 
 parser_error_t _readLookupCryptoAmount_V12(
     parser_context_t* c,
-    pd_CryptoAmount_V12_t* v) {
+    compactInt_t* v) {
+    v->len = (uint8_t) c->bufferLen - c->offset;
     GEN_DEF_READARRAY(32)
 }
 parser_error_t _readLookupCryptoTokenType_V12(
@@ -1058,10 +1075,10 @@ parser_error_t _readLookupCryptoTokenType_V12(
     pd_LookupCryptoTokenType_V12_t* v)
 {
     switch (v->value) {
-    case 0: // EOS
-    case 1: // ETH
-    case 2: // VTBC
-    case 3: // VTBT
+    case EOS: // EOS
+    case ETH: // ETH
+    case VTBC: // VTBC
+    case VTBT: // VTBT
         return parser_ok;
     default:
         return parser_unexpected_address_type;

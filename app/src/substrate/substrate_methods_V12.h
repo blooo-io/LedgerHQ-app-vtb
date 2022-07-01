@@ -61,7 +61,7 @@ extern "C" {
 
 #define PD_BUY_VTBC_V12 2054
 typedef struct {
-    pd_CryptoAmount_V12_t crypto_amount;
+    compactInt_t value;
     pd_LookupCryptoTokenType_V12_t crypto_type;
 } pd_buy_vtbc_V12_t;
 

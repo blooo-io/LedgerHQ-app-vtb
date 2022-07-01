@@ -18,6 +18,7 @@ import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
 import { newVTBApp } from '@blooo/ledger-substrate'
 import { txBalances_transfer, txBuyVTB, txProxy_proxy, txSession_setKeys, txStaking_nominate } from './zemu_blobs'
 import { APP_SEED, models } from './common'
+import { listen } from "@ledgerhq/logs"
 
 // @ts-ignore
 import ed25519 from 'ed25519-supercop'
@@ -370,12 +371,15 @@ describe('Standard', function () {
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      console.log("GUILANE : ",signatureRequest);
+      
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
       await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_buy_vtb`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
+
+      console.log("GUILANE : ",signatureResponse);
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')
