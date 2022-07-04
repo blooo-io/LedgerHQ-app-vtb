@@ -61,6 +61,13 @@ __Z_INLINE parser_error_t _readMethod_initiate_convert_vtbc_to_vtbt_substrate_V1
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(
+    parser_context_t* c, pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t* m)
+{
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))   
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_V12(
     parser_context_t* c, pd_cancel_sell_vtbc_V12_t* m)
 {
@@ -1736,6 +1743,9 @@ parser_error_t _readMethod_V12(
     case 2066: /* module 8 call 18 */
         CHECK_ERROR(_readMethod_claim_distribution_V12(c, &method->basic.claim_distribution_V12))
         break;
+    case 2060: /* module 8 call 12 */
+        CHECK_ERROR(_readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(c, &method->basic.initiate_convert_vtbt_to_vtbc_substrate_V12))
+        break;
     case 2059: /* module 8 call 11 */
         CHECK_ERROR(_readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(c, &method->basic.initiate_convert_vtbc_to_vtbt_substrate_V12))
         break;
@@ -2505,6 +2515,8 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2066: /* module 8 call 18 */
         return STR_ME_CLAIM_DISTRIBUTION;
+    case 2060: /* module 8 call 12 */
+        return STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE;
     case 2059: /* module 8 call 11 */
         return STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE;
     case 2058: /* module 8 call 10 */
@@ -2979,6 +2991,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2066: /* module 8 call 18 */
         return 1;
+    case 2060: /* module 8 call 12 */
+        return 1;
     case 2059: /* module 8 call 11 */
         return 1;
     case 2058: /* module 8 call 10 */
@@ -3445,6 +3459,13 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         switch (itemIdx) {
         case 0:
             return STR_IT_crypto_type;
+        default:
+            return NULL;
+        }
+    case 2060: /* module 8 call 12 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_crypto_amount;
         default:
             return NULL;
         }
@@ -5285,6 +5306,16 @@ parser_error_t _getMethod_ItemValue_V12(
         case 0: /* claim_distribution - network */;
             return _toStringLookupCryptoTokenType_V12(
                 &m->basic.claim_distribution_V12.crypto_type,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 2060: /* module 8 call 12 */
+        switch (itemIdx) {
+        case 0: /* initiate_convert_vtbt_to_vtbc_substrate - amount */;
+            return _toStringCompactAmount(
+                &m->basic.initiate_convert_vtbt_to_vtbc_substrate_V12.value,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

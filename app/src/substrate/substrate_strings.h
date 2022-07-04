@@ -57,6 +57,7 @@ static const char* STR_MO_CROWDLOAN = "Crowdloan";
 // Methods names
 static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
 static const char* STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE = "Convert VTBC to VTBT";
+static const char* STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
 static const char* STR_ME_CLAIM_DISTRIBUTION = "Claim Distribution";
 static const char* STR_ME_CANCEL_SELL_VTBC = "Cancel sell Vtbc";
 static const char* STR_ME_SELL_VTBC = "Sell Vtbc";
