@@ -24,11 +24,6 @@
 #include <zxformat.h>
 #include <zxmacros.h>
 
-parser_error_t _buyVTBC_V12(parser_context_t* c, pd_buy_vtbc_V12_t* v){
-    CHECK_INPUT();
-    return parser_ok;
-}
-
 parser_error_t _readAccountId_V12(parser_context_t* c, pd_AccountId_V12_t* v) {
     GEN_DEF_READARRAY(32)
 }

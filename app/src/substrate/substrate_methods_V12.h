@@ -65,6 +65,12 @@ typedef struct {
     pd_LookupCryptoTokenType_V12_t crypto_type;
 } pd_buy_vtbc_V12_t;
 
+#define PD_SELL_VTBC_V12 2056
+typedef struct {
+    compactInt_t value;
+    pd_LookupCryptoTokenType_V12_t crypto_type;
+} pd_sell_vtbc_V12_t;
+
 #define PD_CANCEL_SELL_VTBC_V12 2057
 typedef struct {
     pd_Vecu8_t order_id;
@@ -1195,6 +1201,7 @@ typedef struct {
 
 typedef union {
     pd_buy_vtbc_V12_t buy_vtbc_V12;
+    pd_sell_vtbc_V12_t sell_vtbc_V12;
     pd_cancel_sell_vtbc_V12_t cancel_sell_vtbc_V12;
     pd_balances_transfer_all_V12_t balances_transfer_all_V12;
     pd_staking_bond_V12_t staking_bond_V12;

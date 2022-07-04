@@ -26,7 +26,6 @@ extern "C" {
 #include <stdint.h>
 
 // Read functions
-parser_error_t _buyVTBC_V12(parser_context_t* c, pd_buy_vtbc_V12_t* v);
 parser_error_t _readLookupCryptoTokenType_V12(parser_context_t* c,pd_LookupCryptoTokenType_V12_t* v);
 parser_error_t _readLookupCryptoAmount_V12(parser_context_t* c,compactInt_t* v);
 parser_error_t _readAccountId_V12(parser_context_t* c, pd_AccountId_V12_t* v);

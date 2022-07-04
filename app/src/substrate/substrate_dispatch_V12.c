@@ -28,6 +28,15 @@ __Z_INLINE parser_error_t _readMethod_buy_VTBC_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_sell_VTBC_V12(
+    parser_context_t* c, pd_sell_vtbc_V12_t* m)
+{
+    CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_V12(
     parser_context_t* c, pd_cancel_sell_vtbc_V12_t* m)
 {
@@ -1700,8 +1709,8 @@ parser_error_t _readMethod_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2057: /* module 8 call 9 */
-        CHECK_ERROR(_readMethod_cancel_sell_vtbc_V12(c, &method->basic.cancel_sell_vtbc_V12))
+    case 2056: /* module 8 call 8 */
+        CHECK_ERROR(_readMethod_sell_VTBC_V12(c, &method->basic.sell_vtbc_V12))
         break;
     case 2054: /* module 8 call 6 */
         CHECK_ERROR(_readMethod_buy_VTBC_V12(c, &method->basic.buy_vtbc_V12))
@@ -2463,6 +2472,8 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2057: /* module 8 call 9 */
         return STR_ME_CANCEL_SELL_VTBC;
+    case 2056: /* module 8 call 8 */
+        return STR_ME_SELL_VTBC;
     case 2054: /* module 8 call 6 */
         return STR_ME_BUY_VTBC;
     case 1280: /* module 5 call 0 */
@@ -2929,6 +2940,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2057: /* module 8 call 9 */
         return 1;
+    case 2056: /* module 8 call 8 */
+        return 2;
     case 2054: /* module 8 call 6 */
         return 2;
     case 1280: /* module 5 call 0 */
@@ -3383,7 +3396,14 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2054: /* module 8 call 6 */
+    case 2057: /* module 8 call 9 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_order_id;
+        default:
+            return NULL;
+        }
+    case 2056: /* module 8 call 8 */
         switch (itemIdx) {
         case 0:
             return STR_IT_crypto_type;
@@ -3392,10 +3412,12 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2057: /* module 8 call 9 */
+    case 2054: /* module 8 call 6 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_order_id;
+            return STR_IT_crypto_type;
+        case 1:
+            return STR_IT_crypto_amount;
         default:
             return NULL;
         }
@@ -5190,26 +5212,41 @@ parser_error_t _getMethod_ItemValue_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2054: /* module 8 call 6 */
-        switch (itemIdx) {
-        case 0: /* balances_transfer_V12 - dest */;
-            return _toStringLookupCryptoTokenType_V12(
-                &m->basic.buy_vtbc_V12.crypto_type,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_transfer_V12 - amount */;
-            return _toStringCompactAmount(
-                &m->basic.buy_vtbc_V12.value,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
     case 2057: /* module 8 call 9 */
         switch (itemIdx) {
         case 0: /* cancel_sell_vtbc_V11 - order_id */;
             return _toStringVecu8(
                 &m->basic.cancel_sell_vtbc_V12.order_id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 2056: /* module 8 call 8 */
+        switch (itemIdx) {
+        case 0: /* sell_vtbc_V12 - network */;
+            return _toStringLookupCryptoTokenType_V12(
+                &m->basic.sell_vtbc_V12.crypto_type,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* sell_vtbc_V12 - amount */;
+            return _toStringCompactAmount(
+                &m->basic.sell_vtbc_V12.value,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 2054: /* module 8 call 6 */
+        switch (itemIdx) {
+        case 0: /* buy_vtbc_V12 - network */;
+            return _toStringLookupCryptoTokenType_V12(
+                &m->basic.buy_vtbc_V12.crypto_type,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* buy_vtbc_V12 - amount */;
+            return _toStringCompactAmount(
+                &m->basic.buy_vtbc_V12.value,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
