@@ -82,6 +82,11 @@ typedef struct {
     pd_LookupCryptoTokenType_V12_t crypto_type;
 } pd_withdraw_initiate_V12_t;
 
+#define PD_CLAIM_DISTRIBUTION_V12 2066
+typedef struct {
+    pd_LookupCryptoTokenType_V12_t crypto_type;
+} pd_claim_distribution_V12_t;
+
 #define PD_CALL_BALANCES_TRANSFER_ALL_V12 4
 typedef struct {
     pd_LookupasStaticLookupSource_V12_t dest;
@@ -1209,6 +1214,7 @@ typedef union {
     pd_buy_vtbc_V12_t buy_vtbc_V12;
     pd_sell_vtbc_V12_t sell_vtbc_V12;
     pd_withdraw_initiate_V12_t withdraw_initiate_V12;
+    pd_claim_distribution_V12_t claim_distribution_V12;
     pd_cancel_sell_vtbc_V12_t cancel_sell_vtbc_V12;
     pd_balances_transfer_all_V12_t balances_transfer_all_V12;
     pd_staking_bond_V12_t staking_bond_V12;
