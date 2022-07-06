@@ -71,10 +71,15 @@ typedef struct {
     pd_LookupCryptoTokenType_V12_t crypto_type;
 } pd_sell_vtbc_V12_t;
 
-#define PD_CANCEL_SELL_VTBC_V12 2057
+#define PD_CANCEL_SELL_VTBC_ORDER_V12 2057
 typedef struct {
-    pd_Vecu8_t order_id;
-} pd_cancel_sell_vtbc_V12_t;
+    pd_LookupCryptoOrder_V12_t order_id;
+} pd_cancel_sell_vtbc_order_V12_t;
+
+#define PD_CANCEL_BUY_VTBC_ORDER_V12 2055
+typedef struct {
+    pd_LookupCryptoOrder_V12_t order_id;
+} pd_cancel_buy_vtbc_order_V12_t;
 
 #define PD_WITHDRAW_INITIATE_V12 2058
 typedef struct {
@@ -1234,7 +1239,8 @@ typedef union {
     pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
     pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t initiate_convert_vtbt_to_vtbc_substrate_V12;
     pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
-    pd_cancel_sell_vtbc_V12_t cancel_sell_vtbc_V12;
+    pd_cancel_sell_vtbc_order_V12_t cancel_sell_vtbc_order_V12;
+    pd_cancel_buy_vtbc_order_V12_t cancel_buy_vtbc_order_V12;
     pd_balances_transfer_all_V12_t balances_transfer_all_V12;
     pd_staking_bond_V12_t staking_bond_V12;
     pd_staking_bond_extra_V12_t staking_bond_extra_V12;

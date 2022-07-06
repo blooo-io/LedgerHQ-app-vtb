@@ -16,7 +16,7 @@
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
 import { newVTBApp } from '@blooo/ledger-substrate'
-import { txBuyVTB, txClaimDistribution, txInitiateConvertVtbcToVtbtSubstrate, txInitiateConvertVtbtToVtbcSubstrate, txInitiateTransferOfVtbtSubstrate, txSellVTB, txWithdrawInitiate } from './zemu_blobs'
+import { txBuyVTB, txCancelBuyVtbcOrder, txCancelSellVtbcOrder, txClaimDistribution, txInitiateConvertVtbcToVtbtSubstrate, txInitiateConvertVtbtToVtbcSubstrate, txInitiateTransferOfVtbtSubstrate, txSellVTB, txWithdrawInitiate } from './zemu_blobs'
 import { APP_SEED, models } from './common'
 import { listen } from "@ledgerhq/logs"
 
@@ -410,6 +410,86 @@ describe('Standard', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
       await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_initiate_transfer_of_vtbt_substrate`)
+
+      const signatureResponse = await signatureRequest
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+  
+  test.each(models)('sign basic cancelBuyVtbcOrder', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txCancelBuyVtbcOrder, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_cancel_buy_vtbc_order`)
+
+      const signatureResponse = await signatureRequest
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+
+  test.each(models)('sign basic cancelSellVtbcOrder', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txCancelSellVtbcOrder, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_cancel_sell_vtbc_order`)
 
       const signatureResponse = await signatureRequest
 

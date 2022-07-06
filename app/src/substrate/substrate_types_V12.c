@@ -1071,6 +1071,14 @@ parser_error_t _readLookupAddress32_V12(
     v->len = (uint8_t) c->bufferLen - c->offset;
     GEN_DEF_READARRAY(32)
 }
+
+parser_error_t _readLookupOrder_V12(
+    parser_context_t* c,
+    pd_LookupCryptoOrder_V12_t* v) {
+    v->len = (uint8_t) c->bufferLen - c->offset;
+    GEN_DEF_READARRAY(32)
+}
+
 parser_error_t _readLookupCryptoTokenType_V12(
     parser_context_t* c,
     pd_LookupCryptoTokenType_V12_t* v)
@@ -1263,7 +1271,7 @@ parser_error_t _toStringLeasePeriodOfT_V12(
     return parser_print_not_supported;
 }
 
-parser_error_t _toStringLookupasStaticLookupSource_V12(
+parser_error_t _toStringLookupasStaticLookupAddress_V12(
     const pd_LookupCryptoAddress_V12_t* v,
     char* outValue,
     uint16_t outValueLen,
@@ -1272,6 +1280,50 @@ parser_error_t _toStringLookupasStaticLookupSource_V12(
 {
     CLEAN_AND_CHECK()
     GEN_DEF_TOSTRING_ARRAY(32)
+}
+
+parser_error_t _toStringLookupasStaticLookupOrder_V12(
+    const pd_LookupCryptoOrder_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    GEN_DEF_TOSTRING_ARRAY(32)
+}
+
+parser_error_t _toStringLookupasStaticLookupSource_V12(
+    const pd_LookupasStaticLookupSource_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    switch (v->value) {
+    case 0: // Id
+        CHECK_ERROR(_toStringAccountId_V12(&v->id, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 1: // Index
+        CHECK_ERROR(_toStringCompactAccountIndex_V12(&v->index, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 2: // Raw
+        CHECK_ERROR(_toStringBytes(&v->raw, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 3: // Address32
+    {
+        GEN_DEF_TOSTRING_ARRAY(32)
+    }
+    case 4: // Address20
+    {
+        GEN_DEF_TOSTRING_ARRAY(20)
+    }
+    default:
+        return parser_not_supported;
+    }
+
+    return parser_ok;
 }
 
 parser_error_t _toStringMemberCount_V12(

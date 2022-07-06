@@ -27,7 +27,7 @@
 parser_error_t parser_init_context(parser_context_t *ctx,
                                    const uint8_t *buffer,
                                    uint16_t bufferSize) {
-    ctx->offset = 1;
+    ctx->offset = 0;
     ctx->buffer = NULL;
     ctx->bufferLen = 0;
 
