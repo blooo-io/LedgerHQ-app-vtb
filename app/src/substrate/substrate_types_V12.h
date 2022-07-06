@@ -35,6 +35,11 @@ typedef struct {
     uint8_t value;
 } pd_LookupCryptoTokenType_V12_t;
 
+typedef struct {
+    const uint8_t* _ptr;
+    uint8_t len;
+} pd_LookupCryptoAddress_V12_t;
+
 typedef enum {
     EOS,
     ETH,

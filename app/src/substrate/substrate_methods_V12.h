@@ -87,15 +87,21 @@ typedef struct {
     pd_LookupCryptoTokenType_V12_t crypto_type;
 } pd_claim_distribution_V12_t;
 
-#define PD_INITIATE_CONVERT_VTBC_TO_VTBT_V12 2059
+#define PD_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE_V12 2059
 typedef struct {
     compactInt_t value;
 } pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t;
 
-#define PD_INITIATE_CONVERT_VTBT_TO_VTBC_V12 2060
+#define PD_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE_V12 2060
 typedef struct {
     compactInt_t value;
 } pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t;
+
+#define PD_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE_V12 2062
+typedef struct {
+    pd_LookupCryptoAddress_V12_t dest;
+    compactInt_t value;
+} pd_initiate_transfer_of_vtbt_substrate_V12_t;
 
 #define PD_CALL_BALANCES_TRANSFER_ALL_V12 4
 typedef struct {
@@ -1227,6 +1233,7 @@ typedef union {
     pd_claim_distribution_V12_t claim_distribution_V12;
     pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
     pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t initiate_convert_vtbt_to_vtbc_substrate_V12;
+    pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
     pd_cancel_sell_vtbc_V12_t cancel_sell_vtbc_V12;
     pd_balances_transfer_all_V12_t balances_transfer_all_V12;
     pd_staking_bond_V12_t staking_bond_V12;
