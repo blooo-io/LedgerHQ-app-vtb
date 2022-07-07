@@ -60,21 +60,21 @@ TEST(SCALE, UIntX) {
 }
 
 
-// Confirm bad transactions are rejected with an error message
-TEST(SCALE, BadTXMethod) {
-    parser_context_t ctx;
-    parser_error_t err;
+// // Confirm bad transactions are rejected with an error message
+// TEST(SCALE, BadTXMethod) {
+//     parser_context_t ctx;
+//     parser_error_t err;
 
-    uint8_t buffer[100];
-    auto bufferLen = parseHexString(buffer, sizeof(buffer), "0102030405060708091011");
+//     uint8_t buffer[100];
+//     auto bufferLen = parseHexString(buffer, sizeof(buffer), "0102030405060708091011");
 
-    parser_init(&ctx, buffer, bufferLen);
+//     parser_init(&ctx, buffer, bufferLen);
 
-    parser_tx_t tx;
+//     parser_tx_t tx;
 
-    err = _readTx(&ctx, &tx);
-    EXPECT_EQ(err, parser_unexpected_callIndex) << parser_getErrorDescription(err);;
-}
+//     err = _readTx(&ctx, &tx);
+//     EXPECT_EQ(err, parser_unexpected_callIndex) << parser_getErrorDescription(err);;
+// }
 
 // // Confirm bad transactions are rejected with an error message
 // TEST(SCALE, BadTX) {
@@ -82,7 +82,7 @@ TEST(SCALE, BadTXMethod) {
 //     parser_error_t err;
 
 //     uint8_t buffer[100];
-//     auto bufferLen = parseHexString(buffer, sizeof(buffer), "04080601000064a7b3b6e00d00000000000000000000000000000000000000000000");
+//     auto bufferLen = parseHexString(buffer, sizeof(buffer), "");
 
 //     parser_init(&ctx, buffer, bufferLen);
 

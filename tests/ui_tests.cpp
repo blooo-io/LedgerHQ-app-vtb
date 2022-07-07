@@ -145,21 +145,7 @@ INSTANTIATE_TEST_SUITE_P
 );
 
 
-INSTANTIATE_TEST_SUITE_P
-
-(
-    JsonTestCasesPreviousTxVer,
-    JsonTestsB,
-    ::testing::ValuesIn(GetJsonTestCases("testcases_previous.json")),
-    JsonTestsB::PrintToStringParamName()
-);
-
 // Parametric test using current runtime:
 TEST_P(JsonTestsA, CheckUIOutput_CurrentTX_Normal) { check_testcase(GetParam(), false); }
 
 TEST_P(JsonTestsA, CheckUIOutput_CurrentTX_Expert) { check_testcase(GetParam(), true); }
-
-// Parametric test using previous runtime:
-TEST_P(JsonTestsB, CheckUIOutput_PreviousTX_Normal) { check_testcase(GetParam(), false); }
-
-TEST_P(JsonTestsB, CheckUIOutput_PreviousTX_Expert) { check_testcase(GetParam(), true); }
