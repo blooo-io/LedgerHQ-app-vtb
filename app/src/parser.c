@@ -43,6 +43,7 @@ void __assert_fail(const char * assertion, const char * file, unsigned int line,
 
 parser_error_t parser_parse(parser_context_t *ctx, const uint8_t *data, size_t dataLen, parser_tx_t *tx_obj) {
     CHECK_PARSER_ERR(parser_init(ctx, data, dataLen))
+    ctx->offset = 1;
     ctx->tx_obj = tx_obj;
     ctx->tx_obj->nestCallIdx.slotIdx = 0;
     ctx->tx_obj->nestCallIdx._lenBuffer = 0;

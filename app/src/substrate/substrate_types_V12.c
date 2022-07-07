@@ -666,6 +666,32 @@ parser_error_t _toStringAccountId_V12(
     return _toStringPubkeyAsAddress(v->_ptr, outValue, outValueLen, pageIdx, pageCount);
 }
 
+parser_error_t _toStringLookupCryptoTokenType_V12(
+    const pd_LookupCryptoTokenType_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    switch (v->value)
+    {
+    case EOS:
+        pageString(outValue, outValueLen, "EOS", pageIdx, pageCount);
+        return parser_ok;
+    case ETH:
+        pageString(outValue, outValueLen, "ETH", pageIdx, pageCount);
+        return parser_ok;
+    case VTBC:
+        pageString(outValue, outValueLen, "VTBC", pageIdx, pageCount);
+        return parser_ok;
+    case VTBT:
+        pageString(outValue, outValueLen, "VTBT", pageIdx, pageCount);
+        return parser_ok;
+    default:
+        return parser_unexpected_address_type;
+    }
+}
+
 parser_error_t _toStringAccountIndex_V12(
     const pd_AccountIndex_V12_t* v,
     char* outValue,
@@ -1033,6 +1059,42 @@ parser_error_t _toStringConviction_V12(
     return parser_ok;
 }
 
+parser_error_t _readLookupCryptoAmount_V12(
+    parser_context_t* c,
+    compactInt_t* v) {
+    v->len = (uint8_t) c->bufferLen - c->offset;
+    GEN_DEF_READARRAY(32)
+}
+parser_error_t _readLookupAddress32_V12(
+    parser_context_t* c,
+    pd_LookupCryptoAddress_V12_t* v) {
+    v->len = (uint8_t) c->bufferLen - c->offset;
+    GEN_DEF_READARRAY(32)
+}
+
+parser_error_t _readLookupOrder_V12(
+    parser_context_t* c,
+    pd_LookupCryptoOrder_V12_t* v) {
+    v->len = (uint8_t) c->bufferLen - c->offset;
+    GEN_DEF_READARRAY(32)
+}
+
+parser_error_t _readLookupCryptoTokenType_V12(
+    parser_context_t* c,
+    pd_LookupCryptoTokenType_V12_t* v)
+{
+    switch (v->value) {
+    case EOS: // EOS
+    case ETH: // ETH
+    case VTBC: // VTBC
+    case VTBT: // VTBT
+        return parser_ok;
+    default:
+        return parser_unexpected_address_type;
+    }
+    return parser_ok;
+}
+
 parser_error_t _toStringEcdsaPublic_V12(
     const pd_EcdsaPublic_V12_t* v,
     char* outValue,
@@ -1207,6 +1269,28 @@ parser_error_t _toStringLeasePeriodOfT_V12(
 {
     CLEAN_AND_CHECK()
     return parser_print_not_supported;
+}
+
+parser_error_t _toStringLookupasStaticLookupAddress_V12(
+    const pd_LookupCryptoAddress_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    GEN_DEF_TOSTRING_ARRAY(32)
+}
+
+parser_error_t _toStringLookupasStaticLookupOrder_V12(
+    const pd_LookupCryptoOrder_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    GEN_DEF_TOSTRING_ARRAY(32)
 }
 
 parser_error_t _toStringLookupasStaticLookupSource_V12(

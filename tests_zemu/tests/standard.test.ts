@@ -15,9 +15,10 @@
  ******************************************************************************* */
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
-import { newPolkadotApp } from '@zondax/ledger-substrate'
-import { txBalances_transfer, txProxy_proxy, txSession_setKeys, txStaking_nominate } from './zemu_blobs'
+import { newVTBApp } from '@blooo/ledger-substrate'
+import { txBuyVTB, txCancelBuyVtbcOrder, txCancelSellVtbcOrder, txClaimDistribution, txInitiateConvertVtbcToVtbtSubstrate, txInitiateConvertVtbtToVtbcSubstrate, txInitiateTransferOfVtbtSubstrate, txSellVTB, txWithdrawInitiate } from './zemu_blobs'
 import { APP_SEED, models } from './common'
+import { listen } from "@ledgerhq/logs"
 
 // @ts-ignore
 import ed25519 from 'ed25519-supercop'
@@ -47,21 +48,21 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('main menu', async function (m) {
-    const sim = new Zemu(m.path)
-    try {
-      await sim.start({ ...defaultOptions, model: m.name })
-      await sim.navigateAndCompareSnapshots('.', `${m.prefix.toLowerCase()}-mainmenu`, [1, 0, 0, 4, -5])
-    } finally {
-      await sim.close()
-    }
-  })
+  // test.each(models)('main menu', async function (m) {
+  //   const sim = new Zemu(m.path)
+  //   try {
+  //     await sim.start({ ...defaultOptions, model: m.name })
+  //     await sim.navigateAndCompareSnapshots('.', `${m.prefix.toLowerCase()}-mainmenu`, [1, 0, 0, 4, -5])
+  //   } finally {
+  //     await sim.close()
+  //   }
+  // })
 
   test.each(models)('get app version', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const resp = await app.getVersion()
 
       console.log(resp)
@@ -81,7 +82,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
 
@@ -90,8 +91,8 @@ describe('Standard', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '166wVhuQsKFeb7bd1faydHgVvX1bZU2rUuY7FJmWApNz2fQY'
-      const expected_pk = 'e1b4d72d27b3e91b9b6116555b4ea17138ddc12ca7cdbab30e2e0509bd848419'
+      const expected_address = '5Da9vz35EVcsHpHhW3kgQ1nfguER3RUrS37VMNXuch297M7k'
+      const expected_pk = '42b21fdbd41f058c3b4de9bce93fdb968c394e0f07bca480ae25d4035d0af534'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -104,7 +105,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -118,8 +119,8 @@ describe('Standard', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '166wVhuQsKFeb7bd1faydHgVvX1bZU2rUuY7FJmWApNz2fQY'
-      const expected_pk = 'e1b4d72d27b3e91b9b6116555b4ea17138ddc12ca7cdbab30e2e0509bd848419'
+      const expected_address = '5Da9vz35EVcsHpHhW3kgQ1nfguER3RUrS37VMNXuch297M7k'
+      const expected_pk = '42b21fdbd41f058c3b4de9bce93fdb968c394e0f07bca480ae25d4035d0af534'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -132,7 +133,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -149,28 +150,28 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('sign basic normal', async function (m) {
+  test.each(models)('sign basic buyVTB', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
 
-      const txBlob = Buffer.from(txBalances_transfer, 'hex')
+      const txBlob = Buffer.from(txBuyVTB, 'hex')
 
       const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_normal`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_buy_vtb`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')
@@ -189,34 +190,28 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('sign basic expert', async function (m) {
+  test.each(models)('sign basic sellVTB', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
 
-      // Change to expert mode so we can skip fields
-      await sim.clickRight()
-      await sim.clickBoth()
-      await sim.clickLeft()
-
-      const txBlob = Buffer.from(txBalances_transfer, 'hex')
+      const txBlob = Buffer.from(txSellVTB, 'hex')
 
       const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
-
+      
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_expert`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_sell_vtb`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')
@@ -235,28 +230,28 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('sign large nomination', async function (m) {
+  test.each(models)('sign basic withdrawInitiate', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
 
-      const txBlob = Buffer.from(txStaking_nominate, 'hex')
+      const txBlob = Buffer.from(txWithdrawInitiate, 'hex')
 
       const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_large_nomination`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_withdraw_initiate`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')
@@ -275,28 +270,28 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('set keys', async function (m) {
+  test.each(models)('sign basic claimDistribution', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
 
-      const txBlob = Buffer.from(txSession_setKeys, 'hex')
+      const txBlob = Buffer.from(txClaimDistribution, 'hex')
 
       const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-set-keys`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_claim_distribution`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')
@@ -315,27 +310,188 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('Proxy proxy balances transfer', async function (m) {
+  test.each(models)('sign basic initiateConvertVtbcToVtbtSubstrate', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVTBApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
 
-      const txBlob = Buffer.from(txProxy_proxy, 'hex')
+      const txBlob = Buffer.from(txInitiateConvertVtbcToVtbtSubstrate, 'hex')
 
       const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-proxy_balances_transfer`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_initiate_convert_vtbc_to_vtbt_substrate`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+
+  test.each(models)('sign basic initiateConvertVtbtToVtbcSubstrate', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txInitiateConvertVtbtToVtbcSubstrate, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_initiate_convert_vtbt_to_vtbc_substrate`)
+
+      const signatureResponse = await signatureRequest
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+
+  test.each(models)('sign basic initiateTransferOfVtbtSubstrate', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txInitiateTransferOfVtbtSubstrate, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_initiate_transfer_of_vtbt_substrate`)
+
+      const signatureResponse = await signatureRequest
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+  
+  test.each(models)('sign basic cancelBuyVtbcOrder', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txCancelBuyVtbcOrder, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_cancel_buy_vtbc_order`)
+
+      const signatureResponse = await signatureRequest
+
+      expect(signatureResponse.return_code).toEqual(0x9000)
+      expect(signatureResponse.error_message).toEqual('No errors')
+
+      // Now verify the signature
+      let prehash = txBlob
+      if (txBlob.length > 256) {
+        const context = blake2bInit(32)
+        blake2bUpdate(context, txBlob)
+        prehash = Buffer.from(blake2bFinal(context))
+      }
+      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      expect(valid).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+
+  test.each(models)('sign basic cancelSellVtbcOrder', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = newVTBApp(sim.getTransport())
+      const pathAccount = 0x80000000
+      const pathChange = 0x80000000
+      const pathIndex = 0x80000000
+
+      const txBlob = Buffer.from(txCancelSellVtbcOrder, 'hex')
+
+      const responseAddr = await app.getAddress(pathAccount, pathChange, pathIndex)
+      const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
+
+      // do not wait here.. we need to navigate
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
+      
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_cancel_sell_vtbc_order`)
+
+      const signatureResponse = await signatureRequest
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')

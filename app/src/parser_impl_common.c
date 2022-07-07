@@ -47,6 +47,10 @@ parser_error_t parser_init(parser_context_t *ctx, const uint8_t *buffer, uint16_
 }
 
 const char *parser_getErrorDescription(parser_error_t err) {
+    // char str[6];
+    // snprintf(str,6, "%d", err);
+    // return str;
+
     switch (err) {
         // General errors
         case parser_ok:
@@ -125,8 +129,8 @@ parser_error_t _readBool(parser_context_t *c, pd_bool_t *v) {
 parser_error_t _readCompactInt(parser_context_t *c, compactInt_t *v) {
     CHECK_INPUT()
 
-    v->ptr = c->buffer + c->offset;
-    const uint8_t mode = *v->ptr & 0x03u;      // get mode from two least significant bits
+    v->_ptr = c->buffer + c->offset;
+    const uint8_t mode = *v->_ptr & 0x03u;      // get mode from two least significant bits
 
     uint64_t tmp;
     switch (mode) {
@@ -146,7 +150,7 @@ parser_error_t _readCompactInt(parser_context_t *c, compactInt_t *v) {
             _getValue(v, &tmp);
             break;
         case 3:         // bigint
-            v->len = (*v->ptr >> 2u) + 4 + 1;
+            v->len = (*v->_ptr >> 2u) + 4 + 1;
             CTX_CHECK_AND_ADVANCE(c, v->len)
             break;
         default:
@@ -162,20 +166,20 @@ parser_error_t _getValue(const compactInt_t *c, uint64_t *v) {
 
     switch (c->len) {
         case 1:
-            *v = (*c->ptr) >> 2u;
+            *v = (*c->_ptr) >> 2u;
             break;
         case 2:
-            *v = (*c->ptr) >> 2u;
-            *v += *(c->ptr + 1) << 6u;
+            *v = (*c->_ptr) >> 2u;
+            *v += *(c->_ptr + 1) << 6u;
             if (*v < 64) {
                 return parser_value_out_of_range;
             }
             break;
         case 4:
-            *v = (*c->ptr) >> 2u;
-            *v += *(c->ptr + 1) << 6u;
-            *v += *(c->ptr + 2) << (8u + 6u);
-            *v += *(c->ptr + 3) << (16u + 6u);
+            *v = (*c->_ptr) >> 2u;
+            *v += *(c->_ptr + 1) << 6u;
+            *v += *(c->_ptr + 2) << (8u + 6u);
+            *v += *(c->_ptr + 3) << (16u + 6u);
             if (*v < 16383) {
                 return parser_value_out_of_range;
             }
@@ -209,7 +213,7 @@ parser_error_t _toStringCompactInt(const compactInt_t *c,
         uint8_t bcdOut[100];
         const uint16_t bcdOutLen = sizeof(bcdOut);
 
-        bignumLittleEndian_to_bcd(bcdOut, bcdOutLen, c->ptr + 1, c->len - 1);
+        bignumLittleEndian_to_bcd(bcdOut, bcdOutLen, c->_ptr, c->len - 1);
         if (!bignumLittleEndian_bcdprint(bufferUI, sizeof(bufferUI), bcdOut, bcdOutLen))
             return parser_unexpected_buffer_end;
     }
@@ -307,6 +311,17 @@ parser_error_t _toStringCompactBalance(const pd_CompactBalance_t *v,
     return parser_ok;
 }
 
+parser_error_t _toStringCompactAmount(const compactInt_t *v,
+                                       char *outValue, uint16_t outValueLen,
+                                       uint8_t pageIdx, uint8_t *pageCount) {
+    CHECK_ERROR(_toStringCompactInt(
+            v,
+            COIN_AMOUNT_DECIMAL_PLACES, "", COIN_TICKER,
+            outValue, outValueLen, pageIdx, pageCount))
+    number_inplace_trimming(outValue, 1);
+    return parser_ok;
+}
+
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -315,43 +330,43 @@ parser_error_t _toStringCompactBalance(const pd_CompactBalance_t *v,
 ////////////////////////////////////////////////////////////////
 
 parser_error_t _checkVersions(parser_context_t *c) {
-    // Methods are not length delimited so in order to retrieve the specVersion
-    // it is necessary to parse from the back.
-    // The transaction is expect to end in
-    // [4 bytes] specVersion
-    // [4 bytes] transactionVersion
-    // [32 bytes] genesisHash
-    // [32 bytes] blockHash
-    const uint16_t specOffsetFromBack = 4 + 4 + 32 + 32;
-    if (c->bufferLen < specOffsetFromBack) {
-        return parser_unexpected_buffer_end;
-    }
+    // // Methods are not length delimited so in order to retrieve the specVersion
+    // // it is necessary to parse from the back.
+    // // The transaction is expect to end in
+    // // [4 bytes] specVersion
+    // // [4 bytes] transactionVersion
+    // // [32 bytes] genesisHash
+    // // [32 bytes] blockHash
+    // const uint16_t specOffsetFromBack = 4 + 4 + 32 + 32;
+    // if (c->bufferLen < specOffsetFromBack) {
+    //     return parser_unexpected_buffer_end;
+    // }
 
-    uint8_t *p = (uint8_t *) (c->buffer + c->bufferLen - specOffsetFromBack);
-    uint32_t specVersion = 0;
-    specVersion += (uint32_t) p[0] << 0u;
-    specVersion += (uint32_t) p[1] << 8u;
-    specVersion += (uint32_t) p[2] << 16u;
-    specVersion += (uint32_t) p[3] << 24u;
+    // uint8_t *p = (uint8_t *) (c->buffer + c->bufferLen - specOffsetFromBack);
+    // uint32_t specVersion = 0;
+    // specVersion += (uint32_t) p[0] << 0u;
+    // specVersion += (uint32_t) p[1] << 8u;
+    // specVersion += (uint32_t) p[2] << 16u;
+    // specVersion += (uint32_t) p[3] << 24u;
 
-    p += 4;
-    uint32_t transactionVersion = 0;
-    transactionVersion += (uint32_t) p[0] << 0u;
-    transactionVersion += (uint32_t) p[1] << 8u;
-    transactionVersion += (uint32_t) p[2] << 16u;
-    transactionVersion += (uint32_t) p[3] << 24u;
+    // p += 4;
+    // uint32_t transactionVersion = 0;
+    // transactionVersion += (uint32_t) p[0] << 0u;
+    // transactionVersion += (uint32_t) p[1] << 8u;
+    // transactionVersion += (uint32_t) p[2] << 16u;
+    // transactionVersion += (uint32_t) p[3] << 24u;
 
-    if (transactionVersion != (SUPPORTED_TX_VERSION_CURRENT) &&
-        transactionVersion != (SUPPORTED_TX_VERSION_PREVIOUS)) {
-        return parser_tx_version_not_supported;
-    }
+    // if (transactionVersion != (SUPPORTED_TX_VERSION_CURRENT) &&
+    //     transactionVersion != (SUPPORTED_TX_VERSION_PREVIOUS)) {
+    //     return parser_tx_version_not_supported;
+    // }
 
-    if (specVersion < SUPPORTED_MINIMUM_SPEC_VERSION) {
-        return parser_spec_not_supported;
-    }
+    // if (specVersion < SUPPORTED_MINIMUM_SPEC_VERSION) {
+    //     return parser_spec_not_supported;
+    // }
 
-    c->tx_obj->specVersion = specVersion;
-    c->tx_obj->transactionVersion = transactionVersion;
+    // c->tx_obj->specVersion = specVersion;
+    c->tx_obj->transactionVersion = 12;
 
     return parser_ok;
 }

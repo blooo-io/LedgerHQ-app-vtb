@@ -20,6 +20,7 @@ extern "C" {
 #endif
 
 // Modules names
+static const char* STR_MO_VTBDEX = "VtbDex";
 static const char* STR_MO_SYSTEM = "System";
 static const char* STR_MO_PREIMAGE = "Preimage";
 static const char* STR_MO_TIMESTAMP = "Timestamp";
@@ -54,6 +55,15 @@ static const char* STR_MO_AUCTIONS = "Auctions";
 static const char* STR_MO_CROWDLOAN = "Crowdloan";
 
 // Methods names
+static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
+static const char* STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE = "Convert VTBC to VTBT";
+static const char* STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
+static const char* STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE = "Transfer VTBT";
+static const char* STR_ME_CLAIM_DISTRIBUTION = "Claim Distribution";
+static const char* STR_ME_CANCEL_SELL_VTBC_ORDER = "Cancel sell Vtbc";
+static const char* STR_ME_CANCEL_BUY_VTBC_ORDER = "Cancel buy Vtbc";
+static const char* STR_ME_SELL_VTBC = "Sell Vtbc";
+static const char* STR_ME_BUY_VTBC = "Buy Vtbc";
 static const char* STR_ME_FILL_BLOCK = "Fill block";
 static const char* STR_ME_REMARK = "Remark";
 static const char* STR_ME_SET_HEAP_PAGES = "Set heap pages";
@@ -258,6 +268,9 @@ static const char* STR_ME_POKE = "Poke";
 static const char* STR_ME_CONTRIBUTE_ALL = "Contribute all";
 
 // Items names
+static const char* STR_IT_crypto_amount = "Crypto amount";
+static const char* STR_IT_crypto_type = "Crypto type";
+static const char* STR_IT_order_id = "Order id";
 static const char* STR_IT_ratio = "Ratio";
 static const char* STR_IT_remark = "Remark";
 static const char* STR_IT_pages = "Pages";
@@ -272,7 +285,7 @@ static const char* STR_IT_now = "Now";
 static const char* STR_IT_index = "Index";
 static const char* STR_IT_new_ = "New";
 static const char* STR_IT_freeze = "Freeze";
-static const char* STR_IT_dest = "Dest";
+static const char* STR_IT_dest = "Recipient";
 static const char* STR_IT_amount = "Amount";
 static const char* STR_IT_who = "Who";
 static const char* STR_IT_new_free = "New free";

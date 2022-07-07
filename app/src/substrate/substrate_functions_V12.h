@@ -26,6 +26,10 @@ extern "C" {
 #include <stdint.h>
 
 // Read functions
+parser_error_t _readLookupCryptoTokenType_V12(parser_context_t* c,pd_LookupCryptoTokenType_V12_t* v);
+parser_error_t _readLookupCryptoAmount_V12(parser_context_t* c,compactInt_t* v);
+parser_error_t _readLookupOrder_V12(parser_context_t* c,pd_LookupCryptoOrder_V12_t* v);
+parser_error_t _readLookupAddress32_V12(parser_context_t* c,pd_LookupCryptoAddress_V12_t* v);
 parser_error_t _readAccountId_V12(parser_context_t* c, pd_AccountId_V12_t* v);
 parser_error_t _readAccountIndex_V12(parser_context_t* c, pd_AccountIndex_V12_t* v);
 parser_error_t _readAccountVoteSplit_V12(parser_context_t* c, pd_AccountVoteSplit_V12_t* v);
@@ -123,6 +127,20 @@ parser_error_t _readschedulePeriodBlockNumber_V12(parser_context_t* c, pd_schedu
 parser_error_t _readschedulePriority_V12(parser_context_t* c, pd_schedulePriority_V12_t* v);
 
 // toString functions
+parser_error_t _toStringLookupCryptoTokenType_V12(
+    const pd_LookupCryptoTokenType_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringLookupCryptoAmount_V12(
+    const pd_CryptoAmount_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringAccountId_V12(
     const pd_AccountId_V12_t* v,
     char* outValue,
@@ -412,6 +430,20 @@ parser_error_t _toStringKeys_V12(
 
 parser_error_t _toStringLeasePeriodOfT_V12(
     const pd_LeasePeriodOfT_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringLookupasStaticLookupAddress_V12(
+    const pd_LookupCryptoAddress_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringLookupasStaticLookupOrder_V12(
+    const pd_LookupCryptoOrder_V12_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

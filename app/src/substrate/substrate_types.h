@@ -64,7 +64,7 @@ typedef struct {
 } pd_ExtrinsicEra_t;
 
 typedef struct {
-    const uint8_t* ptr;
+    const uint8_t* _ptr;
     uint8_t len;
 } compactInt_t;
 
