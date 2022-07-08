@@ -87,7 +87,7 @@ parser_error_t _readCallImpl(parser_context_t* c, pd_Call_t* v, pd_MethodNested_
 
     CHECK_ERROR(_readCallIndex(c, &v->callIndex));
 
-    if (!_getMethod_IsNestingSupported(c->tx_obj->transactionVersion, v->callIndex.moduleIdx, v->callIndex.idx)) {
+    if (!_getMethod_IsNestingSupported(v->callIndex.moduleIdx, v->callIndex.idx)) {
         return parser_tx_nesting_not_supported;
     }
 
@@ -482,18 +482,18 @@ parser_error_t _toStringCall(
     }
 
     // Get num items of this current Call
-    uint8_t callNumItems = _getMethod_NumItems(*v->_txVerPtr, v->callIndex.moduleIdx, v->callIndex.idx);
+    uint8_t callNumItems = _getMethod_NumItems(v->callIndex.moduleIdx, v->callIndex.idx);
 
     // Count how many pages this call has (including nested ones if they exists)
     for (uint8_t i = 0; i < callNumItems; i++) {
         uint8_t itemPages = 0;
-        _getMethod_ItemValue(*v->_txVerPtr, &_txObj.method, _call.callIndex.moduleIdx, _call.callIndex.idx, i,
+        _getMethod_ItemValue(&_txObj.method, _call.callIndex.moduleIdx, _call.callIndex.idx, i,
             outValue, outValueLen, 0, &itemPages);
         (*pageCount) += itemPages;
     }
 
     if (pageIdx == 0) {
-        snprintf(outValue, outValueLen, "%s", _getMethod_Name(*v->_txVerPtr, v->callIndex.moduleIdx, v->callIndex.idx));
+        snprintf(outValue, outValueLen, "%s", _getMethod_Name(v->callIndex.moduleIdx, v->callIndex.idx));
         return parser_ok;
     }
 
@@ -505,12 +505,12 @@ parser_error_t _toStringCall(
 
     for (uint8_t i = 0; i < callNumItems; i++) {
         uint8_t itemPages = 0;
-        _getMethod_ItemValue(*v->_txVerPtr, &_txObj.method, v->callIndex.moduleIdx, v->callIndex.idx, i,
+        _getMethod_ItemValue(&_txObj.method, v->callIndex.moduleIdx, v->callIndex.idx, i,
             outValue, outValueLen, 0, &itemPages);
 
         if (pageIdx < itemPages) {
             uint8_t tmp;
-            _getMethod_ItemValue(*v->_txVerPtr, &_txObj.method, v->callIndex.moduleIdx, v->callIndex.idx, i,
+            _getMethod_ItemValue(&_txObj.method, v->callIndex.moduleIdx, v->callIndex.idx, i,
                 outValue, outValueLen, pageIdx, &tmp);
             return parser_ok;
         }
