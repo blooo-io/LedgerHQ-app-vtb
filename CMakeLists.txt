@@ -105,13 +105,13 @@ add_definitions(
 #  static libs
 file(GLOB_RECURSE LIB_SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/deps/BLAKE2/ref/blake2b-ref.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/app_mode.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/base58.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/bignum.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/hexutils.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/zxmacros.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/zbuffer.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/src/zxformat.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/app_mode.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/base58.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/bignum.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/hexutils.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/zxmacros.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/zbuffer.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/src/zxformat.c
         ####
         ${CMAKE_CURRENT_SOURCE_DIR}/app/src/crypto_helper.c
         ${CMAKE_CURRENT_SOURCE_DIR}/app/src/parser.c
@@ -124,7 +124,7 @@ file(GLOB_RECURSE LIB_SRC
 add_library(app_lib STATIC ${LIB_SRC})
 target_include_directories(app_lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/deps/BLAKE2/ref
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-zxlib/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/ledger-blooo-lib/include
         ${CMAKE_CURRENT_SOURCE_DIR}/app/src
         ${CMAKE_CURRENT_SOURCE_DIR}/app/src/lib
         ${CMAKE_CURRENT_SOURCE_DIR}/app/src/common

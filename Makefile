@@ -26,7 +26,7 @@ ifeq ($(BOLOS_SDK),)
 # When not using the SDK, we override and build the XL complete app
 
 SUBSTRATE_PARSER_FULL ?= 1
-include $(CURDIR)/deps/ledger-zxlib/dockerized_build.mk
+include $(CURDIR)/deps/ledger-blooo-lib/dockerized_build.mk
 
 else
 default:
