@@ -424,8 +424,6 @@ parser_error_t _getMethod_ItemValue_V12(
 
 bool _getMethod_ItemIsExpert_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx)
 {
-    uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
-
     return false;
 }
 

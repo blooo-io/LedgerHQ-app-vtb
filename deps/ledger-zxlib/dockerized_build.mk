@@ -84,6 +84,10 @@ all:
 	@$(MAKE) clean_output
 	@$(MAKE) clean_build
 	@$(MAKE) buildS
+	@$(MAKE) clean_build
+	@$(MAKE) buildX
+	@$(MAKE) clean_build
+	@$(MAKE) buildS2
 
 .PHONY: check_python
 check_python:
