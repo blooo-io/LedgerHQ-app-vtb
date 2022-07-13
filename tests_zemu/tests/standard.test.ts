@@ -18,7 +18,6 @@ import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
 import { newVTBApp } from '@blooo/ledger-substrate'
 import { txBuyVTB, txCancelBuyVtbcOrder, txCancelSellVtbcOrder, txClaimDistribution, txInitiateConvertVtbcToVtbtSubstrate, txInitiateConvertVtbtToVtbcSubstrate, txInitiateTransferOfVtbtSubstrate, txSellVTB, txWithdrawInitiate } from './zemu_blobs'
 import { APP_SEED, models } from './common'
-import { listen } from "@ledgerhq/logs"
 
 // @ts-ignore
 import ed25519 from 'ed25519-supercop'
@@ -48,15 +47,15 @@ describe('Standard', function () {
     }
   })
 
-  // test.each(models)('main menu', async function (m) {
-  //   const sim = new Zemu(m.path)
-  //   try {
-  //     await sim.start({ ...defaultOptions, model: m.name })
-  //     await sim.navigateAndCompareSnapshots('.', `${m.prefix.toLowerCase()}-mainmenu`, [1, 0, 0, 4, -5])
-  //   } finally {
-  //     await sim.close()
-  //   }
-  // })
+  test.each(models)('main menu', async function (m) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      await sim.navigateAndCompareSnapshots('.', `${m.prefix.toLowerCase()}-mainmenu`, [1, 0, 0, 3, -4])
+    } finally {
+      await sim.close()
+    }
+  })
 
   test.each(models)('get app version', async function (m) {
     const sim = new Zemu(m.path)

@@ -20,7 +20,7 @@ extern "C" {
 #endif
 
 #define COIN_ADDR_TYPE 42 // change 0 to 42 for general
-#define CLA 0x90 //change 0x90 to 0xa4
+#define CLA 0xa4 //change 0x90 to 0xa4
 
 #define HDPATH_LEN_DEFAULT 5
 #define HDPATH_0_DEFAULT (0x80000000 | 0x2c)
@@ -56,8 +56,7 @@ typedef enum {
 #define SUPPORTED_MINIMUM_SPEC_VERSION 9000
 
 #define COIN_AMOUNT_DECIMAL_PLACES 18 // change 10 to 18
-#define COIN_GENESIS_HASH "cb2d6ea2af1b0c81aa70b6d0cae813b0c76d68899ec86e3a344cb2bfdfa53a60"
-// #define COIN_GENESIS_HASH "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3"
+#define COIN_GENESIS_HASH "286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f"
 #define COIN_NAME "VTB"
 #define COIN_TICKER "VTB "
 
