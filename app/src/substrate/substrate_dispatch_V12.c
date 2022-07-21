@@ -105,7 +105,7 @@ parser_error_t _readMethod_V12(
     case 2066: /* module 8 call 18 */
         CHECK_ERROR(_readMethod_claim_distribution_V12(c, &method->basic.claim_distribution_V12))
         break;
-    case 2062: /* module 8 call 14 */
+    case 2061: /* module 8 call 13 */
         CHECK_ERROR(_readMethod_initiate_transfer_of_vtbt_substrate_V12(c, &method->basic.initiate_transfer_of_vtbt_substrate_V12))
         break;
     case 2060: /* module 8 call 12 */
@@ -160,7 +160,7 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2066: /* module 8 call 18 */
         return STR_ME_CLAIM_DISTRIBUTION;
-    case 2062: /* module 8 call 14 */
+    case 2061: /* module 8 call 13 */
         return STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE;
     case 2060: /* module 8 call 12 */
         return STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE;
@@ -190,7 +190,7 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     switch (callPrivIdx) {
     case 2066: /* module 8 call 18 */
         return 1;
-    case 2062: /* module 8 call 14 */
+    case 2061: /* module 8 call 13 */
         return 2;
     case 2060: /* module 8 call 12 */
         return 1;
@@ -225,7 +225,7 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2062: /* module 8 call 14 */
+    case 2061: /* module 8 call 13 */
         switch (itemIdx) {
         case 0:
             return STR_IT_dest;
@@ -315,7 +315,7 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2062: /* module 8 call 14 */
+    case 2061: /* module 8 call 13 */
         switch (itemIdx) {
         case 0: /* initiate_transfer_of_vtbt_substrate - dest */;
             return _toStringLookupasStaticLookupAddress_V12(
