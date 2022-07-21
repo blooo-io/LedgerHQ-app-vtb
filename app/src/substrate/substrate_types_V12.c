@@ -1062,21 +1062,34 @@ parser_error_t _toStringConviction_V12(
 parser_error_t _readLookupCryptoAmount_V12(
     parser_context_t* c,
     compactInt_t* v) {
-    v->len = (uint8_t) c->bufferLen - c->offset;
-    GEN_DEF_READARRAY(32)
+    const uint16_t size = 32;
+    v->len = (uint8_t) size;
+    GEN_DEF_READARRAY(size)
 }
 parser_error_t _readLookupAddress32_V12(
     parser_context_t* c,
     pd_LookupCryptoAddress_V12_t* v) {
-    v->len = (uint8_t) c->bufferLen - c->offset;
-    GEN_DEF_READARRAY(32)
+    const uint16_t size = 32;
+    v->len = (uint8_t) size;
+    GEN_DEF_READARRAY(size)
 }
 
 parser_error_t _readLookupOrder_V12(
     parser_context_t* c,
     pd_LookupCryptoOrder_V12_t* v) {
-    v->len = (uint8_t) c->bufferLen - c->offset;
-    GEN_DEF_READARRAY(32)
+    // OrderID are not length delimited so in order to retrieve the value
+    // it is necessary to calculate the length of the order.
+    // The transaction is expect to end in
+    // [2 bytes] era
+    // [1 bytes] nonce
+    // [1 bytes] tip
+    // [4 bytes] specVersion
+    // [4 bytes] transactionVersion
+    // [32 bytes] genesisHash
+    // [32 bytes] blockHash
+    const uint16_t size = c->bufferLen - c->offset - 2 - 1 - 1 - 4 - 4 - 32 - 32;
+    v->len = (uint8_t) size;
+    GEN_DEF_READARRAY(size)
 }
 
 parser_error_t _readLookupCryptoTokenType_V12(
@@ -1290,7 +1303,7 @@ parser_error_t _toStringLookupasStaticLookupOrder_V12(
     uint8_t* pageCount)
 {
     CLEAN_AND_CHECK()
-    GEN_DEF_TOSTRING_ARRAY(32)
+    GEN_DEF_TOSTRING_ARRAY(v->len)
 }
 
 parser_error_t _toStringLookupasStaticLookupSource_V12(
