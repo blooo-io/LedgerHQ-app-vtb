@@ -33,7 +33,7 @@ The general structure of commands and responses is as follows:
 | 0x6D00      | INS not supported       |
 | 0x6E00      | CLA not supported       |
 | 0x6F00      | Unknown                 |
-| 0xa400      | Success                 |
+| 0x9000      | Success                 |
 
 ---
 
