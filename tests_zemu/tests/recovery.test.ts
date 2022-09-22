@@ -16,7 +16,7 @@
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
 import { APP_SEED, models } from './common'
-import { newVTBApp } from '@blooo/ledger-substrate'
+import { newSubstrateApp } from '@zondax/ledger-substrate'
 
 const defaultOptions = {
   ...DEFAULT_START_OPTIONS,
@@ -36,7 +36,7 @@ describe('Recovery', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const vtb_expected_address = '5Da9vz35EVcsHpHhW3kgQ1nfguER3RUrS37VMNXuch297M7k'
       const vtb_expected_pk = '42b21fdbd41f058c3b4de9bce93fdb968c394e0f07bca480ae25d4035d0af534'

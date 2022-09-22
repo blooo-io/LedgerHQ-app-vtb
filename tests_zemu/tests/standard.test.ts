@@ -15,7 +15,7 @@
  ******************************************************************************* */
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
-import { newVTBApp } from '@blooo/ledger-substrate'
+import { newSubstrateApp } from '@zondax/ledger-substrate'
 import { txBuyVTB, txCancelBuyVtbcOrder, txCancelSellVtbcOrder, txClaimDistribution, txInitiateConvertVtbcToVtbtSubstrate, txInitiateConvertVtbtToVtbcSubstrate, txInitiateTransferOfVtbtSubstrate, txSellVTB, txWithdrawInitiate } from './zemu_blobs'
 import { APP_SEED, models } from './common'
 
@@ -61,7 +61,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const resp = await app.getVersion()
 
       console.log(resp)
@@ -81,7 +81,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
 
@@ -104,7 +104,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -132,7 +132,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -153,7 +153,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -193,7 +193,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -233,7 +233,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -273,7 +273,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -313,7 +313,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -353,7 +353,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -393,7 +393,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -433,7 +433,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -473,7 +473,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
