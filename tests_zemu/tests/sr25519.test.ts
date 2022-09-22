@@ -19,7 +19,7 @@ import { APP_SEED } from './common'
 
 // @ts-ignore
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
-import { newVTBApp } from '@blooo/ledger-substrate'
+import { newSubstrateApp } from '@zondax/ledger-substrate'
 
 const addon = require('../../tests_tools/neon/native')
 
@@ -44,7 +44,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000, false, 1)
 
@@ -67,7 +67,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions, model: 'nanos' })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
@@ -94,7 +94,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newVTBApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), "VTB")
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
