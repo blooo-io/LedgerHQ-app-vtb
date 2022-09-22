@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "@zondax/ledger-substrate": "^0.39.0"
-  }
-}
