@@ -102,40 +102,40 @@ parser_error_t _readMethod_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2066: /* module 8 call 18 */
-    case 3090: /* module 12 call 18 */
+    case 2068: /* module 8 call 20 */
+    case 3092: /* module 12 call 20 */
         CHECK_ERROR(_readMethod_claim_distribution_V12(c, &method->basic.claim_distribution_V12))
+        break;
+    case 2063: /* module 8 call 15 */
+    case 3087: /* module 12 call 15 */
+        CHECK_ERROR(_readMethod_initiate_transfer_of_vtbt_substrate_V12(c, &method->basic.initiate_transfer_of_vtbt_substrate_V12))
+        break;
+    case 2062: /* module 8 call 14 */
+    case 3086: /* module 12 call 14 */
+        CHECK_ERROR(_readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(c, &method->basic.initiate_convert_vtbt_to_vtbc_substrate_V12))
         break;
     case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
-        CHECK_ERROR(_readMethod_initiate_transfer_of_vtbt_substrate_V12(c, &method->basic.initiate_transfer_of_vtbt_substrate_V12))
+        CHECK_ERROR(_readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(c, &method->basic.initiate_convert_vtbc_to_vtbt_substrate_V12))
         break;
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
-        CHECK_ERROR(_readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(c, &method->basic.initiate_convert_vtbt_to_vtbc_substrate_V12))
+        CHECK_ERROR(_readMethod_withdraw_initiate_V12(c, &method->basic.withdraw_initiate_V12))
         break;
     case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
-        CHECK_ERROR(_readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(c, &method->basic.initiate_convert_vtbc_to_vtbt_substrate_V12))
+        CHECK_ERROR(_readMethod_cancel_sell_vtbc_order_V12(c, &method->basic.cancel_sell_vtbc_order_V12))
         break;
     case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
-        CHECK_ERROR(_readMethod_withdraw_initiate_V12(c, &method->basic.withdraw_initiate_V12))
+        CHECK_ERROR(_readMethod_sell_vtbc_V12(c, &method->basic.sell_vtbc_V12))
         break;
     case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
-        CHECK_ERROR(_readMethod_cancel_sell_vtbc_order_V12(c, &method->basic.cancel_sell_vtbc_order_V12))
+        CHECK_ERROR(_readMethod_cancel_buy_vtbc_order_V12(c, &method->basic.cancel_buy_vtbc_order_V12))
         break;
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        CHECK_ERROR(_readMethod_sell_vtbc_V12(c, &method->basic.sell_vtbc_V12))
-        break;
-    case 2055: /* module 8 call 7 */
-    case 3079: /* module 12 call 7 */
-        CHECK_ERROR(_readMethod_cancel_buy_vtbc_order_V12(c, &method->basic.cancel_buy_vtbc_order_V12))
-        break;
-    case 2054: /* module 8 call 6 */
-    case 3078: /* module 12 call 6 */
         CHECK_ERROR(_readMethod_buy_vtbc_V12(c, &method->basic.buy_vtbc_V12))
         break;
     default:
@@ -168,32 +168,32 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2066: /* module 8 call 18 */
-    case 3090: /* module 12 call 18 */
+    case 2068: /* module 8 call 20 */
+    case 3092: /* module 12 call 20 */
         return STR_ME_CLAIM_DISTRIBUTION;
+    case 2063: /* module 8 call 15 */
+    case 3087: /* module 12 call 15 */
+        return STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE;
+    case 2062: /* module 8 call 14 */
+    case 3086: /* module 12 call 14 */
+        return STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE;
     case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
-        return STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE;
+        return STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE;
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
-        return STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE;
+        return STR_ME_WITHDRAW_INITIATE;
     case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
-        return STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE;
+        return STR_ME_CANCEL_SELL_VTBC_ORDER;
     case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
-        return STR_ME_WITHDRAW_INITIATE;
+        return STR_ME_SELL_VTBC;
     case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
-        return STR_ME_CANCEL_SELL_VTBC_ORDER;
+        return STR_ME_CANCEL_BUY_VTBC_ORDER;
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        return STR_ME_SELL_VTBC;
-    case 2055: /* module 8 call 7 */
-    case 3079: /* module 12 call 7 */
-        return STR_ME_CANCEL_BUY_VTBC_ORDER;
-    case 2054: /* module 8 call 6 */
-    case 3078: /* module 12 call 6 */
         return STR_ME_BUY_VTBC;
     default:
         return NULL;
@@ -207,15 +207,21 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2066: /* module 8 call 18 */
-    case 3090: /* module 12 call 18 */
+    case 2068: /* module 8 call 20 */
+    case 3092: /* module 12 call 20 */
+        return 1;
+    case 2063: /* module 8 call 15 */
+    case 3087: /* module 12 call 15 */
+        return 2;
+    case 2062: /* module 8 call 14 */
+    case 3086: /* module 12 call 14 */
         return 1;
     case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
-        return 2;
+        return 1;
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
-        return 1;
+        return 2;
     case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         return 1;
@@ -227,12 +233,6 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        return 2;
-    case 2055: /* module 8 call 7 */
-    case 3079: /* module 12 call 7 */
-        return 1;
-    case 2054: /* module 8 call 6 */
-    case 3078: /* module 12 call 6 */
         return 2;
     default:
         return 0;
@@ -246,16 +246,16 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2066: /* module 8 call 18 */
-    case 3090: /* module 12 call 18 */
+    case 2068: /* module 8 call 20 */
+    case 3092: /* module 12 call 20 */
         switch (itemIdx) {
         case 0:
             return STR_IT_crypto_type;
         default:
             return NULL;
         }
-    case 2061: /* module 8 call 13 */
-    case 3085: /* module 12 call 13 */
+    case 2063: /* module 8 call 15 */
+    case 3087: /* module 12 call 15 */
         switch (itemIdx) {
         case 0:
             return STR_IT_dest;
@@ -264,10 +264,28 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
+    case 2062: /* module 8 call 14 */
+    case 3086: /* module 12 call 14 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_crypto_amount;
+        default:
+            return NULL;
+        }
+    case 2061: /* module 8 call 13 */
+    case 3085: /* module 12 call 13 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_crypto_amount;
+        default:
+            return NULL;
+        }
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         switch (itemIdx) {
         case 0:
+            return STR_IT_crypto_type;
+        case 1:
             return STR_IT_crypto_amount;
         default:
             return NULL;
@@ -276,7 +294,7 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
     case 3083: /* module 12 call 11 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_crypto_amount;
+            return STR_IT_order_id;
         default:
             return NULL;
         }
@@ -300,24 +318,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_crypto_type;
-        case 1:
-            return STR_IT_crypto_amount;
-        default:
-            return NULL;
-        }
-    case 2055: /* module 8 call 7 */
-    case 3079: /* module 12 call 7 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_order_id;
-        default:
-            return NULL;
-        }
-    case 2054: /* module 8 call 6 */
-    case 3078: /* module 12 call 6 */
         switch (itemIdx) {
         case 0:
             return STR_IT_crypto_type;
@@ -342,8 +342,8 @@ parser_error_t _getMethod_ItemValue_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2066: /* module 8 call 18 */
-    case 3090: /* module 12 call 18 */
+    case 2068: /* module 8 call 20 */
+    case 3092: /* module 12 call 20 */
         switch (itemIdx) {
         case 0: /* claim_distribution - network */;
             return _toStringLookupCryptoTokenType_V12(
@@ -353,8 +353,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2061: /* module 8 call 13 */
-    case 3085: /* module 12 call 13 */
+    case 2063: /* module 8 call 15 */
+    case 3087: /* module 12 call 15 */
         switch (itemIdx) {
         case 0: /* initiate_transfer_of_vtbt_substrate - dest */;
             return _toStringLookupasStaticLookupAddress_V12(
@@ -369,8 +369,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2060: /* module 8 call 12 */
-    case 3084: /* module 12 call 12 */
+    case 2062: /* module 8 call 14 */
+    case 3086: /* module 12 call 14 */
         switch (itemIdx) {
         case 0: /* initiate_convert_vtbt_to_vtbc_substrate - amount */;
             return _toStringCompactAmount(
@@ -380,8 +380,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2059: /* module 8 call 11 */
-    case 3083: /* module 12 call 11 */
+    case 2061: /* module 8 call 13 */
+    case 3085: /* module 12 call 13 */
         switch (itemIdx) {
         case 0: /* initiate_convert_vtbc_to_vtbt_substrate - amount */;
             return _toStringCompactAmount(
@@ -391,8 +391,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2058: /* module 8 call 10 */
-    case 3082: /* module 12 call 10 */
+    case 2060: /* module 8 call 12 */
+    case 3084: /* module 12 call 12 */
         switch (itemIdx) {
         case 0: /* withdraw_initiate - network */;
             return _toStringLookupCryptoTokenType_V12(
@@ -407,8 +407,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2057: /* module 8 call 9 */
-    case 3081: /* module 12 call 9 */
+    case 2059: /* module 8 call 11 */
+    case 3083: /* module 12 call 11 */
         switch (itemIdx) {
         case 0: /* cancel_sell_vtbc_V11 - order_id */;
             return _toStringLookupasStaticLookupOrder_V12(
@@ -418,8 +418,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2056: /* module 8 call 8 */
-    case 3080: /* module 12 call 8 */
+    case 2058: /* module 8 call 10 */
+    case 3082: /* module 12 call 10 */
         switch (itemIdx) {
         case 0: /* sell_vtbc_V12 - network */;
             return _toStringLookupCryptoTokenType_V12(
@@ -434,8 +434,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2055: /* module 8 call 7 */
-    case 3079: /* module 12 call 7 */
+    case 2057: /* module 8 call 9 */
+    case 3081: /* module 12 call 9 */
         switch (itemIdx) {
         case 0: /* cancel_sell_vtbc_V11 - order_id */;
             return _toStringLookupasStaticLookupOrder_V12(
@@ -445,8 +445,8 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2054: /* module 8 call 6 */
-    case 3078: /* module 12 call 6 */
+    case 2056: /* module 8 call 8 */
+    case 3080: /* module 12 call 8 */
         switch (itemIdx) {
         case 0: /* buy_vtbc_V12 - network */;
             return _toStringLookupCryptoTokenType_V12(
