@@ -1,9 +1,3 @@
-[submodule "nanos-secure-sdk"]
-	path = deps/nanos-secure-sdk
-	url = https://github.com/LedgerHQ/nanos-secure-sdk.git
-[submodule "BLAKE2"]
-	path = deps/BLAKE2
-	url = https://github.com/BLAKE2/BLAKE2
 [submodule "cmake-modules"]
 	path = cmake/cmake-modules
 	url = https://github.com/bilke/cmake-modules.git
@@ -16,3 +10,9 @@
 [submodule "blooo-ledger-lib"]
 	path = deps/ledger-zxlib
 	url = https://github.com/blooo-io/ledger-blooo-lib.git
+[submodule "deps/nanos-secure-sdk"]
+	path = deps/nanos-secure-sdk
+	url = https://github.com/LedgerHQ/nanos-secure-sdk.git
+[submodule "deps/BLAKE2"]
+	path = deps/BLAKE2
+	url = https://github.com/BLAKE2/BLAKE2
