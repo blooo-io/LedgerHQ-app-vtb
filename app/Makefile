@@ -75,13 +75,13 @@ DEFINES += APP_STANDARD
 ifneq ($(TARGET_NAME),TARGET_NANOS)
 DEFINES += SUBSTRATE_PARSER_FULL
 endif
-APPNAME = "VTB"
+APPNAME = "VTB Testnet"
 APPPATH = "44'/694'"  --path "44'/694'"
 
 else ifeq ($(COIN),VTB_XL)
 # XL app configuration
 DEFINES += APP_STANDARD SUBSTRATE_PARSER_FULL
-APPNAME = "VTB XL"
+APPNAME = "VTB Testnet XL"
 APPPATH = "44'/694'"  --path "44'/694'"
 
 else
