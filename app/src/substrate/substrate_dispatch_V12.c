@@ -20,16 +20,16 @@
 #include <stdint.h>
 
 __Z_INLINE parser_error_t _readMethod_buy_vtbc_V12(
-    parser_context_t* c, pd_buy_vtbc_V12_t* m)
+    parser_context_t *c, pd_buy_vtbc_V12_t *m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
-    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_cancel_buy_vtbc_order_V12(
-    parser_context_t* c, pd_cancel_buy_vtbc_order_V12_t* m)
+    parser_context_t *c, pd_cancel_buy_vtbc_order_V12_t *m)
 {
     c->offset += 1;
     CHECK_ERROR(_readLookupOrder_V12(c, &m->order_id))
@@ -37,7 +37,7 @@ __Z_INLINE parser_error_t _readMethod_cancel_buy_vtbc_order_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_order_V12(
-    parser_context_t* c, pd_cancel_sell_vtbc_order_V12_t* m)
+    parser_context_t *c, pd_cancel_sell_vtbc_order_V12_t *m)
 {
     c->offset += 1;
     CHECK_ERROR(_readLookupOrder_V12(c, &m->order_id))
@@ -45,63 +45,64 @@ __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_order_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_sell_vtbc_V12(
-    parser_context_t* c, pd_sell_vtbc_V12_t* m)
+    parser_context_t *c, pd_sell_vtbc_V12_t *m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
-    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_withdraw_initiate_V12(
-    parser_context_t* c, pd_withdraw_initiate_V12_t* m)
+    parser_context_t *c, pd_withdraw_initiate_V12_t *m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
-    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_claim_distribution_V12(
-    parser_context_t* c, pd_claim_distribution_V12_t* m)
+    parser_context_t *c, pd_claim_distribution_V12_t *m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
-    CHECK_ERROR(_readLookupCryptoTokenType_V12(c,&m->crypto_type))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(
-    parser_context_t* c, pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t* m)
+    parser_context_t *c, pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t *m)
 {
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))   
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(
-    parser_context_t* c, pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t* m)
+    parser_context_t *c, pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t *m)
 {
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
-    parser_context_t* c, pd_initiate_transfer_of_vtbt_substrate_V12_t* m)
+    parser_context_t *c, pd_initiate_transfer_of_vtbt_substrate_V12_t *m)
 {
     CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
-    CHECK_ERROR(_readLookupCryptoAmount_V12(c,&m->value))   
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
-
 parser_error_t _readMethod_V12(
-    parser_context_t* c,
+    parser_context_t *c,
     uint8_t moduleIdx,
     uint8_t callIdx,
-    pd_Method_V12_t* method)
+    pd_Method_V12_t *method)
 {
-    uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
+    uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
+    PRINTF("%d\n", callPrivIdx);
+    switch (callPrivIdx)
+    {
     case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         CHECK_ERROR(_readMethod_claim_distribution_V12(c, &method->basic.claim_distribution_V12))
@@ -138,6 +139,12 @@ parser_error_t _readMethod_V12(
     case 3080: /* module 12 call 8 */
         CHECK_ERROR(_readMethod_buy_vtbc_V12(c, &method->basic.buy_vtbc_V12))
         break;
+    case 2053: /* module 8 call 5 */
+    case 3077: /* module 12 call 5 */
+        break;
+    case 2052: /* module 8 call 4 */
+    case 3076: /* module 12 call 4 */
+        break;
     default:
         return parser_unexpected_callIndex;
     }
@@ -150,9 +157,10 @@ parser_error_t _readMethod_V12(
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-const char* _getMethod_ModuleName_V12(uint8_t moduleIdx)
+const char *_getMethod_ModuleName_V12(uint8_t moduleIdx)
 {
-    switch (moduleIdx) {
+    switch (moduleIdx)
+    {
     case 8:
     case 12:
         return STR_MO_VTBDEX;
@@ -163,11 +171,12 @@ const char* _getMethod_ModuleName_V12(uint8_t moduleIdx)
     return NULL;
 }
 
-const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
+const char *_getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
+    switch (callPrivIdx)
+    {
     case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         return STR_ME_CLAIM_DISTRIBUTION;
@@ -195,6 +204,12 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return STR_ME_BUY_VTBC;
+    case 2053: /* module 8 call 5 */
+    case 3077: /* module 12 call 5 */
+        return STR_ME_RESUME_VTB_DEX_FUNCTIONALITY;
+    case 2052: /* module 8 call 4 */
+    case 3076: /* module 12 call 4 */
+        return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
     default:
         return NULL;
     }
@@ -206,7 +221,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
+    switch (callPrivIdx)
+    {
     case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         return 1;
@@ -241,14 +257,16 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     return 0;
 }
 
-const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx)
+const char *_getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
+    switch (callPrivIdx)
+    {
     case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_type;
         default:
@@ -256,7 +274,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_dest;
         case 1:
@@ -266,7 +285,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_amount;
         default:
@@ -274,7 +294,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_amount;
         default:
@@ -282,7 +303,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_type;
         case 1:
@@ -292,7 +314,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_order_id;
         default:
@@ -300,7 +323,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_type;
         case 1:
@@ -310,7 +334,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_order_id;
         default:
@@ -318,7 +343,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         }
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0:
             return STR_IT_crypto_type;
         case 1:
@@ -334,17 +360,19 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
 }
 
 parser_error_t _getMethod_ItemValue_V12(
-    pd_Method_V12_t* m,
+    pd_Method_V12_t *m,
     uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
-    char* outValue, uint16_t outValueLen,
-    uint8_t pageIdx, uint8_t* pageCount)
+    char *outValue, uint16_t outValueLen,
+    uint8_t pageIdx, uint8_t *pageCount)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
+    switch (callPrivIdx)
+    {
     case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* claim_distribution - network */;
             return _toStringLookupCryptoTokenType_V12(
                 &m->basic.claim_distribution_V12.crypto_type,
@@ -355,7 +383,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* initiate_transfer_of_vtbt_substrate - dest */;
             return _toStringLookupasStaticLookupAddress_V12(
                 &m->basic.initiate_transfer_of_vtbt_substrate_V12.dest,
@@ -371,7 +400,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* initiate_convert_vtbt_to_vtbc_substrate - amount */;
             return _toStringCompactAmount(
                 &m->basic.initiate_convert_vtbt_to_vtbc_substrate_V12.value,
@@ -382,7 +412,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* initiate_convert_vtbc_to_vtbt_substrate - amount */;
             return _toStringCompactAmount(
                 &m->basic.initiate_convert_vtbc_to_vtbt_substrate_V12.value,
@@ -393,7 +424,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* withdraw_initiate - network */;
             return _toStringLookupCryptoTokenType_V12(
                 &m->basic.withdraw_initiate_V12.crypto_type,
@@ -409,7 +441,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* cancel_sell_vtbc_V11 - order_id */;
             return _toStringLookupasStaticLookupOrder_V12(
                 &m->basic.cancel_sell_vtbc_order_V12.order_id,
@@ -420,7 +453,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* sell_vtbc_V12 - network */;
             return _toStringLookupCryptoTokenType_V12(
                 &m->basic.sell_vtbc_V12.crypto_type,
@@ -436,7 +470,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* cancel_sell_vtbc_V11 - order_id */;
             return _toStringLookupasStaticLookupOrder_V12(
                 &m->basic.cancel_buy_vtbc_order_V12.order_id,
@@ -447,7 +482,8 @@ parser_error_t _getMethod_ItemValue_V12(
         }
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
-        switch (itemIdx) {
+        switch (itemIdx)
+        {
         case 0: /* buy_vtbc_V12 - network */;
             return _toStringLookupCryptoTokenType_V12(
                 &m->basic.buy_vtbc_V12.crypto_type,
@@ -477,150 +513,151 @@ bool _getMethod_IsNestingSupported_V12(uint8_t moduleIdx, uint8_t callIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
-    switch (callPrivIdx) {
-    case 2560: // Preimage:Note preimage
-    case 2561: // Preimage:Unnote preimage
-    case 2562: // Preimage:Request preimage
-    case 2563: // Preimage:Unrequest preimage
-    case 768: // Timestamp:Set
-    case 1024: // Indices:Claim
-    case 1025: // Indices:Transfer
-    case 1026: // Indices:Free
-    case 1027: // Indices:Force transfer
-    case 1028: // Indices:Freeze
-    case 1284: // Balances:Transfer all
-    case 1285: // Balances:Force unreserve
-    case 1792: // Staking:Bond
-    case 1793: // Staking:Bond extra
-    case 1794: // Staking:Unbond
-    case 1795: // Staking:Withdraw Unbonded
-    case 1796: // Staking:Validate
-    case 1797: // Staking:Nominate
-    case 1798: // Staking:Chill
-    case 1799: // Staking:Set payee
-    case 1800: // Staking:Set controller
-    case 1801: // Staking:Set validator count
-    case 1802: // Staking:Increase validator count
-    case 1804: // Staking:Force no eras
-    case 1805: // Staking:Force new era
-    case 1806: // Staking:Set invulnerables
-    case 1807: // Staking:Force unstake
-    case 1808: // Staking:Force new era always
-    case 1809: // Staking:Cancel deferred slash
-    case 1810: // Staking:Payout stakers
-    case 1811: // Staking:Rebond
-    case 1812: // Staking:Set history depth
-    case 1813: // Staking:Reap stash
-    case 1814: // Staking:Kick
-    case 1816: // Staking:Chill other
-    case 1817: // Staking:Force apply min commission
-    case 2304: // Session:Set keys
-    case 2305: // Session:Purge keys
-    case 2818: // Grandpa:Note stalled
-    case 3584: // Democracy:Propose
-    case 3585: // Democracy:Second
-    case 3586: // Democracy:Vote
-    case 3587: // Democracy:Emergency cancel
-    case 3588: // Democracy:External propose
-    case 3589: // Democracy:External propose majority
-    case 3590: // Democracy:External propose default
-    case 3591: // Democracy:Fast track
-    case 3592: // Democracy:Veto external
-    case 3593: // Democracy:Cancel referendum
-    case 3594: // Democracy:Cancel queued
-    case 3595: // Democracy:Delegate
-    case 3596: // Democracy:Undelegate
-    case 3597: // Democracy:Clear public proposals
-    case 3598: // Democracy:Note preimage
-    case 3599: // Democracy:Note preimage operational
-    case 3600: // Democracy:Note imminent preimage
-    case 3601: // Democracy:Note imminent preimage operational
-    case 3602: // Democracy:Reap preimage
-    case 3603: // Democracy:Unlock
-    case 3604: // Democracy:Remove vote
-    case 3605: // Democracy:Remove other vote
-    case 3606: // Democracy:Enact proposal
-    case 3608: // Democracy:Cancel proposal
-    case 3840: // Council:Set members
-    case 3841: // Council:Execute
-    case 3842: // Council:Propose
-    case 3843: // Council:Vote
-    case 3844: // Council:Close
-    case 3845: // Council:Disapprove proposal
-    case 4096: // TechnicalCommittee:Set members
-    case 4097: // TechnicalCommittee:Execute
-    case 4098: // TechnicalCommittee:Propose
-    case 4099: // TechnicalCommittee:Vote
-    case 4100: // TechnicalCommittee:Close
-    case 4101: // TechnicalCommittee:Disapprove proposal
-    case 4352: // PhragmenElection:Vote
-    case 4353: // PhragmenElection:Remove voter
-    case 4354: // PhragmenElection:Submit candidacy
-    case 4356: // PhragmenElection:Remove member
-    case 4357: // PhragmenElection:Clean defunct voters
-    case 4608: // TechnicalMembership:Add member
-    case 4609: // TechnicalMembership:Remove member
-    case 4610: // TechnicalMembership:Swap member
-    case 4611: // TechnicalMembership:Reset members
-    case 4612: // TechnicalMembership:Change key
-    case 4613: // TechnicalMembership:Set prime
-    case 4614: // TechnicalMembership:Clear prime
-    case 4864: // Treasury:Propose spend
-    case 4865: // Treasury:Reject proposal
-    case 4866: // Treasury:Approve proposal
-    case 4867: // Treasury:Remove approval
-    case 6144: // Claims:Claim
-    case 6146: // Claims:Claim attest
-    case 6147: // Claims:Attest
-    case 6148: // Claims:Move claim
-    case 6400: // Vesting:Vest
-    case 6401: // Vesting:Vest other
-    case 6402: // Vesting:Vested transfer
-    case 6403: // Vesting:Force vested transfer
-    case 6404: // Vesting:Merge schedules
-    case 6656: // Utility:Batch
-    case 6658: // Utility:Batch all
-    case 6660: // Utility:Force batch
-    case 7168: // Identity:Add registrar
-    case 7171: // Identity:Clear identity
-    case 7172: // Identity:Request judgement
-    case 7173: // Identity:Cancel request
-    case 7174: // Identity:Set fee
-    case 7175: // Identity:Set account id
-    case 7178: // Identity:Kill identity
-    case 7181: // Identity:Remove sub
-    case 7182: // Identity:Quit sub
-    case 7425: // Proxy:Add proxy
-    case 7426: // Proxy:Remove proxy
-    case 7427: // Proxy:Remove proxies
-    case 7428: // Proxy:Anonymous
-    case 7429: // Proxy:Kill anonymous
-    case 7433: // Proxy:Proxy announced
-    case 8704: // Bounties:Propose bounty
-    case 8705: // Bounties:Approve bounty
-    case 8706: // Bounties:Propose curator
-    case 8707: // Bounties:Unassign curator
-    case 8708: // Bounties:Accept curator
-    case 8709: // Bounties:Award bounty
-    case 8710: // Bounties:Claim bounty
-    case 8711: // Bounties:Close bounty
-    case 8712: // Bounties:Extend bounty expiry
-    case 9728: // ChildBounties:Add child bounty
-    case 9729: // ChildBounties:Propose curator
-    case 9730: // ChildBounties:Accept curator
-    case 9731: // ChildBounties:Unassign curator
-    case 9732: // ChildBounties:Award child bounty
-    case 9733: // ChildBounties:Claim child bounty
-    case 9734: // ChildBounties:Close child bounty
-    case 8960: // Tips:Report awesome
-    case 8961: // Tips:Retract tip
-    case 8962: // Tips:Tip new
-    case 8963: // Tips:Tip
-    case 8964: // Tips:Close tip
-    case 8965: // Tips:Slash tip
-    case 9220: // ElectionProviderMultiPhase:Governance fallback
-    case 9472: // BagsList:Rebag
-    case 9473: // BagsList:Put in front of
+    switch (callPrivIdx)
+    {
+    case 2560:  // Preimage:Note preimage
+    case 2561:  // Preimage:Unnote preimage
+    case 2562:  // Preimage:Request preimage
+    case 2563:  // Preimage:Unrequest preimage
+    case 768:   // Timestamp:Set
+    case 1024:  // Indices:Claim
+    case 1025:  // Indices:Transfer
+    case 1026:  // Indices:Free
+    case 1027:  // Indices:Force transfer
+    case 1028:  // Indices:Freeze
+    case 1284:  // Balances:Transfer all
+    case 1285:  // Balances:Force unreserve
+    case 1792:  // Staking:Bond
+    case 1793:  // Staking:Bond extra
+    case 1794:  // Staking:Unbond
+    case 1795:  // Staking:Withdraw Unbonded
+    case 1796:  // Staking:Validate
+    case 1797:  // Staking:Nominate
+    case 1798:  // Staking:Chill
+    case 1799:  // Staking:Set payee
+    case 1800:  // Staking:Set controller
+    case 1801:  // Staking:Set validator count
+    case 1802:  // Staking:Increase validator count
+    case 1804:  // Staking:Force no eras
+    case 1805:  // Staking:Force new era
+    case 1806:  // Staking:Set invulnerables
+    case 1807:  // Staking:Force unstake
+    case 1808:  // Staking:Force new era always
+    case 1809:  // Staking:Cancel deferred slash
+    case 1810:  // Staking:Payout stakers
+    case 1811:  // Staking:Rebond
+    case 1812:  // Staking:Set history depth
+    case 1813:  // Staking:Reap stash
+    case 1814:  // Staking:Kick
+    case 1816:  // Staking:Chill other
+    case 1817:  // Staking:Force apply min commission
+    case 2304:  // Session:Set keys
+    case 2305:  // Session:Purge keys
+    case 2818:  // Grandpa:Note stalled
+    case 3584:  // Democracy:Propose
+    case 3585:  // Democracy:Second
+    case 3586:  // Democracy:Vote
+    case 3587:  // Democracy:Emergency cancel
+    case 3588:  // Democracy:External propose
+    case 3589:  // Democracy:External propose majority
+    case 3590:  // Democracy:External propose default
+    case 3591:  // Democracy:Fast track
+    case 3592:  // Democracy:Veto external
+    case 3593:  // Democracy:Cancel referendum
+    case 3594:  // Democracy:Cancel queued
+    case 3595:  // Democracy:Delegate
+    case 3596:  // Democracy:Undelegate
+    case 3597:  // Democracy:Clear public proposals
+    case 3598:  // Democracy:Note preimage
+    case 3599:  // Democracy:Note preimage operational
+    case 3600:  // Democracy:Note imminent preimage
+    case 3601:  // Democracy:Note imminent preimage operational
+    case 3602:  // Democracy:Reap preimage
+    case 3603:  // Democracy:Unlock
+    case 3604:  // Democracy:Remove vote
+    case 3605:  // Democracy:Remove other vote
+    case 3606:  // Democracy:Enact proposal
+    case 3608:  // Democracy:Cancel proposal
+    case 3840:  // Council:Set members
+    case 3841:  // Council:Execute
+    case 3842:  // Council:Propose
+    case 3843:  // Council:Vote
+    case 3844:  // Council:Close
+    case 3845:  // Council:Disapprove proposal
+    case 4096:  // TechnicalCommittee:Set members
+    case 4097:  // TechnicalCommittee:Execute
+    case 4098:  // TechnicalCommittee:Propose
+    case 4099:  // TechnicalCommittee:Vote
+    case 4100:  // TechnicalCommittee:Close
+    case 4101:  // TechnicalCommittee:Disapprove proposal
+    case 4352:  // PhragmenElection:Vote
+    case 4353:  // PhragmenElection:Remove voter
+    case 4354:  // PhragmenElection:Submit candidacy
+    case 4356:  // PhragmenElection:Remove member
+    case 4357:  // PhragmenElection:Clean defunct voters
+    case 4608:  // TechnicalMembership:Add member
+    case 4609:  // TechnicalMembership:Remove member
+    case 4610:  // TechnicalMembership:Swap member
+    case 4611:  // TechnicalMembership:Reset members
+    case 4612:  // TechnicalMembership:Change key
+    case 4613:  // TechnicalMembership:Set prime
+    case 4614:  // TechnicalMembership:Clear prime
+    case 4864:  // Treasury:Propose spend
+    case 4865:  // Treasury:Reject proposal
+    case 4866:  // Treasury:Approve proposal
+    case 4867:  // Treasury:Remove approval
+    case 6144:  // Claims:Claim
+    case 6146:  // Claims:Claim attest
+    case 6147:  // Claims:Attest
+    case 6148:  // Claims:Move claim
+    case 6400:  // Vesting:Vest
+    case 6401:  // Vesting:Vest other
+    case 6402:  // Vesting:Vested transfer
+    case 6403:  // Vesting:Force vested transfer
+    case 6404:  // Vesting:Merge schedules
+    case 6656:  // Utility:Batch
+    case 6658:  // Utility:Batch all
+    case 6660:  // Utility:Force batch
+    case 7168:  // Identity:Add registrar
+    case 7171:  // Identity:Clear identity
+    case 7172:  // Identity:Request judgement
+    case 7173:  // Identity:Cancel request
+    case 7174:  // Identity:Set fee
+    case 7175:  // Identity:Set account id
+    case 7178:  // Identity:Kill identity
+    case 7181:  // Identity:Remove sub
+    case 7182:  // Identity:Quit sub
+    case 7425:  // Proxy:Add proxy
+    case 7426:  // Proxy:Remove proxy
+    case 7427:  // Proxy:Remove proxies
+    case 7428:  // Proxy:Anonymous
+    case 7429:  // Proxy:Kill anonymous
+    case 7433:  // Proxy:Proxy announced
+    case 8704:  // Bounties:Propose bounty
+    case 8705:  // Bounties:Approve bounty
+    case 8706:  // Bounties:Propose curator
+    case 8707:  // Bounties:Unassign curator
+    case 8708:  // Bounties:Accept curator
+    case 8709:  // Bounties:Award bounty
+    case 8710:  // Bounties:Claim bounty
+    case 8711:  // Bounties:Close bounty
+    case 8712:  // Bounties:Extend bounty expiry
+    case 9728:  // ChildBounties:Add child bounty
+    case 9729:  // ChildBounties:Propose curator
+    case 9730:  // ChildBounties:Accept curator
+    case 9731:  // ChildBounties:Unassign curator
+    case 9732:  // ChildBounties:Award child bounty
+    case 9733:  // ChildBounties:Claim child bounty
+    case 9734:  // ChildBounties:Close child bounty
+    case 8960:  // Tips:Report awesome
+    case 8961:  // Tips:Retract tip
+    case 8962:  // Tips:Tip new
+    case 8963:  // Tips:Tip
+    case 8964:  // Tips:Close tip
+    case 8965:  // Tips:Slash tip
+    case 9220:  // ElectionProviderMultiPhase:Governance fallback
+    case 9472:  // BagsList:Rebag
+    case 9473:  // BagsList:Put in front of
     case 13056: // Configuration:Set validation upgrade cooldown
     case 13057: // Configuration:Set validation upgrade delay
     case 13058: // Configuration:Set code retention period
