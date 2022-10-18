@@ -58,6 +58,7 @@ extern "C"
     // Methods names
     static const char *STR_ME_RESUME_VTB_DEX_FUNCTIONALITY = "Resume VTB dex functionality";
     static const char *STR_ME_STOP_VTB_DEX_FUNCTIONALITY = "Stop VTB dex functionality";
+    static const char *STR_ME_SET_CODE = "Set code";
     static const char *STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
     static const char *STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE = "Convert VTBC to VTBT";
     static const char *STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
@@ -70,7 +71,6 @@ extern "C"
     static const char *STR_ME_FILL_BLOCK = "Fill block";
     static const char *STR_ME_REMARK = "Remark";
     static const char *STR_ME_SET_HEAP_PAGES = "Set heap pages";
-    static const char *STR_ME_SET_CODE = "Set code";
     static const char *STR_ME_SET_CODE_WITHOUT_CHECKS = "Set code without checks";
     static const char *STR_ME_REMARK_WITH_EVENT = "Remark with event";
     static const char *STR_ME_NOTE_PREIMAGE = "Note preimage";

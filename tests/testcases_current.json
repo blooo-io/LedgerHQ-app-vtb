@@ -181,5 +181,56 @@
       "6 | Block [1/2] : 1b621331a19de243e681085fe55b0f92769021",
       "6 | Block [2/2] : affff17b9b873799504378af79"
     ]
+  },
+  {
+    "index": 10,
+    "name": "Stop_Vtb_Dex_Functionality",
+    "blob": "0c04350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
+    "output": [
+      "0 | VtbDex : Stop VTB dex functionality"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Stop VTB dex functionality",
+      "1 | Chain : VTB",
+      "2 | Nonce : 0",
+      "3 | Era Phase : 3",
+      "4 | Era Period : 64",
+      "5 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
+      "5 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
+    ]
+  },
+  {
+    "index": 11,
+    "name": "Resume_Vtb_Dex_Functionality",
+    "blob": "0c05350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
+    "output": [
+      "0 | VtbDex : Resume VTB dex functionality"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Resume VTB dex functionality",
+      "1 | Chain : VTB",
+      "2 | Nonce : 0",
+      "3 | Era Phase : 3",
+      "4 | Era Period : 64",
+      "5 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
+      "5 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
+    ]
+  },
+  {
+    "index": 12,
+    "name": "Set_Code",
+    "blob": "00031000122190350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
+    "output": [
+      "0 | VtbDex : Set code"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Set code",
+      "1 | Chain : VTB",
+      "2 | Nonce : 0",
+      "3 | Era Phase : 3",
+      "4 | Era Period : 64",
+      "5 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
+      "5 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
+    ]
   }
 ]

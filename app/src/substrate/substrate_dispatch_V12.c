@@ -92,6 +92,13 @@ __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_set_code_V12(
+    parser_context_t *c, pd_set_code_V12_t *m)
+{
+    CHECK_ERROR(_readLookupId_V12(c, &m->id))
+    return parser_ok;
+}
+
 parser_error_t _readMethod_V12(
     parser_context_t *c,
     uint8_t moduleIdx,
@@ -100,7 +107,6 @@ parser_error_t _readMethod_V12(
 {
 
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
-    PRINTF("%d\n", callPrivIdx);
     switch (callPrivIdx)
     {
     case 2068: /* module 8 call 20 */
@@ -141,9 +147,14 @@ parser_error_t _readMethod_V12(
         break;
     case 2053: /* module 8 call 5 */
     case 3077: /* module 12 call 5 */
+               // resumeVTBdexFunc
         break;
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
+               // stopVTBdexFunc
+        break;
+    case 3: /* module 0 call 3 */
+        CHECK_ERROR(_readMethod_set_code_V12(c, &method->basic.set_code_V12))
         break;
     default:
         return parser_unexpected_callIndex;
@@ -210,6 +221,8 @@ const char *_getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
         return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
+    case 3: /* module 0 call 3 */
+        return STR_ME_SET_CODE;
     default:
         return NULL;
     }
@@ -250,6 +263,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return 2;
+    case 3: /* module 0 call 3 */
+        return 1;
     default:
         return 0;
     }
@@ -349,6 +364,14 @@ const char *_getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
             return STR_IT_crypto_type;
         case 1:
             return STR_IT_crypto_amount;
+        default:
+            return NULL;
+        }
+    case 3: /* module 0 call 3 */
+        switch (itemIdx)
+        {
+         case 0:
+            return STR_IT_id;
         default:
             return NULL;
         }
@@ -497,6 +520,17 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
+    case 3: /* module 0 call 3 */
+        switch (itemIdx)
+       {
+        case 0: /* set Code Id */
+            return _toStringId_V12(
+                &m->basic.set_code_V12.id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+       } 
     default:
         return parser_ok;
     }
