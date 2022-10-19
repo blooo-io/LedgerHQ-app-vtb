@@ -588,7 +588,7 @@ describe('Standard', function () {
   //     await sim.close()
   //   }
   // })
-    
+
   test.each(models)('sign basic setCode', async function (m) {
     const sim = new Zemu(m.path)
     try {
@@ -604,14 +604,14 @@ describe('Standard', function () {
       const pubKey = Buffer.from(responseAddr.pubKey, 'hex')
 
       // do not wait here.. we need to navigate
-      const signatureRequest = await app.sign(pathAccount, pathChange, pathIndex, txBlob)
-      console.log(signatureRequest)
+      const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob)
 
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
       await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_set_code`)
 
       const signatureResponse = await signatureRequest
+      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')

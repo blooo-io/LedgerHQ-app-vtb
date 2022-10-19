@@ -60,10 +60,10 @@ extern "C"
 #define PD_CALL_AUCTIONS_V12 72
 #define PD_CALL_CROWDLOAN_V12 73
 
-#define PD_SET_CODE_V12
+#define PD_SET_CODE_V12 3
     typedef struct
     {
-        pd_LookupId_V12_t id;
+        pd_LookupId_V12_t set_id;
     } pd_set_code_V12_t;
 
 #define PD_BUY_VTBC_V12 2054

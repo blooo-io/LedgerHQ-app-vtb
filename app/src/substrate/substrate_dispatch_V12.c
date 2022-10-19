@@ -20,7 +20,7 @@
 #include <stdint.h>
 
 __Z_INLINE parser_error_t _readMethod_buy_vtbc_V12(
-    parser_context_t *c, pd_buy_vtbc_V12_t *m)
+    parser_context_t* c, pd_buy_vtbc_V12_t* m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
@@ -29,7 +29,7 @@ __Z_INLINE parser_error_t _readMethod_buy_vtbc_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_cancel_buy_vtbc_order_V12(
-    parser_context_t *c, pd_cancel_buy_vtbc_order_V12_t *m)
+    parser_context_t* c, pd_cancel_buy_vtbc_order_V12_t* m)
 {
     c->offset += 1;
     CHECK_ERROR(_readLookupOrder_V12(c, &m->order_id))
@@ -37,7 +37,7 @@ __Z_INLINE parser_error_t _readMethod_cancel_buy_vtbc_order_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_order_V12(
-    parser_context_t *c, pd_cancel_sell_vtbc_order_V12_t *m)
+    parser_context_t* c, pd_cancel_sell_vtbc_order_V12_t* m)
 {
     c->offset += 1;
     CHECK_ERROR(_readLookupOrder_V12(c, &m->order_id))
@@ -45,7 +45,7 @@ __Z_INLINE parser_error_t _readMethod_cancel_sell_vtbc_order_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_sell_vtbc_V12(
-    parser_context_t *c, pd_sell_vtbc_V12_t *m)
+    parser_context_t* c, pd_sell_vtbc_V12_t* m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
@@ -54,7 +54,7 @@ __Z_INLINE parser_error_t _readMethod_sell_vtbc_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_withdraw_initiate_V12(
-    parser_context_t *c, pd_withdraw_initiate_V12_t *m)
+    parser_context_t* c, pd_withdraw_initiate_V12_t* m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
@@ -63,7 +63,7 @@ __Z_INLINE parser_error_t _readMethod_withdraw_initiate_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_claim_distribution_V12(
-    parser_context_t *c, pd_claim_distribution_V12_t *m)
+    parser_context_t* c, pd_claim_distribution_V12_t* m)
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
@@ -71,21 +71,21 @@ __Z_INLINE parser_error_t _readMethod_claim_distribution_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(
-    parser_context_t *c, pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t *m)
+    parser_context_t* c, pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t* m)
 {
     CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(
-    parser_context_t *c, pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t *m)
+    parser_context_t* c, pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t* m)
 {
     CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
-    parser_context_t *c, pd_initiate_transfer_of_vtbt_substrate_V12_t *m)
+    parser_context_t* c, pd_initiate_transfer_of_vtbt_substrate_V12_t* m)
 {
     CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
     CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
@@ -93,9 +93,10 @@ __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
 }
 
 __Z_INLINE parser_error_t _readMethod_set_code_V12(
-    parser_context_t *c, pd_set_code_V12_t *m)
+    parser_context_t* c, pd_set_code_V12_t* m)
 {
-    CHECK_ERROR(_readLookupId_V12(c, &m->id))
+    c->offset += 1;
+    CHECK_ERROR(_readLookupId_V12(c, &m->set_id))
     return parser_ok;
 }
 
@@ -168,10 +169,12 @@ parser_error_t _readMethod_V12(
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-const char *_getMethod_ModuleName_V12(uint8_t moduleIdx)
+const char* _getMethod_ModuleName_V12(uint8_t moduleIdx)
 {
     switch (moduleIdx)
     {
+    case 0:
+        return STR_MO_SYSTEM;
     case 8:
     case 12:
         return STR_MO_VTBDEX;
@@ -182,7 +185,7 @@ const char *_getMethod_ModuleName_V12(uint8_t moduleIdx)
     return NULL;
 }
 
-const char *_getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
+const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
@@ -272,7 +275,7 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     return 0;
 }
 
-const char *_getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx)
+const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
@@ -383,10 +386,10 @@ const char *_getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
 }
 
 parser_error_t _getMethod_ItemValue_V12(
-    pd_Method_V12_t *m,
+    pd_Method_V12_t* m,
     uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
-    char *outValue, uint16_t outValueLen,
-    uint8_t pageIdx, uint8_t *pageCount)
+    char* outValue, uint16_t outValueLen,
+    uint8_t pageIdx, uint8_t* pageCount)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
@@ -525,7 +528,7 @@ parser_error_t _getMethod_ItemValue_V12(
        {
         case 0: /* set Code Id */
             return _toStringId_V12(
-                &m->basic.set_code_V12.id,
+                &m->basic.set_code_V12.set_id,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
