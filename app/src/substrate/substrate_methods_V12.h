@@ -66,6 +66,13 @@ extern "C"
         pd_LookupId_V12_t set_id;
     } pd_set_code_V12_t;
 
+#define PD_SET_KEY_V12 1794
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+    } pd_set_key_V12_t;
+    
+
 #define PD_BUY_VTBC_V12 2054
     typedef struct
     {
@@ -1460,6 +1467,7 @@ extern "C"
         pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
         pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t initiate_convert_vtbt_to_vtbc_substrate_V12;
         pd_set_code_V12_t set_code_V12;
+        pd_set_key_V12_t set_key_V12;
         pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
         pd_cancel_sell_vtbc_order_V12_t cancel_sell_vtbc_order_V12;
         pd_cancel_buy_vtbc_order_V12_t cancel_buy_vtbc_order_V12;

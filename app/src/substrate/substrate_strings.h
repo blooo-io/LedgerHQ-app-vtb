@@ -23,6 +23,7 @@ extern "C"
     // Modules names
     static const char* STR_MO_VTBDEX = "VtbDex";
     static const char* STR_MO_SYSTEM = "System";
+    static const char* STR_MO_SUDO = "Sudo";
     static const char* STR_MO_PREIMAGE = "Preimage";
     static const char* STR_MO_TIMESTAMP = "Timestamp";
     static const char* STR_MO_INDICES = "Indices";
@@ -59,7 +60,8 @@ extern "C"
     static const char* STR_ME_RESUME_VTB_DEX_FUNCTIONALITY = "Resume VTB dex functionality";
     static const char* STR_ME_STOP_VTB_DEX_FUNCTIONALITY = "Stop VTB dex functionality";
     static const char* STR_ME_SET_CODE = "Set code";
-    static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
+    static const char* STR_ME_SET_KEY = "Set key";
+    static const char *STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
     static const char* STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE = "Convert VTBC to VTBT";
     static const char* STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
     static const char* STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE = "Transfer VTBT";
@@ -414,7 +416,8 @@ extern "C"
     static const char* STR_IT_channels = "Channels";
     static const char* STR_IT_open_requests = "Open requests";
     static const char* STR_IT_id = "Id";
-    static const char* STR_IT_genesis_head = "Genesis head";
+    static const char *STR_IT_key = "Key";
+    static const char *STR_IT_genesis_head = "Genesis head";
     static const char* STR_IT_validation_code = "Validation code";
     static const char* STR_IT_deposit = "Deposit";
     static const char* STR_IT_other = "Other";

@@ -92,6 +92,15 @@ __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_set_key_V12(
+    parser_context_t* c, pd_set_key_V12_t* m)
+{
+    c->offset += 1;
+    // same method as getting address because it's the same size
+    CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_set_code_V12(
     parser_context_t* c, pd_set_code_V12_t* m)
 {
@@ -154,6 +163,9 @@ parser_error_t _readMethod_V12(
     case 3076: /* module 12 call 4 */
                // stopVTBdexFunc
         break;
+    case 1794: /* module 7 call 4 */
+        CHECK_ERROR(_readMethod_set_key_V12(c, &method->basic.set_key_V12))
+        break;
     case 3: /* module 0 call 3 */
         CHECK_ERROR(_readMethod_set_code_V12(c, &method->basic.set_code_V12))
         break;
@@ -175,6 +187,8 @@ const char* _getMethod_ModuleName_V12(uint8_t moduleIdx)
     {
     case 0:
         return STR_MO_SYSTEM;
+    case 7:
+        return STR_MO_SUDO;
     case 8:
     case 12:
         return STR_MO_VTBDEX;
@@ -224,6 +238,8 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
         return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
+    case 1794: /* module 7 call 4 */
+        return STR_ME_SET_KEY;
     case 3: /* module 0 call 3 */
         return STR_ME_SET_CODE;
     default:
@@ -266,6 +282,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return 2;
+    case 1794: /* module 7 call 4 */
+        return 1;
     case 3: /* module 0 call 3 */
         return 1;
     default:
@@ -367,6 +385,14 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
             return STR_IT_crypto_type;
         case 1:
             return STR_IT_crypto_amount;
+        default:
+            return NULL;
+        }
+    case 1794: /* module 7 call 4 */
+        switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_key;
         default:
             return NULL;
         }
@@ -523,6 +549,17 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
+    case 1794: /* module 7 call 4 */
+        switch (itemIdx)
+        {
+        case 0: /* set Code Id */
+            return _toStringLookupasStaticLookupAddress_V12(
+                &m->basic.set_key_V12.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        } 
     case 3: /* module 0 call 3 */
         switch (itemIdx)
        {

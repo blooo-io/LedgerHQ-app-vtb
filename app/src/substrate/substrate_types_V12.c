@@ -1072,7 +1072,7 @@ parser_error_t _readLookupAddress32_V12(
     const uint16_t size = 32;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)
-}
+} 
 
 parser_error_t _readLookupOrder_V12(
     parser_context_t* c,
