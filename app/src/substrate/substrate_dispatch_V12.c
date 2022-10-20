@@ -92,11 +92,24 @@ __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_set_vtb_dex_transaction_fee_V12(
+    parser_context_t* c, pd_set_vtb_dex_transaction_fee_V12_t* m)
+{
+    CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_set_vtb_dex_fee_collector_account_V12(
+    parser_context_t* c, pd_set_vtb_dex_fee_collector_account_V12_t* m)
+{
+    CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_set_key_V12(
     parser_context_t* c, pd_set_key_V12_t* m)
 {
     c->offset += 1;
-    // same method as getting address because it's the same size
     CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
     return parser_ok;
 }
@@ -162,6 +175,14 @@ parser_error_t _readMethod_V12(
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
                // stopVTBdexFunc
+        break;
+    case 2049: /* module 8 call 1 */
+    case 3073: /* module 8 call 1 */
+        CHECK_ERROR(_readMethod_set_vtb_dex_transaction_fee_V12(c, &method->basic.set_vtb_dex_transaction_fee_V12))
+        break;
+    case 2048: /* module 8 call 0 */
+    case 3072: /* module 12 call 0 */
+        CHECK_ERROR(_readMethod_set_vtb_dex_fee_collector_account_V12(c, &method->basic.set_vtb_dex_fee_collector_account_V12))
         break;
     case 1794: /* module 7 call 4 */
         CHECK_ERROR(_readMethod_set_key_V12(c, &method->basic.set_key_V12))
@@ -238,6 +259,12 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
         return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
+    case 2049: /* module 8 call 1 */
+    case 3073: /* module 8 call 1 */
+        return STR_ME_SET_VTB_DEX_TRANSACTION_FEE;
+    case 2048: /* module 8 call 0 */
+    case 3072: /* module 12 call 0 */
+        return STR_ME_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT;
     case 1794: /* module 7 call 4 */
         return STR_ME_SET_KEY;
     case 3: /* module 0 call 3 */
@@ -282,6 +309,12 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return 2;
+    case 2049: /* module 8 call 1 */
+    case 3073: /* module 8 call 1 */
+        return 1;
+    case 2048: /* module 8 call 0 */
+    case 3072: /* module 12 call 0 */
+        return 1;
     case 1794: /* module 7 call 4 */
         return 1;
     case 3: /* module 0 call 3 */
@@ -388,11 +421,29 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
+    case 2049: /* module 8 call 1 */
+    case 3073: /* module 8 call 1 */
+         switch (itemIdx)
+        {
+        case 0:
+            return STR_ME_FEE_AMOUNT;
+        default:
+            return NULL;
+        }
+    case 2048: /* module 8 call 0 */
+    case 3072: /* module 12 call 0 */
+        switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_account;
+        default:
+            return NULL;
+        }
     case 1794: /* module 7 call 4 */
         switch (itemIdx)
         {
         case 0:
-            return STR_IT_key;
+            return STR_IT_account;
         default:
             return NULL;
         }
@@ -549,10 +600,34 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
+    case 2049: /* module 8 call 1 */
+    case 3073: /* module 8 call 1 */
+        switch (itemIdx)
+        {
+        case 0: /* set fee amount */
+            return _toStringCompactAmount(
+                &m->basic.set_vtb_dex_transaction_fee_V12.value,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        } 
+    case 2048: /* module 8 call 0 */
+    case 3072: /* module 12 call 0 */
+        switch (itemIdx)
+        {
+        case 0: /* set address */
+            return _toStringLookupasStaticLookupAddress_V12(
+                &m->basic.set_vtb_dex_fee_collector_account_V12.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        } 
     case 1794: /* module 7 call 4 */
         switch (itemIdx)
         {
-        case 0: /* set Code Id */
+        case 0: /* set address */
             return _toStringLookupasStaticLookupAddress_V12(
                 &m->basic.set_key_V12.dest,
                 outValue, outValueLen,

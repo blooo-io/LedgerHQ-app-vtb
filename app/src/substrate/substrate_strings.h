@@ -57,11 +57,13 @@ extern "C"
     static const char* STR_MO_CROWDLOAN = "Crowdloan";
 
     // Methods names
-    static const char* STR_ME_RESUME_VTB_DEX_FUNCTIONALITY = "Resume VTB dex functionality";
-    static const char* STR_ME_STOP_VTB_DEX_FUNCTIONALITY = "Stop VTB dex functionality";
+    static const char* STR_ME_RESUME_VTB_DEX_FUNCTIONALITY = "Resume Vtbdex functionality";
+    static const char* STR_ME_STOP_VTB_DEX_FUNCTIONALITY = "Stop Vtbdex functionality";
+    static const char* STR_ME_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT = "Set Vtbdex fee collector account";
+    static const char* STR_ME_SET_VTB_DEX_TRANSACTION_FEE = "Set VtbDex transaction fee";
     static const char* STR_ME_SET_CODE = "Set code";
     static const char* STR_ME_SET_KEY = "Set key";
-    static const char *STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
+    static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
     static const char* STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE = "Convert VTBC to VTBT";
     static const char* STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
     static const char* STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE = "Transfer VTBT";
@@ -173,6 +175,7 @@ extern "C"
     static const char* STR_ME_REQUEST_JUDGEMENT = "Request judgement";
     static const char* STR_ME_CANCEL_REQUEST = "Cancel request";
     static const char* STR_ME_SET_FEE = "Set fee";
+    static const char* STR_ME_FEE_AMOUNT = "Fee amount";
     static const char* STR_ME_SET_ACCOUNT_ID = "Set account id";
     static const char* STR_ME_KILL_IDENTITY = "Kill identity";
     static const char* STR_ME_REMOVE_SUB = "Remove sub";

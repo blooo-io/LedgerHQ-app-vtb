@@ -187,10 +187,10 @@
     "name": "Stop_Vtb_Dex_Functionality",
     "blob": "0c04350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
     "output": [
-      "0 | VtbDex : Stop VTB dex functionality"
+      "0 | VtbDex : Stop Vtbdex functionality"
     ],
     "output_expert": [
-      "0 | VtbDex : Stop VTB dex functionality",
+      "0 | VtbDex : Stop Vtbdex functionality",
       "1 | Chain : VTB",
       "2 | Nonce : 0",
       "3 | Era Phase : 3",
@@ -204,10 +204,10 @@
     "name": "Resume_Vtb_Dex_Functionality",
     "blob": "0c05350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
     "output": [
-      "0 | VtbDex : Resume VTB dex functionality"
+      "0 | VtbDex : Resume Vtbdex functionality"
     ],
     "output_expert": [
-      "0 | VtbDex : Resume VTB dex functionality",
+      "0 | VtbDex : Resume Vtbdex functionality",
       "1 | Chain : VTB",
       "2 | Nonce : 0",
       "3 | Era Phase : 3",
@@ -248,6 +248,46 @@
       "0 | Sudo : Set key",
       "1 | Account [1/2] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
       "1 | Account [2/2] : 21b78868762f516a7856e81045",
+      "2 | Chain : VTB",
+      "3 | Nonce : 7",
+      "4 | Era Phase : 63",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "6 | Block [2/2] : 5b7329368378227f374b18b5a5"
+    ]
+  },
+  {
+    "index": 13,
+    "name": "Set_VTB_dex_fee_collector_account",
+    "blob": "0c00e64ede8a1e71aa47a61ab106a7961ec18d752621b78868762f516a7856e81045f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "output": [
+      "0 | VtbDex : Set Vtbdex fee collector account",
+      "1 | Account [1/2] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
+      "1 | Account [2/2] : 21b78868762f516a7856e81045"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Set Vtbdex fee collector account",
+      "1 | Account [1/2] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
+      "1 | Account [2/2] : 21b78868762f516a7856e81045",
+      "2 | Chain : VTB",
+      "3 | Nonce : 7",
+      "4 | Era Phase : 63",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "6 | Block [2/2] : 5b7329368378227f374b18b5a5"
+    ]
+  },
+  {
+    "index": 14,
+    "name": "Set_VTB_dex_transaction_fee",
+    "blob": "0c015cbcea4900000000000000000000000000000000000000000000000000000000f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "output": [
+      "0 | VtbDex : Set VtbDex transaction fee",
+      "1 | Fee amount : VTB 0.000000001240120412"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Set VtbDex transaction fee",
+      "1 | Fee amount : VTB 0.000000001240120412",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
