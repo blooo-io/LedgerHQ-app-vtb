@@ -45,9 +45,9 @@ extern "C" {
     MEMZERO(outValue, outValueLen);  \
     if (v == NULL) { *pageCount = 0; return parser_no_data; }
 
-#define GEN_DEF_READARRAY(SIZE) \
+#define GEN_DEF_READARRAY(SIZE)      \                       
     v->_ptr = c->buffer + c->offset; \
-    CTX_CHECK_AND_ADVANCE(c, SIZE) \
+    CTX_CHECK_AND_ADVANCE(c, SIZE)   \
     return parser_ok;
 
 #define GEN_DEF_TOSTRING_ARRAY(SIZE) \

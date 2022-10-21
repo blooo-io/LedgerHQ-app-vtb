@@ -295,5 +295,51 @@
       "6 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
       "6 | Block [2/2] : 5b7329368378227f374b18b5a5"
     ]
+  },
+  {
+    "index": 15,
+    "name": "Set_Check_and_return_withdraw_pending_amount",
+    "blob": "0c02eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b42203058323133313233f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "output": [
+      "0 | VtbDex : Check & return withdraw amount",
+      "1 | Recipient [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Recipient [2/2] : 8074e8cc6dc7078fdc40ee3b42",
+      "2 | Id : 3058323133313233"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Check & return withdraw amount",
+      "1 | Recipient [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Recipient [2/2] : 8074e8cc6dc7078fdc40ee3b42",
+      "2 | Id : 3058323133313233",
+      "3 | Chain : VTB",
+      "4 | Nonce : 7",
+      "5 | Era Phase : 63",
+      "6 | Era Period : 64",
+      "7 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "7 | Block [2/2] : 5b7329368378227f374b18b5a5"
+    ]
+  },
+  {
+    "index": 16,
+    "name": "Set_Check_and_remove_from_pending_list",
+    "blob": "0c03eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b421012301230f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "output": [
+      "0 | VtbDex : Check & remove from pending list",
+      "1 | Account [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Account [2/2] : 8074e8cc6dc7078fdc40ee3b42",
+      "2 | Id : 12301230"
+    ],
+    "output_expert": [
+      "0 | VtbDex : Check & remove from pending list",
+      "1 | Account [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Account [2/2] : 8074e8cc6dc7078fdc40ee3b42",
+      "2 | Id : 12301230",
+      "3 | Chain : VTB",
+      "4 | Nonce : 7",
+      "5 | Era Phase : 63",
+      "6 | Era Period : 64",
+      "7 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "7 | Block [2/2] : 5b7329368378227f374b18b5a5"
+    ]
   }
 ]

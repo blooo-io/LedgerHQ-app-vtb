@@ -84,6 +84,20 @@ extern "C"
         compactInt_t value;
     } pd_set_vtb_dex_transaction_fee_V12_t;
 
+#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 2050
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+        pd_LookupId_V12_t id;
+    } pd_check_and_return_withdraw_pending_amount_V12_t;
+
+#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 2051
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+        pd_LookupId_V12_t id;
+    } pd_check_and_remove_from_pending_list_V12_t;
+
 #define PD_BUY_VTBC_V12 2054
     typedef struct
     {
@@ -1481,6 +1495,8 @@ extern "C"
         pd_set_key_V12_t set_key_V12;
         pd_set_vtb_dex_transaction_fee_V12_t set_vtb_dex_transaction_fee_V12;
         pd_set_vtb_dex_fee_collector_account_V12_t set_vtb_dex_fee_collector_account_V12;
+        pd_check_and_return_withdraw_pending_amount_V12_t check_and_return_withdraw_pending_amount_V12;
+        pd_check_and_remove_from_pending_list_V12_t check_and_remove_from_pending_list_V12;
         pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
         pd_cancel_sell_vtbc_order_V12_t cancel_sell_vtbc_order_V12;
         pd_cancel_buy_vtbc_order_V12_t cancel_buy_vtbc_order_V12;

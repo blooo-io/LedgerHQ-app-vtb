@@ -92,6 +92,24 @@ __Z_INLINE parser_error_t _readMethod_initiate_transfer_of_vtbt_substrate_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_check_and_remove_from_pending_list_V12(
+    parser_context_t* c, pd_check_and_remove_from_pending_list_V12_t* m)
+{
+    CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
+    c->offset += 1;
+    CHECK_ERROR(_readLookupId_V12(c, &m->id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_check_and_return_withdraw_pending_amount_V12(
+    parser_context_t* c, pd_check_and_return_withdraw_pending_amount_V12_t* m)
+{
+    CHECK_ERROR(_readLookupAddress32_V12(c, &m->dest))
+    c->offset += 1;
+    CHECK_ERROR(_readLookupId_V12(c, &m->id))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_set_vtb_dex_transaction_fee_V12(
     parser_context_t* c, pd_set_vtb_dex_transaction_fee_V12_t* m)
 {
@@ -176,8 +194,16 @@ parser_error_t _readMethod_V12(
     case 3076: /* module 12 call 4 */
                // stopVTBdexFunc
         break;
+    case 2051: /* module 8 call 3 */
+    case 3075: /* module 12 call 3 */
+        CHECK_ERROR(_readMethod_check_and_remove_from_pending_list_V12(c, &method->basic.check_and_remove_from_pending_list_V12))
+        break;
+    case 2050: /* module 8 call 2 */
+    case 3074: /* module 12 call 2 */
+        CHECK_ERROR(_readMethod_check_and_return_withdraw_pending_amount_V12(c, &method->basic.check_and_return_withdraw_pending_amount_V12))
+        break;
     case 2049: /* module 8 call 1 */
-    case 3073: /* module 8 call 1 */
+    case 3073: /* module 12 call 1 */
         CHECK_ERROR(_readMethod_set_vtb_dex_transaction_fee_V12(c, &method->basic.set_vtb_dex_transaction_fee_V12))
         break;
     case 2048: /* module 8 call 0 */
@@ -259,8 +285,14 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
         return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
+    case 2051: /* module 8 call 3 */
+    case 3075: /* module 12 call 3 */
+        return STR_ME_CHECK_AND_REMOVE_FROM_PENDING_LIST;
+    case 2050: /* module 8 call 2 */
+    case 3074: /* module 12  call 2 */
+        return STR_ME_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT;
     case 2049: /* module 8 call 1 */
-    case 3073: /* module 8 call 1 */
+    case 3073: /* module 12 call 1 */
         return STR_ME_SET_VTB_DEX_TRANSACTION_FEE;
     case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
@@ -308,6 +340,12 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
+        return 2;
+    case 2051: /* module 8 call 3 */
+    case 3075: /* module 12 call 3 */
+        return 2;
+    case 2050: /* module 8 call 2 */
+    case 3074: /* module 12 call 2 */
         return 2;
     case 2049: /* module 8 call 1 */
     case 3073: /* module 8 call 1 */
@@ -421,8 +459,30 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
+    case 2051: /* module 8 call 3 */
+    case 3075: /* module 12 call 3 */
+         switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_account;
+        case 1:
+            return STR_IT_id;
+        default:
+            return NULL;
+        }
+    case 2050: /* module 8 call 2 */
+    case 3074: /* module 12 call 2 */
+         switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_recipient;
+        case 1:
+            return STR_IT_id;
+        default:
+            return NULL;
+        }
     case 2049: /* module 8 call 1 */
-    case 3073: /* module 8 call 1 */
+    case 3073: /* module 12 call 1 */
          switch (itemIdx)
         {
         case 0:
@@ -600,11 +660,45 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
+    case 2051: /* module 8 call 3 */
+    case 3075: /* module 12 call 3 */
+         switch (itemIdx)
+        {
+        case 0: /* check_and_remove_from_pending_list - dest */;
+            return _toStringLookupasStaticLookupOrder_V12(
+                &m->basic.check_and_return_withdraw_pending_amount_V12.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* check_and_remove_from_pending_list - id */
+            return _toStringId_V12(
+                &m->basic.check_and_return_withdraw_pending_amount_V12.id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 2050: /* module 8 call 2 */
+    case 3074: /* module 12 call 2 */
+         switch (itemIdx)
+        {
+        case 0: /* check_and_return_withdraw_pending_amount - dest */;
+            return _toStringLookupasStaticLookupOrder_V12(
+                &m->basic.check_and_return_withdraw_pending_amount_V12.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* check_and_return_withdraw_pending_amount - id */
+            return _toStringId_V12(
+                &m->basic.check_and_return_withdraw_pending_amount_V12.id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
     case 2049: /* module 8 call 1 */
-    case 3073: /* module 8 call 1 */
+    case 3073: /* module 12 call 1 */
         switch (itemIdx)
         {
-        case 0: /* set fee amount */
+        case 0: /* set_vbt_dex_transaction_fee - fee amount */
             return _toStringCompactAmount(
                 &m->basic.set_vtb_dex_transaction_fee_V12.value,
                 outValue, outValueLen,
@@ -616,7 +710,7 @@ parser_error_t _getMethod_ItemValue_V12(
     case 3072: /* module 12 call 0 */
         switch (itemIdx)
         {
-        case 0: /* set address */
+        case 0: /* set_vtb_dex_collector_fee_account - dest */
             return _toStringLookupasStaticLookupAddress_V12(
                 &m->basic.set_vtb_dex_fee_collector_account_V12.dest,
                 outValue, outValueLen,
@@ -627,7 +721,7 @@ parser_error_t _getMethod_ItemValue_V12(
     case 1794: /* module 7 call 4 */
         switch (itemIdx)
         {
-        case 0: /* set address */
+        case 0: /* set_key - dest */
             return _toStringLookupasStaticLookupAddress_V12(
                 &m->basic.set_key_V12.dest,
                 outValue, outValueLen,
@@ -638,7 +732,7 @@ parser_error_t _getMethod_ItemValue_V12(
     case 3: /* module 0 call 3 */
         switch (itemIdx)
        {
-        case 0: /* set Code Id */
+        case 0: /* set_code - id */
             return _toStringId_V12(
                 &m->basic.set_code_V12.set_id,
                 outValue, outValueLen,
