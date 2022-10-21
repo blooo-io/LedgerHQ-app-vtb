@@ -426,7 +426,7 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
          switch (itemIdx)
         {
         case 0:
-            return STR_ME_FEE_AMOUNT;
+            return STR_IT_fee_amount;
         default:
             return NULL;
         }
@@ -451,7 +451,7 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         switch (itemIdx)
         {
          case 0:
-            return STR_IT_id;
+            return STR_IT_code;
         default:
             return NULL;
         }

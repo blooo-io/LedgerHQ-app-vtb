@@ -175,7 +175,6 @@ extern "C"
     static const char* STR_ME_REQUEST_JUDGEMENT = "Request judgement";
     static const char* STR_ME_CANCEL_REQUEST = "Cancel request";
     static const char* STR_ME_SET_FEE = "Set fee";
-    static const char* STR_ME_FEE_AMOUNT = "Fee amount";
     static const char* STR_ME_SET_ACCOUNT_ID = "Set account id";
     static const char* STR_ME_KILL_IDENTITY = "Kill identity";
     static const char* STR_ME_REMOVE_SUB = "Remove sub";
@@ -278,6 +277,7 @@ extern "C"
     // Items names
     static const char* STR_IT_crypto_amount = "Crypto amount";
     static const char* STR_IT_crypto_type = "Crypto type";
+    static const char* STR_IT_fee_amount = "Fee amount";
     static const char* STR_IT_order_id = "Order id";
     static const char* STR_IT_ratio = "Ratio";
     static const char* STR_IT_remark = "Remark";
