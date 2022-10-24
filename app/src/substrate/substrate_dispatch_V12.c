@@ -210,7 +210,7 @@ parser_error_t _readMethod_V12(
     case 3072: /* module 12 call 0 */
         CHECK_ERROR(_readMethod_set_vtb_dex_fee_collector_account_V12(c, &method->basic.set_vtb_dex_fee_collector_account_V12))
         break;
-    case 1794: /* module 7 call 4 */
+    case 1794: /* module 7 call 2 */
         CHECK_ERROR(_readMethod_set_key_V12(c, &method->basic.set_key_V12))
         break;
     case 3: /* module 0 call 3 */
@@ -297,7 +297,7 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         return STR_ME_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT;
-    case 1794: /* module 7 call 4 */
+    case 1794: /* module 7 call 2 */
         return STR_ME_SET_KEY;
     case 3: /* module 0 call 3 */
         return STR_ME_SET_CODE;
@@ -353,7 +353,7 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         return 1;
-    case 1794: /* module 7 call 4 */
+    case 1794: /* module 7 call 2 */
         return 1;
     case 3: /* module 0 call 3 */
         return 1;
@@ -499,7 +499,7 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 1794: /* module 7 call 4 */
+    case 1794: /* module 7 call 2 */
         switch (itemIdx)
         {
         case 0:
@@ -718,7 +718,7 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         } 
-    case 1794: /* module 7 call 4 */
+    case 1794: /* module 7 call 2 */
         switch (itemIdx)
         {
         case 0: /* set_key - dest */
