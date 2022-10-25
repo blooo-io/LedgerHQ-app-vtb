@@ -140,6 +140,22 @@ __Z_INLINE parser_error_t _readMethod_set_code_V12(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_resume_crypto_functionality_V12(
+    parser_context_t* c, pd_resume_crypto_functionality_V12_t* m)
+{
+    CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_stop_crypto_functionality_V12(
+    parser_context_t* c, pd_stop_crypto_functionality_V12_t* m)
+{
+    CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
+    CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    return parser_ok;
+}
+
 parser_error_t _readMethod_V12(
     parser_context_t *c,
     uint8_t moduleIdx,
@@ -150,63 +166,54 @@ parser_error_t _readMethod_V12(
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
     switch (callPrivIdx)
     {
-    case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         CHECK_ERROR(_readMethod_claim_distribution_V12(c, &method->basic.claim_distribution_V12))
         break;
-    case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
         CHECK_ERROR(_readMethod_initiate_transfer_of_vtbt_substrate_V12(c, &method->basic.initiate_transfer_of_vtbt_substrate_V12))
         break;
-    case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
         CHECK_ERROR(_readMethod_initiate_convert_vtbt_to_vtbc_substrate_V12(c, &method->basic.initiate_convert_vtbt_to_vtbc_substrate_V12))
         break;
-    case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
         CHECK_ERROR(_readMethod_initiate_convert_vtbc_to_vtbt_substrate_V12(c, &method->basic.initiate_convert_vtbc_to_vtbt_substrate_V12))
         break;
-    case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         CHECK_ERROR(_readMethod_withdraw_initiate_V12(c, &method->basic.withdraw_initiate_V12))
         break;
-    case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         CHECK_ERROR(_readMethod_cancel_sell_vtbc_order_V12(c, &method->basic.cancel_sell_vtbc_order_V12))
         break;
-    case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
         CHECK_ERROR(_readMethod_sell_vtbc_V12(c, &method->basic.sell_vtbc_V12))
         break;
-    case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
         CHECK_ERROR(_readMethod_cancel_buy_vtbc_order_V12(c, &method->basic.cancel_buy_vtbc_order_V12))
         break;
-    case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         CHECK_ERROR(_readMethod_buy_vtbc_V12(c, &method->basic.buy_vtbc_V12))
         break;
-    case 2053: /* module 8 call 5 */
+    case 3079: /* module 12 call 7 */
+        CHECK_ERROR(_readMethod_resume_crypto_functionality_V12(c, &method->basic.resume_crypto_functionality_V12))
+        break;
+    case 3078: /* module 12 call 6 */
+        CHECK_ERROR(_readMethod_stop_crypto_functionality_V12(c, &method->basic.stop_crypto_functionality_V12))
+        break;
     case 3077: /* module 12 call 5 */
                // resumeVTBdexFunc
         break;
-    case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
                // stopVTBdexFunc
         break;
-    case 2051: /* module 8 call 3 */
     case 3075: /* module 12 call 3 */
         CHECK_ERROR(_readMethod_check_and_remove_from_pending_list_V12(c, &method->basic.check_and_remove_from_pending_list_V12))
         break;
-    case 2050: /* module 8 call 2 */
     case 3074: /* module 12 call 2 */
         CHECK_ERROR(_readMethod_check_and_return_withdraw_pending_amount_V12(c, &method->basic.check_and_return_withdraw_pending_amount_V12))
         break;
-    case 2049: /* module 8 call 1 */
     case 3073: /* module 12 call 1 */
         CHECK_ERROR(_readMethod_set_vtb_dex_transaction_fee_V12(c, &method->basic.set_vtb_dex_transaction_fee_V12))
         break;
-    case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         CHECK_ERROR(_readMethod_set_vtb_dex_fee_collector_account_V12(c, &method->basic.set_vtb_dex_fee_collector_account_V12))
         break;
@@ -252,49 +259,38 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
 
     switch (callPrivIdx)
     {
-    case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         return STR_ME_CLAIM_DISTRIBUTION;
-    case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
         return STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE;
-    case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
         return STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE;
-    case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
         return STR_ME_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE;
-    case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         return STR_ME_WITHDRAW_INITIATE;
-    case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         return STR_ME_CANCEL_SELL_VTBC_ORDER;
-    case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
         return STR_ME_SELL_VTBC;
-    case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
         return STR_ME_CANCEL_BUY_VTBC_ORDER;
-    case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return STR_ME_BUY_VTBC;
-    case 2053: /* module 8 call 5 */
+    case 3079: /* module 12 call 7 */
+        return STR_ME_RESUME_CRYPTO_FUNCTIONALITY;
+    case 3078: /* module 12 call 6 */
+        return STR_ME_STOP_CRYPTO_FUNCTIONALITY;
     case 3077: /* module 12 call 5 */
         return STR_ME_RESUME_VTB_DEX_FUNCTIONALITY;
-    case 2052: /* module 8 call 4 */
     case 3076: /* module 12 call 4 */
         return STR_ME_STOP_VTB_DEX_FUNCTIONALITY;
-    case 2051: /* module 8 call 3 */
     case 3075: /* module 12 call 3 */
         return STR_ME_CHECK_AND_REMOVE_FROM_PENDING_LIST;
-    case 2050: /* module 8 call 2 */
     case 3074: /* module 12  call 2 */
         return STR_ME_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT;
-    case 2049: /* module 8 call 1 */
     case 3073: /* module 12 call 1 */
         return STR_ME_SET_VTB_DEX_TRANSACTION_FEE;
-    case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         return STR_ME_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT;
     case 1794: /* module 7 call 2 */
@@ -314,43 +310,34 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
 
     switch (callPrivIdx)
     {
-    case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         return 1;
-    case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
         return 2;
-    case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
         return 1;
-    case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
         return 1;
-    case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         return 2;
-    case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         return 1;
-    case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
         return 2;
-    case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
         return 1;
-    case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         return 2;
-    case 2051: /* module 8 call 3 */
+    case 3079: /* module 12 call 7 */
+        return 1;
+    case 3078: /* module 12 call 6 */
+        return 1;
     case 3075: /* module 12 call 3 */
         return 2;
-    case 2050: /* module 8 call 2 */
     case 3074: /* module 12 call 2 */
         return 2;
-    case 2049: /* module 8 call 1 */
-    case 3073: /* module 8 call 1 */
+    case 3073: /* module 12 call 1 */
         return 1;
-    case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         return 1;
     case 1794: /* module 7 call 2 */
@@ -370,7 +357,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
 
     switch (callPrivIdx)
     {
-    case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         switch (itemIdx)
         {
@@ -379,7 +365,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
         switch (itemIdx)
         {
@@ -390,7 +375,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
         switch (itemIdx)
         {
@@ -399,7 +383,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
         switch (itemIdx)
         {
@@ -408,7 +391,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         switch (itemIdx)
         {
@@ -419,7 +401,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         switch (itemIdx)
         {
@@ -428,7 +409,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
         switch (itemIdx)
         {
@@ -439,7 +419,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
         switch (itemIdx)
         {
@@ -448,7 +427,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         switch (itemIdx)
         {
@@ -459,7 +437,22 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2051: /* module 8 call 3 */
+    case 3079: /* module 12 call 7 */
+        switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_crypto_type;
+        default:
+            return NULL;
+        }
+    case 3078: /* module 12 call 6 */
+        switch (itemIdx)
+        {
+        case 0:
+            return STR_IT_crypto_type;
+        default:
+            return NULL;
+        }
     case 3075: /* module 12 call 3 */
          switch (itemIdx)
         {
@@ -470,7 +463,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2050: /* module 8 call 2 */
     case 3074: /* module 12 call 2 */
          switch (itemIdx)
         {
@@ -481,7 +473,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2049: /* module 8 call 1 */
     case 3073: /* module 12 call 1 */
          switch (itemIdx)
         {
@@ -490,7 +481,6 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         default:
             return NULL;
         }
-    case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         switch (itemIdx)
         {
@@ -532,7 +522,6 @@ parser_error_t _getMethod_ItemValue_V12(
 
     switch (callPrivIdx)
     {
-    case 2068: /* module 8 call 20 */
     case 3092: /* module 12 call 20 */
         switch (itemIdx)
         {
@@ -544,7 +533,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2063: /* module 8 call 15 */
     case 3087: /* module 12 call 15 */
         switch (itemIdx)
         {
@@ -561,7 +549,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2062: /* module 8 call 14 */
     case 3086: /* module 12 call 14 */
         switch (itemIdx)
         {
@@ -573,7 +560,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2061: /* module 8 call 13 */
     case 3085: /* module 12 call 13 */
         switch (itemIdx)
         {
@@ -585,7 +571,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2060: /* module 8 call 12 */
     case 3084: /* module 12 call 12 */
         switch (itemIdx)
         {
@@ -602,7 +587,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2059: /* module 8 call 11 */
     case 3083: /* module 12 call 11 */
         switch (itemIdx)
         {
@@ -614,7 +598,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2058: /* module 8 call 10 */
     case 3082: /* module 12 call 10 */
         switch (itemIdx)
         {
@@ -631,7 +614,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2057: /* module 8 call 9 */
     case 3081: /* module 12 call 9 */
         switch (itemIdx)
         {
@@ -643,7 +625,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2056: /* module 8 call 8 */
     case 3080: /* module 12 call 8 */
         switch (itemIdx)
         {
@@ -660,29 +641,49 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2051: /* module 8 call 3 */
-    case 3075: /* module 12 call 3 */
-         switch (itemIdx)
+    case 3079: /* module 12 call 7 */
+        switch (itemIdx)
         {
-        case 0: /* check_and_remove_from_pending_list - dest */;
-            return _toStringLookupasStaticLookupOrder_V12(
-                &m->basic.check_and_return_withdraw_pending_amount_V12.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* check_and_remove_from_pending_list - id */
-            return _toStringId_V12(
-                &m->basic.check_and_return_withdraw_pending_amount_V12.id,
+        case 0: /* resume_crypto_functionality - network */;
+            return _toStringLookupCryptoTokenType_V12(
+                &m->basic.resume_crypto_functionality_V12.crypto_type,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
             return parser_no_data;
         }
-    case 2050: /* module 8 call 2 */
+    case 3078: /* module 12 call 6 */
+        switch (itemIdx)
+        {
+        case 0: /* stop_crypto_functionality - network */;
+            return _toStringLookupCryptoTokenType_V12(
+                &m->basic.stop_crypto_functionality_V12.crypto_type,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 3075: /* module 12 call 3 */
+         switch (itemIdx)
+        {
+        case 0: /* check_and_remove_from_pending_list - dest */;
+            return _toStringLookupasStaticLookupAddress_V12(
+                &m->basic.check_and_remove_from_pending_list_V12.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* check_and_remove_from_pending_list - id */
+            return _toStringId_V12(
+                &m->basic.check_and_remove_from_pending_list_V12.id,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
     case 3074: /* module 12 call 2 */
          switch (itemIdx)
         {
         case 0: /* check_and_return_withdraw_pending_amount - dest */;
-            return _toStringLookupasStaticLookupOrder_V12(
+            return _toStringLookupasStaticLookupAddress_V12(
                 &m->basic.check_and_return_withdraw_pending_amount_V12.dest,
                 outValue, outValueLen,
                 pageIdx, pageCount);
@@ -694,7 +695,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         }
-    case 2049: /* module 8 call 1 */
     case 3073: /* module 12 call 1 */
         switch (itemIdx)
         {
@@ -706,7 +706,6 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         } 
-    case 2048: /* module 8 call 0 */
     case 3072: /* module 12 call 0 */
         switch (itemIdx)
         {

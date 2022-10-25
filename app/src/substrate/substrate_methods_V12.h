@@ -72,84 +72,98 @@ extern "C"
         pd_LookupCryptoAddress_V12_t dest;
     } pd_set_key_V12_t;
 
-#define PD_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT_V12 2048
+#define PD_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT_V12 3072
     typedef struct
     {
         pd_LookupCryptoAddress_V12_t dest;
     } pd_set_vtb_dex_fee_collector_account_V12_t;
 
-#define PD_SET_VTB_DEX_TRANSACTION_FEE_V12 2049
+#define PD_SET_VTB_DEX_TRANSACTION_FEE_V12 3073
     typedef struct
     {
         compactInt_t value;
     } pd_set_vtb_dex_transaction_fee_V12_t;
 
-#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 2050
+#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 3074
     typedef struct
     {
         pd_LookupCryptoAddress_V12_t dest;
         pd_LookupId_V12_t id;
     } pd_check_and_return_withdraw_pending_amount_V12_t;
 
-#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 2051
+#define PD_SET_CHECK_AND_REMOVE_FROM_LIST 3075
     typedef struct
     {
         pd_LookupCryptoAddress_V12_t dest;
         pd_LookupId_V12_t id;
     } pd_check_and_remove_from_pending_list_V12_t;
 
-#define PD_BUY_VTBC_V12 2054
+#define PD_STOP_CRYPTO_FUNCTIONALITY_V12 3078
+    typedef struct
+    {
+        compactInt_t value;
+        pd_LookupCryptoTokenType_V12_t crypto_type;
+    } pd_stop_crypto_functionality_V12_t;
+
+#define PD_RESUME_CRYPTO_FUNCTIONALITY_V12 3079
+    typedef struct
+    {
+        compactInt_t value;
+        pd_LookupCryptoTokenType_V12_t crypto_type;
+    } pd_resume_crypto_functionality_V12_t;
+
+#define PD_BUY_VTBC_V12 3080
     typedef struct
     {
         compactInt_t value;
         pd_LookupCryptoTokenType_V12_t crypto_type;
     } pd_buy_vtbc_V12_t;
 
-#define PD_SELL_VTBC_V12 2056
+#define PD_SELL_VTBC_V12 3082
     typedef struct
     {
         compactInt_t value;
         pd_LookupCryptoTokenType_V12_t crypto_type;
     } pd_sell_vtbc_V12_t;
 
-#define PD_CANCEL_SELL_VTBC_ORDER_V12 2057
+#define PD_CANCEL_SELL_VTBC_ORDER_V12 3083
     typedef struct
     {
         pd_LookupCryptoOrder_V12_t order_id;
     } pd_cancel_sell_vtbc_order_V12_t;
 
-#define PD_CANCEL_BUY_VTBC_ORDER_V12 2055
+#define PD_CANCEL_BUY_VTBC_ORDER_V12 3081
     typedef struct
     {
         pd_LookupCryptoOrder_V12_t order_id;
     } pd_cancel_buy_vtbc_order_V12_t;
 
-#define PD_WITHDRAW_INITIATE_V12 2058
+#define PD_WITHDRAW_INITIATE_V12 3084
     typedef struct
     {
         compactInt_t value;
         pd_LookupCryptoTokenType_V12_t crypto_type;
     } pd_withdraw_initiate_V12_t;
 
-#define PD_CLAIM_DISTRIBUTION_V12 2066
+#define PD_CLAIM_DISTRIBUTION_V12 3092
     typedef struct
     {
         pd_LookupCryptoTokenType_V12_t crypto_type;
     } pd_claim_distribution_V12_t;
 
-#define PD_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE_V12 2059
+#define PD_INITIATE_CONVERT_VTBC_TO_VTBT_SUBSTRATE_V12 3085
     typedef struct
     {
         compactInt_t value;
     } pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t;
 
-#define PD_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE_V12 2060
+#define PD_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE_V12 3086
     typedef struct
     {
         compactInt_t value;
     } pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t;
 
-#define PD_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE_V12 2062
+#define PD_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE_V12 3087
     typedef struct
     {
         pd_LookupCryptoAddress_V12_t dest;
@@ -1498,6 +1512,8 @@ extern "C"
         pd_check_and_return_withdraw_pending_amount_V12_t check_and_return_withdraw_pending_amount_V12;
         pd_check_and_remove_from_pending_list_V12_t check_and_remove_from_pending_list_V12;
         pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
+        pd_resume_crypto_functionality_V12_t resume_crypto_functionality_V12;
+        pd_stop_crypto_functionality_V12_t stop_crypto_functionality_V12;
         pd_cancel_sell_vtbc_order_V12_t cancel_sell_vtbc_order_V12;
         pd_cancel_buy_vtbc_order_V12_t cancel_buy_vtbc_order_V12;
         pd_balances_transfer_all_V12_t balances_transfer_all_V12;
