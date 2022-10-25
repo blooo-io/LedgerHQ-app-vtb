@@ -70,6 +70,8 @@ extern "C"
     static const char* STR_ME_INITIATE_CONVERT_VTBT_TO_VTBC_SUBSTRATE = "Convert VTBT to VTBC";
     static const char* STR_ME_INITIATE_TRANSFER_OF_VTBT_SUBSTRATE = "Transfer VTBT";
     static const char* STR_ME_CLAIM_DISTRIBUTION = "Claim Distribution";
+    static const char* STR_ME_RESUME_CRYPTO_FUNCTIONALITY = "Resume Crypto Functionality";
+    static const char* STR_ME_STOP_CRYPTO_FUNCTIONALITY = "Stop Crypto Functionality";
     static const char* STR_ME_CANCEL_SELL_VTBC_ORDER = "Cancel sell Vtbc";
     static const char* STR_ME_CANCEL_BUY_VTBC_ORDER = "Cancel buy Vtbc";
     static const char* STR_ME_SELL_VTBC = "Sell Vtbc";

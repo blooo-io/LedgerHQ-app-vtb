@@ -18,6 +18,8 @@
 |Resume VTBDex functionality | none |
 |Check and return withdraw pending amount | `AccountId` user <br/> `Bytes` id <br/> |
 |Check and remove from pending list | `AccountId` user <br/> `Bytes` id <br/> |
+|Resume crypto functionality | `TokenType` token <br/> |
+|Stop crypto functionality | `TokenType` token <br/> |
 
 ## Sudo
 
