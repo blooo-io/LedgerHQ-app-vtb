@@ -27,7 +27,8 @@ main(void) {
     view_init();
     os_boot();
 
-    BEGIN_TRY
+
+    BEGIN_TRY 
     {
         TRY
         {
