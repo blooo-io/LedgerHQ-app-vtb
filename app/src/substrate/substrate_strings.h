@@ -63,6 +63,7 @@ extern "C"
     static const char* STR_ME_SET_VTB_DEX_TRANSACTION_FEE = "Set VtbDex transaction fee";
     static const char* STR_ME_SET_CODE = "Set code";
     static const char* STR_ME_SET_KEY = "Set key";
+    static const char* STR_ME_SUDO_CALL = "Sudo call";
     static const char* STR_ME_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT = "Check & return withdraw amount";
     static const char* STR_ME_CHECK_AND_REMOVE_FROM_PENDING_LIST = "Check & remove from pending list";
     static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
