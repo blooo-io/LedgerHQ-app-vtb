@@ -185,48 +185,54 @@
   {
     "index": 10,
     "name": "Stop_Vtb_Dex_Functionality",
-    "blob": "0c04350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
+    "blob": "07000c04350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
     "output": [
-      "0 | VtbDex : Stop Vtbdex functionality"
+      "0 | Sudo : Sudo call",
+      "1 | Call : Stop Vtbdex functionality"
     ],
     "output_expert": [
-      "0 | VtbDex : Stop Vtbdex functionality",
-      "1 | Chain : VTB",
-      "2 | Nonce : 0",
-      "3 | Era Phase : 3",
-      "4 | Era Period : 64",
-      "5 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
-      "5 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
+      "0 | Sudo : Sudo call",
+      "1 | Call : Stop Vtbdex functionality",
+      "2 | Chain : VTB",
+      "3 | Nonce : 0",
+      "4 | Era Phase : 3",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
+      "6 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
     ]
   },
   {
     "index": 11,
     "name": "Resume_Vtb_Dex_Functionality",
-    "blob": "0c05350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
+    "blob": "07000c05350000006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f9b38f3c703557e9ff6e5742d3e15db44f9273ed59cd1c430e7ad5e4cfe038814",
     "output": [
-      "0 | VtbDex : Resume Vtbdex functionality"
+      "0 | Sudo : Sudo call",
+      "1 | Call : Resume Vtbdex functionality"
     ],
     "output_expert": [
-      "0 | VtbDex : Resume Vtbdex functionality",
-      "1 | Chain : VTB",
-      "2 | Nonce : 0",
-      "3 | Era Phase : 3",
-      "4 | Era Period : 64",
-      "5 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
-      "5 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
+      "0 | Sudo : Sudo call",
+      "1 | Call : Resume Vtbdex functionality",
+      "2 | Chain : VTB",
+      "3 | Nonce : 0",
+      "4 | Era Phase : 3",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 9b38f3c703557e9ff6e5742d3e15db44f9273e",
+      "6 | Block [2/2] : d59cd1c430e7ad5e4cfe038814"
     ]
   },
   {
     "index": 12,
     "name": "Set_Code",
-    "blob": "00031012312312f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "070000031012312312f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | System : Set code",
-      "1 | Code : 12312312"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Set code",
+      "1 | Call [2/2] : 12312312"
     ],
     "output_expert": [
-      "0 | System : Set code",
-      "1 | Code : 12312312",
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Set code",
+      "1 | Call [2/2] : 12312312",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
@@ -259,16 +265,18 @@
   {
     "index": 13,
     "name": "Set_VTB_dex_fee_collector_account",
-    "blob": "0c00e64ede8a1e71aa47a61ab106a7961ec18d752621b78868762f516a7856e81045f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c00e64ede8a1e71aa47a61ab106a7961ec18d752621b78868762f516a7856e81045f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Set Vtbdex fee collector account",
-      "1 | Account [1/2] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
-      "1 | Account [2/2] : 21b78868762f516a7856e81045"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/3] : Set Vtbdex fee collector account",
+      "1 | Call [2/3] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
+      "1 | Call [3/3] : 21b78868762f516a7856e81045"
     ],
     "output_expert": [
-      "0 | VtbDex : Set Vtbdex fee collector account",
-      "1 | Account [1/2] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
-      "1 | Account [2/2] : 21b78868762f516a7856e81045",
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/3] : Set Vtbdex fee collector account",
+      "1 | Call [2/3] : e64ede8a1e71aa47a61ab106a7961ec18d7526",
+      "1 | Call [3/3] : 21b78868762f516a7856e81045",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
@@ -280,14 +288,16 @@
   {
     "index": 14,
     "name": "Set_VTB_dex_transaction_fee",
-    "blob": "0c015cbcea4900000000000000000000000000000000000000000000000000000000f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c015cbcea4900000000000000000000000000000000000000000000000000000000f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Set VtbDex transaction fee",
-      "1 | Fee amount : VTB 0.000000001240120412"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Set VtbDex transaction fee",
+      "1 | Call [2/2] : VTB 0.000000001240120412"
     ],
     "output_expert": [
-      "0 | VtbDex : Set VtbDex transaction fee",
-      "1 | Fee amount : VTB 0.000000001240120412",
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Set VtbDex transaction fee",
+      "1 | Call [2/2] : VTB 0.000000001240120412",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
@@ -299,60 +309,66 @@
   {
     "index": 15,
     "name": "Set_Check_and_return_withdraw_pending_amount",
-    "blob": "0c02eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b42203058323133313233f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c02eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b42203058323133313233f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Check & return withdraw amount",
-      "1 | Recipient [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
-      "1 | Recipient [2/2] : 8074e8cc6dc7078fdc40ee3b42",
-      "2 | Id : 3058323133313233"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/4] : Check & return withdraw amount",
+      "1 | Call [2/4] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Call [3/4] : 8074e8cc6dc7078fdc40ee3b42",
+      "1 | Call [4/4] : 3058323133313233"
     ],
     "output_expert": [
-      "0 | VtbDex : Check & return withdraw amount",
-      "1 | Recipient [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
-      "1 | Recipient [2/2] : 8074e8cc6dc7078fdc40ee3b42",
-      "2 | Id : 3058323133313233",
-      "3 | Chain : VTB",
-      "4 | Nonce : 7",
-      "5 | Era Phase : 63",
-      "6 | Era Period : 64",
-      "7 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
-      "7 | Block [2/2] : 5b7329368378227f374b18b5a5"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/4] : Check & return withdraw amount",
+      "1 | Call [2/4] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Call [3/4] : 8074e8cc6dc7078fdc40ee3b42",
+      "1 | Call [4/4] : 3058323133313233",
+      "2 | Chain : VTB",
+      "3 | Nonce : 7",
+      "4 | Era Phase : 63",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "6 | Block [2/2] : 5b7329368378227f374b18b5a5"
     ]
   },
   {
     "index": 16,
     "name": "Set_Check_and_remove_from_pending_list",
-    "blob": "0c03eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b421012301230f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c03eebd58aa6294be72a4f6b8d1e84b75de3464038074e8cc6dc7078fdc40ee3b421012301230f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Check & remove from pending list",
-      "1 | Account [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
-      "1 | Account [2/2] : 8074e8cc6dc7078fdc40ee3b42",
-      "2 | Id : 12301230"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/4] : Check & remove from pending list",
+      "1 | Call [2/4] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Call [3/4] : 8074e8cc6dc7078fdc40ee3b42",
+      "1 | Call [4/4] : 12301230"
     ],
     "output_expert": [
-      "0 | VtbDex : Check & remove from pending list",
-      "1 | Account [1/2] : eebd58aa6294be72a4f6b8d1e84b75de346403",
-      "1 | Account [2/2] : 8074e8cc6dc7078fdc40ee3b42",
-      "2 | Id : 12301230",
-      "3 | Chain : VTB",
-      "4 | Nonce : 7",
-      "5 | Era Phase : 63",
-      "6 | Era Period : 64",
-      "7 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
-      "7 | Block [2/2] : 5b7329368378227f374b18b5a5"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/4] : Check & remove from pending list",
+      "1 | Call [2/4] : eebd58aa6294be72a4f6b8d1e84b75de346403",
+      "1 | Call [3/4] : 8074e8cc6dc7078fdc40ee3b42",
+      "1 | Call [4/4] : 12301230",
+      "2 | Chain : VTB",
+      "3 | Nonce : 7",
+      "4 | Era Phase : 63",
+      "5 | Era Period : 64",
+      "6 | Block [1/2] : 90d60fdf5a637a4bec8e0a445b0bda63f79e10",
+      "6 | Block [2/2] : 5b7329368378227f374b18b5a5"
     ]
   },
   {
     "index": 17,
     "name": "Resume_Crypto_Functionality",
-    "blob": "0c0700f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c0700f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Resume Crypto Functionality",
-      "1 | Crypto type : EOS"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Resume Crypto Functionality",
+      "1 | Call [2/2] : EOS"
     ],
     "output_expert": [
-      "0 | VtbDex : Resume Crypto Functionality",
-      "1 | Crypto type : EOS",
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Resume Crypto Functionality",
+      "1 | Call [2/2] : EOS",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
@@ -364,14 +380,16 @@
   {
     "index": 18,
     "name": "Stop_Crypto_Functionality",
-    "blob": "0c0600f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
+    "blob": "07000c0600f5031c006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f90d60fdf5a637a4bec8e0a445b0bda63f79e105b7329368378227f374b18b5a5",
     "output": [
-      "0 | VtbDex : Stop Crypto Functionality",
-      "1 | Crypto type : EOS"
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Stop Crypto Functionality",
+      "1 | Call [2/2] : EOS"
     ],
     "output_expert": [
-      "0 | VtbDex : Stop Crypto Functionality",
-      "1 | Crypto type : EOS",
+      "0 | Sudo : Sudo call",
+      "1 | Call [1/2] : Stop Crypto Functionality",
+      "1 | Call [2/2] : EOS",
       "2 | Chain : VTB",
       "3 | Nonce : 7",
       "4 | Era Phase : 63",
