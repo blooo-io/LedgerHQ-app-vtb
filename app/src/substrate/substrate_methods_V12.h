@@ -170,6 +170,11 @@ extern "C"
         compactInt_t value;
     } pd_initiate_transfer_of_vtbt_substrate_V12_t;
 
+#define PD_SUDO_CALL_V12 0
+    typedef struct {
+        pd_Call_t call;
+    } pd_sudo_call_V12_t;
+
 #define PD_CALL_BALANCES_TRANSFER_ALL_V12 4
     typedef struct
     {
@@ -1501,6 +1506,7 @@ extern "C"
     {
         pd_buy_vtbc_V12_t buy_vtbc_V12;
         pd_sell_vtbc_V12_t sell_vtbc_V12;
+        pd_sudo_call_V12_t sudo_call_V12;
         pd_withdraw_initiate_V12_t withdraw_initiate_V12;
         pd_claim_distribution_V12_t claim_distribution_V12;
         pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
