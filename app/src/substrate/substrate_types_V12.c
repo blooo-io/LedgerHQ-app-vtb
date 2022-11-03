@@ -1074,6 +1074,25 @@ parser_error_t _readLookupAddress32_V12(
     GEN_DEF_READARRAY(size)
 } 
 
+parser_error_t _readUncheckedWeight_V12(
+    parser_context_t* c, 
+    pd_Weight_t* v) {
+    // Weight is equal to [8 bytes]
+    // it is necessary to calculate the total length of the remaining tx order to add a offset so we can get only the weight and not the other arguments
+    // The transaction is expect to end in
+    // [2 bytes] era
+    // [1 bytes] nonce
+    // [1 bytes] tip
+    // [4 bytes] specVersion
+    // [4 bytes] transactionVersion
+    // [32 bytes] genesisHash
+    // [32 bytes] blockHash 
+    c->offset += 2 + c->bufferLen - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32; // 2 = 2nd call index
+    const uint16_t size = 8;
+    v->len = (uint8_t) size;
+    GEN_DEF_READARRAY(size)
+}
+
 parser_error_t _readLookupOrder_V12(
     parser_context_t* c,
     pd_LookupCryptoOrder_V12_t* v) {
@@ -1328,6 +1347,17 @@ parser_error_t _toStringLookupasStaticLookupOrder_V12(
 
 parser_error_t _toStringId_V12(
     const pd_LookupId_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    GEN_DEF_TOSTRING_ARRAY(v->len)
+}
+
+parser_error_t _toStringUncheckedWeight_V12(
+    const pd_Weight_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

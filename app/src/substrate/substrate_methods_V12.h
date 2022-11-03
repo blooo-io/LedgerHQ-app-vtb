@@ -66,6 +66,13 @@ extern "C"
         pd_LookupId_V12_t set_id;
     } pd_set_code_V12_t;
 
+#define PD_SUDO_UNCHECKED_WEIGHT 1793
+    typedef struct 
+    {
+        pd_Weight_t weight;
+        pd_Call_t call;
+    } pd_sudo_unchecked_weight_V12_t;
+
 #define PD_SET_KEY_V12 1794
     typedef struct
     {
@@ -1507,6 +1514,7 @@ extern "C"
         pd_buy_vtbc_V12_t buy_vtbc_V12;
         pd_sell_vtbc_V12_t sell_vtbc_V12;
         pd_sudo_call_V12_t sudo_call_V12;
+        pd_sudo_unchecked_weight_V12_t sudo_unchecked_weight_V12;
         pd_withdraw_initiate_V12_t withdraw_initiate_V12;
         pd_claim_distribution_V12_t claim_distribution_V12;
         pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
