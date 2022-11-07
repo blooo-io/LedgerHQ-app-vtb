@@ -69,8 +69,8 @@ extern "C"
 #define PD_SUDO_UNCHECKED_WEIGHT 1793
     typedef struct 
     {
-        pd_Weight_t weight;
         pd_Call_t call;
+        pd_Weight_t weight;
     } pd_sudo_unchecked_weight_V12_t;
 
 #define PD_SET_KEY_V12 1794

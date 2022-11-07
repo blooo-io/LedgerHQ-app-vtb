@@ -31,6 +31,7 @@ parser_error_t parser_init_context(parser_context_t *ctx,
     ctx->offset = 0;
     ctx->buffer = NULL;
     ctx->bufferLen = 0;
+    ctx->sizeModifier = 0;
 
     if (bufferSize == 0 || buffer == NULL)
     {

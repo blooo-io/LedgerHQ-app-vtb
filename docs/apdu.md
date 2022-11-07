@@ -1,4 +1,4 @@
-# Polkadot App
+# VTB Community App
 
 ## General structure
 

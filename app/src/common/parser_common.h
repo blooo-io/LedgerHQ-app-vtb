@@ -59,6 +59,7 @@ typedef struct {
     const uint8_t *buffer;
     uint16_t bufferLen;
     uint16_t offset;
+    uint16_t sizeModifier;
     parser_tx_t *tx_obj;
 } parser_context_t;
 

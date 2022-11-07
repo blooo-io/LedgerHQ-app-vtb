@@ -160,7 +160,8 @@ __Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
     parser_context_t* c, pd_sudo_unchecked_weight_V12_t* m)
 {
     CHECK_ERROR(_readUncheckedWeight_V12(c, &m->weight))
-    c->offset = 2; // set to 2 to reset offset after first function
+    c->offset = 2;
+    // c->sizeModifier = 8;  
     CHECK_ERROR(_readCall(c, &m->call))
     return parser_ok;
 }

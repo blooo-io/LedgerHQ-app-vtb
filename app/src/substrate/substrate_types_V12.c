@@ -1077,8 +1077,9 @@ parser_error_t _readLookupAddress32_V12(
 parser_error_t _readUncheckedWeight_V12(
     parser_context_t* c, 
     pd_Weight_t* v) {
-    // Weight is equal to [8 bytes]
-    // it is necessary to calculate the total length of the remaining tx order to add a offset so we can get only the weight and not the other arguments
+    // it is necessary to calculate the len of the others arguments to add a offset so we can get only the weight
+    // [2 bytes] Method&CallIdx
+    // [8 bytes] Weight 
     // The transaction is expect to end in
     // [2 bytes] era
     // [1 bytes] nonce
@@ -1087,7 +1088,7 @@ parser_error_t _readUncheckedWeight_V12(
     // [4 bytes] transactionVersion
     // [32 bytes] genesisHash
     // [32 bytes] blockHash 
-    c->offset += 2 + c->bufferLen - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32; // 2 = 2nd call index
+    c->offset += c->bufferLen - 2 - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32;
     const uint16_t size = 8;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)
@@ -1114,7 +1115,7 @@ parser_error_t _readLookupOrder_V12(
 parser_error_t _readLookupId_V12(
     parser_context_t* c,
     pd_LookupId_V12_t* v) {
-    // OrderID are not length delimited so in order to retrieve the value
+    // ID are not length delimited so in order to retrieve the value
     // it is necessary to calculate the length of the order.
     // The transaction is expect to end in
     // [2 bytes] era
@@ -1124,7 +1125,7 @@ parser_error_t _readLookupId_V12(
     // [4 bytes] transactionVersion
     // [32 bytes] genesisHash
     // [32 bytes] blockHash
-    const uint16_t size = c->bufferLen - c->offset - 2 - 1 - 1 - 4 - 4 - 32 - 32;
+    const uint16_t size = c->bufferLen - c->offset - c->sizeModifier - 2 - 1 - 1 - 4 - 4 - 32 - 32;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)
 }
