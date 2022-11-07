@@ -159,16 +159,17 @@ __Z_INLINE parser_error_t _readMethod_stop_crypto_functionality_V12(
 __Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
     parser_context_t* c, pd_sudo_unchecked_weight_V12_t* m)
 {
-    CHECK_ERROR(_readUncheckedWeight_V12(c, &m->weight))
-    c->offset = 2;
-    // c->sizeModifier = 8;  
+    m->call.type = 1793;
+    c->sizeModifier = 8;
     CHECK_ERROR(_readCall(c, &m->call))
+    CHECK_ERROR(_readUncheckedWeight_V12(c, &m->weight))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_sudo_call_V12(
     parser_context_t* c, pd_sudo_call_V12_t* m)
 {
+    m->call.type = 1792;
     CHECK_ERROR(_readCall(c, &m->call))
     return parser_ok;
 }
@@ -532,9 +533,9 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         switch(itemIdx) 
         {
         case 0:
-            return STR_IT_weight;
-        case 1:
             return STR_IT_call;
+        case 1:
+            return STR_IT_weight;
         default:
             return NULL;
         }
@@ -779,14 +780,14 @@ parser_error_t _getMethod_ItemValue_V12(
     case 1793: /* module 7 call 1 */
         switch (itemIdx)
         {
-        case 0: /* sudo_unchecked_weight - weight */;
-            return _toStringUncheckedWeight_V12(
-                &m->basic.sudo_unchecked_weight_V12.weight,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* sudo_unchecked_weight  - call */;
+        case 0: /* sudo_unchecked_weight  - call */;
             return _toStringCall(
                 &m->basic.sudo_unchecked_weight_V12.call,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* sudo_unchecked_weight - weight */;
+            return _toStringUncheckedWeight_V12(
+                &m->basic.sudo_unchecked_weight_V12.weight,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

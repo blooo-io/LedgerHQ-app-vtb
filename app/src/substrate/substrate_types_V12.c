@@ -1088,7 +1088,7 @@ parser_error_t _readUncheckedWeight_V12(
     // [4 bytes] transactionVersion
     // [32 bytes] genesisHash
     // [32 bytes] blockHash 
-    c->offset += c->bufferLen - 2 - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32;
+    // c->offset += c->bufferLen - 2 - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32;
     const uint16_t size = 8;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)
