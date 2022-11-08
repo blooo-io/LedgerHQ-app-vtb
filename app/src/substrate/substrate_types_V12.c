@@ -1077,18 +1077,6 @@ parser_error_t _readLookupAddress32_V12(
 parser_error_t _readUncheckedWeight_V12(
     parser_context_t* c, 
     pd_Weight_t* v) {
-    // it is necessary to calculate the len of the others arguments to add a offset so we can get only the weight
-    // [2 bytes] Method&CallIdx
-    // [8 bytes] Weight 
-    // The transaction is expect to end in
-    // [2 bytes] era
-    // [1 bytes] nonce
-    // [1 bytes] tip
-    // [4 bytes] specVersion
-    // [4 bytes] transactionVersion
-    // [32 bytes] genesisHash
-    // [32 bytes] blockHash 
-    // c->offset += c->bufferLen - 2 - 8 - 2 - 1 - 1 - 4 - 4 - 32 - 32;
     const uint16_t size = 8;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)

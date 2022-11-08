@@ -35,7 +35,7 @@ then run:
 
 - We only officially support Ubuntu. Install the following packages:
    ```
-   sudo apt update && apt-get -y install build-essential git wget cmake \
+   sudo apt update && sudo apt-get -y install build-essential git wget cmake \
   libssl-dev libgmp-dev autoconf libtool
    ```
 
@@ -57,8 +57,15 @@ If you see conan is not found, check that you installed the package in the same 
 - Building the app itself
 
   If you installed what is described above, just run:
+  
+    Mainnet :
     ```bash
     make
+    ```
+
+    Testnet : 
+    ```bash
+    make TEST=1
     ```
 
 ## Running tests

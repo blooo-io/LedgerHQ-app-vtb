@@ -26,6 +26,8 @@
 | Name        | Arguments |
 | :---------- |:--------|
 |Set key | `LookupSource` new <br/> |
+|Call | `Call` method <br/> |
+|Unchecked Weight | `Call` method <br/> `u256` weight <br/> |
 
 ## System
 
