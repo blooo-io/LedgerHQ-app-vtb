@@ -1113,7 +1113,7 @@ parser_error_t _readLookupId_V12(
     // [4 bytes] transactionVersion
     // [32 bytes] genesisHash
     // [32 bytes] blockHash
-    const uint16_t size = c->bufferLen - c->offset - c->sizeModifier - 2 - 1 - 1 - 4 - 4 - 32 - 32;
+    const uint16_t size = c->bufferLen - c->offset - 2 - 1 - 1 - 4 - 4 - 32 - 32;
     v->len = (uint8_t) size;
     GEN_DEF_READARRAY(size)
 }

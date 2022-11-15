@@ -63,7 +63,7 @@ extern "C"
 #define PD_SET_CODE_V12 3
     typedef struct
     {
-        pd_LookupId_V12_t set_id;
+        pd_Bytes_t code;
     } pd_set_code_V12_t;
 
 #define PD_SUDO_UNCHECKED_WEIGHT 1793

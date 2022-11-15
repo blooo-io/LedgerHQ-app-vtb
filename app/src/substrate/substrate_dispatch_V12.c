@@ -135,8 +135,7 @@ __Z_INLINE parser_error_t _readMethod_set_key_V12(
 __Z_INLINE parser_error_t _readMethod_set_code_V12(
     parser_context_t* c, pd_set_code_V12_t* m)
 {
-    c->offset += 1;
-    CHECK_ERROR(_readLookupId_V12(c, &m->set_id))
+    CHECK_ERROR(_readBytes(c, &m->code))
     return parser_ok;
 }
 
@@ -159,8 +158,6 @@ __Z_INLINE parser_error_t _readMethod_stop_crypto_functionality_V12(
 __Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
     parser_context_t* c, pd_sudo_unchecked_weight_V12_t* m)
 {
-    m->call.type = 1793;
-    c->sizeModifier = 8;
     CHECK_ERROR(_readCall(c, &m->call))
     CHECK_ERROR(_readUncheckedWeight_V12(c, &m->weight))
     return parser_ok;
@@ -169,7 +166,6 @@ __Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
 __Z_INLINE parser_error_t _readMethod_sudo_call_V12(
     parser_context_t* c, pd_sudo_call_V12_t* m)
 {
-    m->call.type = 1792;
     CHECK_ERROR(_readCall(c, &m->call))
     return parser_ok;
 }
@@ -808,8 +804,8 @@ parser_error_t _getMethod_ItemValue_V12(
         switch (itemIdx)
        {
         case 0: /* set_code - id */
-            return _toStringId_V12(
-                &m->basic.set_code_V12.set_id,
+            return _toStringBytes(
+                &m->basic.set_code_V12.code,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

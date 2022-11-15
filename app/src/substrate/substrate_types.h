@@ -97,7 +97,6 @@ typedef struct {
     pd_CallIndex_t callIndex;
     const uint32_t* _txVerPtr;
     pd_NestCallIdx_t nestCallIdx;
-    uint16_t type;
 } pd_Call_t;
 
 typedef struct {

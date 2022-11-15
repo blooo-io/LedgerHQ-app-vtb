@@ -460,19 +460,6 @@ parser_error_t _toStringCall(
         buffer = v->nestCallIdx._nextPtr;
     }
     parser_init(&ctx, buffer, v->nestCallIdx._lenBuffer);
-
-    // If nested call need sizeModifier to calculate dynamic len
-    switch (v->type)
-    {
-    case 1793:
-        ctx.sizeModifier = 8;
-        break;
-    case 1792:
-        break;
-    default:
-        break;
-    }
-
     parser_tx_t _txObj;
 
     pd_Call_t _call;
