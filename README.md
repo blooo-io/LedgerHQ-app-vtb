@@ -20,7 +20,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# VTB  1.107.x (Main) & VTB v1.143 (Test)
+# VTB  1.107.x (Main) & VTB v1.143.x (Test)
 
 ## vtbDex
 

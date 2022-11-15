@@ -58,12 +58,12 @@ If you see conan is not found, check that you installed the package in the same 
 
   If you installed what is described above, just run:
   
-    Mainnet :
+    Main :
     ```bash
     make
     ```
 
-    Testnet : 
+    Test : 
     ```bash
     make TEST=1
     ```
