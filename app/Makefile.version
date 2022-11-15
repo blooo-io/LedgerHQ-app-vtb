@@ -2,14 +2,14 @@
 # This is the `transaction_version` field of `Runtime`
 APPVERSION_M=1
 # This is the `spec_version` field of `Runtime`
-APPVERSION_N=108
+APPVERSION_N=107
 # This is the patch version of this release
-APPVERSION_P=0
+APPVERSION_P=6
 
 # TESTNET
 # This is the `transaction_version` field of `Runtime`
 APPVERSION_TM=1
 # This is the `spec_version` field of `Runtime`
-APPVERSION_TN=144
+APPVERSION_TN=143
 # This is the patch version of this release
-APPVERSION_TP=0
+APPVERSION_TP=4
