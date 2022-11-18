@@ -50,6 +50,11 @@ typedef struct {
     uint8_t len;
 } pd_LookupId_V12_t;
 
+typedef struct {
+    const uint8_t* _ptr;
+    uint8_t len;
+} pd_Weight_t;
+
 typedef enum {
     EOS,
     ETH,

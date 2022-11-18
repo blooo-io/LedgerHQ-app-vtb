@@ -135,8 +135,7 @@ __Z_INLINE parser_error_t _readMethod_set_key_V12(
 __Z_INLINE parser_error_t _readMethod_set_code_V12(
     parser_context_t* c, pd_set_code_V12_t* m)
 {
-    c->offset += 1;
-    CHECK_ERROR(_readLookupId_V12(c, &m->set_id))
+    CHECK_ERROR(_readBytes(c, &m->code))
     return parser_ok;
 }
 
@@ -153,6 +152,14 @@ __Z_INLINE parser_error_t _readMethod_stop_crypto_functionality_V12(
 {
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
+    parser_context_t* c, pd_sudo_unchecked_weight_V12_t* m)
+{
+    CHECK_ERROR(_readCall(c, &m->call))
+    CHECK_ERROR(_readu64 (c, &m->weight))
     return parser_ok;
 }
 
@@ -226,6 +233,9 @@ parser_error_t _readMethod_V12(
         break;
     case 1794: /* module 7 call 2 */
         CHECK_ERROR(_readMethod_set_key_V12(c, &method->basic.set_key_V12))
+        break;
+    case 1793: /* module 7 call 1 */
+        CHECK_ERROR(_readMethod_sudo_unchecked_weight_V12(c, &method->basic.sudo_unchecked_weight_V12))
         break;
     case 1792: /* module 7 call 0 */
         CHECK_ERROR(_readMethod_sudo_call_V12(c, &method->basic.sudo_call_V12))
@@ -305,6 +315,8 @@ const char* _getMethod_Name_V12(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT;
     case 1794: /* module 7 call 2 */
         return STR_ME_SET_KEY;
+    case 1793: /* module 7 call 1 */
+        return STR_ME_SUDO_UNCHECKED_WEIGHT;
     case 1792: /* module 7 call 0 */
         return STR_ME_SUDO_CALL;
     case 3: /* module 0 call 3 */
@@ -354,6 +366,8 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 1794: /* module 7 call 2 */
         return 1;
+    case 1793: /* module 7 call 1 */
+        return 2;
     case 1792: /* module 7 call 0 */
         return 1;
     case 3: /* module 0 call 3 */
@@ -508,6 +522,16 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
         {
         case 0:
             return STR_IT_account;
+        default:
+            return NULL;
+        }
+    case 1793: /* module 7 call 1 */
+        switch(itemIdx) 
+        {
+        case 0:
+            return STR_IT_call;
+        case 1:
+            return STR_IT_weight;
         default:
             return NULL;
         }
@@ -749,8 +773,25 @@ parser_error_t _getMethod_ItemValue_V12(
         default:
             return parser_no_data;
         } 
+    case 1793: /* module 7 call 1 */
+        switch (itemIdx)
+        {
+        case 0: /* sudo_unchecked_weight  - call */;
+            return _toStringCall(
+                &m->basic.sudo_unchecked_weight_V12.call,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* sudo_unchecked_weight - weight */;
+            return _toStringu64(
+                &m->basic.sudo_unchecked_weight_V12.weight,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
     case 1792: /* module 7 call 0 */
-        switch (itemIdx) {
+        switch (itemIdx) 
+        {
         case 0: /* Sudo - call */;
             return _toStringCall(
                 &m->basic.sudo_call_V12.call,
@@ -763,8 +804,8 @@ parser_error_t _getMethod_ItemValue_V12(
         switch (itemIdx)
        {
         case 0: /* set_code - id */
-            return _toStringId_V12(
-                &m->basic.set_code_V12.set_id,
+            return _toStringBytes(
+                &m->basic.set_code_V12.code,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

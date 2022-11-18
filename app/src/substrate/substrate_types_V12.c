@@ -1095,7 +1095,7 @@ parser_error_t _readLookupOrder_V12(
 parser_error_t _readLookupId_V12(
     parser_context_t* c,
     pd_LookupId_V12_t* v) {
-    // OrderID are not length delimited so in order to retrieve the value
+    // ID are not length delimited so in order to retrieve the value
     // it is necessary to calculate the length of the order.
     // The transaction is expect to end in
     // [2 bytes] era

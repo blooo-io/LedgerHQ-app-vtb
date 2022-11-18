@@ -459,13 +459,11 @@ parser_error_t _toStringCall(
     } else {
         buffer = v->nestCallIdx._nextPtr;
     }
-
     parser_init(&ctx, buffer, v->nestCallIdx._lenBuffer);
     parser_tx_t _txObj;
 
     pd_Call_t _call;
     _call.nestCallIdx.isTail = false;
-
     ctx.tx_obj = &_txObj;
     _txObj.transactionVersion = *v->_txVerPtr;
 
@@ -483,7 +481,6 @@ parser_error_t _toStringCall(
 
     // Get num items of this current Call
     uint8_t callNumItems = _getMethod_NumItems(v->callIndex.moduleIdx, v->callIndex.idx);
-
     // Count how many pages this call has (including nested ones if they exists)
     for (uint8_t i = 0; i < callNumItems; i++) {
         uint8_t itemPages = 0;

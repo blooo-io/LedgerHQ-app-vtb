@@ -651,7 +651,6 @@ describe('Standard', function () {
       await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic_set_key`)
 
       const signatureResponse = await signatureRequest
-      console.log(signatureResponse)
 
       expect(signatureResponse.return_code).toEqual(0x9000)
       expect(signatureResponse.error_message).toEqual('No errors')

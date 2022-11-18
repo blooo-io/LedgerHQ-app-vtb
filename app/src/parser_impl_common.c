@@ -413,13 +413,12 @@ uint16_t _detectAddressType(const parser_context_t *c)
 {
     char hashstr[65];
     uint8_t pc;
-
+    
     if (c->tx_obj->genesisHash._ptr != NULL)
     {
         _toStringHash(&c->tx_obj->genesisHash, hashstr, 65, 0, &pc);
-
         // Compare with known genesis hashes
-        if (strcmp(hashstr, COIN_GENESIS_HASH) == 0)
+        if (strcmp(hashstr, MAINCOIN_GENESIS_HASH) == 0 || strcmp(hashstr, TESTCOIN_GENESIS_HASH) == 0)
         {
             return PK_ADDRESS_TYPE;
         }

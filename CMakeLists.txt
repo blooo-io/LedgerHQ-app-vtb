@@ -81,6 +81,7 @@ set (RETRIEVE_MAJOR_CMD
 set (RETRIEVE_MINOR_CMD
         "cat ${CMAKE_CURRENT_SOURCE_DIR}/app/Makefile.version | grep APPVERSION_N | cut -b 14- | tr -d '\n'"
 )
+
 execute_process(
         COMMAND bash "-c" ${RETRIEVE_MAJOR_CMD}
         RESULT_VARIABLE MAJOR_RESULT

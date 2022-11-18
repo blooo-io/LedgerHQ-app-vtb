@@ -64,6 +64,7 @@ extern "C"
     static const char* STR_ME_SET_CODE = "Set code";
     static const char* STR_ME_SET_KEY = "Set key";
     static const char* STR_ME_SUDO_CALL = "Sudo call";
+    static const char* STR_ME_SUDO_UNCHECKED_WEIGHT = "Sudo Unchecked Weight";
     static const char* STR_ME_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT = "Check & return withdraw amount";
     static const char* STR_ME_CHECK_AND_REMOVE_FROM_PENDING_LIST = "Check & remove from pending list";
     static const char* STR_ME_WITHDRAW_INITIATE = "Withdraw Initiate";
@@ -373,6 +374,7 @@ extern "C"
     static const char* STR_IT_schedule2_index = "Schedule2 index";
     static const char* STR_IT_calls = "Calls";
     static const char* STR_IT_call = "Call";
+    static const char* STR_IT_weight = "Weight";
     static const char* STR_IT_as_origin = "As origin";
     static const char* STR_IT_account = "Account";
     static const char* STR_IT_info = "Info";
