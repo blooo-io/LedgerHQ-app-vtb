@@ -49,7 +49,7 @@ Please:
 | :---------- |:--------|
 |Set key | `LookupSource` new <br/> |
 |Call | `Call` method <br/> |
-|Unchecked Weight | `Call` method <br/> `u256` weight <br/> |
+|Unchecked Weight | `Call` method <br/> `u64` weight <br/> |
 
 ## System
 

@@ -159,7 +159,7 @@ __Z_INLINE parser_error_t _readMethod_sudo_unchecked_weight_V12(
     parser_context_t* c, pd_sudo_unchecked_weight_V12_t* m)
 {
     CHECK_ERROR(_readCall(c, &m->call))
-    CHECK_ERROR(_readUncheckedWeight_V12(c, &m->weight))
+    CHECK_ERROR(_readu64 (c, &m->weight))
     return parser_ok;
 }
 
@@ -782,7 +782,7 @@ parser_error_t _getMethod_ItemValue_V12(
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* sudo_unchecked_weight - weight */;
-            return _toStringUncheckedWeight_V12(
+            return _toStringu64(
                 &m->basic.sudo_unchecked_weight_V12.weight,
                 outValue, outValueLen,
                 pageIdx, pageCount);

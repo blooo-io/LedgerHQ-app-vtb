@@ -70,7 +70,7 @@ extern "C"
     typedef struct 
     {
         pd_Call_t call;
-        pd_Weight_t weight;
+        pd_u64_t weight;
     } pd_sudo_unchecked_weight_V12_t;
 
 #define PD_SET_KEY_V12 1794

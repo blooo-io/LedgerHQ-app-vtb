@@ -1074,14 +1074,6 @@ parser_error_t _readLookupAddress32_V12(
     GEN_DEF_READARRAY(size)
 } 
 
-parser_error_t _readUncheckedWeight_V12(
-    parser_context_t* c, 
-    pd_Weight_t* v) {
-    const uint16_t size = 8;
-    v->len = (uint8_t) size;
-    GEN_DEF_READARRAY(size)
-}
-
 parser_error_t _readLookupOrder_V12(
     parser_context_t* c,
     pd_LookupCryptoOrder_V12_t* v) {
@@ -1336,17 +1328,6 @@ parser_error_t _toStringLookupasStaticLookupOrder_V12(
 
 parser_error_t _toStringId_V12(
     const pd_LookupId_V12_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CLEAN_AND_CHECK()
-    GEN_DEF_TOSTRING_ARRAY(v->len)
-}
-
-parser_error_t _toStringUncheckedWeight_V12(
-    const pd_Weight_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
