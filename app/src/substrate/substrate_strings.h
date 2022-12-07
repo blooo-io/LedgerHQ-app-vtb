@@ -74,8 +74,7 @@ extern "C"
     static const char* STR_ME_CLAIM_DISTRIBUTION = "Claim Distribution";
     static const char* STR_ME_RESUME_CRYPTO_FUNCTIONALITY = "Resume Crypto Functionality";
     static const char* STR_ME_STOP_CRYPTO_FUNCTIONALITY = "Stop Crypto Functionality";
-    static const char* STR_ME_CANCEL_SELL_VTBC_ORDER = "Cancel sell Vtbc";
-    static const char* STR_ME_CANCEL_BUY_VTBC_ORDER = "Cancel buy Vtbc";
+    static const char* STR_ME_CANCEL_VTBC_ORDER = "Cancel Vtbc Order";
     static const char* STR_ME_SELL_VTBC = "Sell Vtbc";
     static const char* STR_ME_BUY_VTBC = "Buy Vtbc";
     static const char* STR_ME_FILL_BLOCK = "Fill block";
@@ -282,6 +281,7 @@ extern "C"
 
     // Items names
     static const char* STR_IT_crypto_amount = "Crypto amount";
+    static const char* STR_IT_trade_type = "Trade type";
     static const char* STR_IT_crypto_type = "Crypto type";
     static const char* STR_IT_fee_amount = "Fee amount";
     static const char* STR_IT_order_id = "Order id";
