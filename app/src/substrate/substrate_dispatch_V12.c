@@ -191,19 +191,19 @@ parser_error_t _readMethod_V12(
                // stopVTBdexFunc
         break;
     case 3076: /* module 12 call 4 */
-        CHECK_ERROR(_readMethod_check_and_remove_from_pending_list_V12(c, &method->basic.check_and_remove_from_pending_list_V12))
+        CHECK_ERROR(_readMethod_check_and_remove_from_pending_list_V12(c, &method->nested.check_and_remove_from_pending_list_V12))
         break;
     case 3075: /* module 12 call 3 */
-        CHECK_ERROR(_readMethod_check_and_return_withdraw_pending_amount_V12(c, &method->basic.check_and_return_withdraw_pending_amount_V12))
+        CHECK_ERROR(_readMethod_check_and_return_withdraw_pending_amount_V12(c, &method->nested.check_and_return_withdraw_pending_amount_V12))
         break;
     case 3073: /* module 12 call 1 */
-        CHECK_ERROR(_readMethod_set_vtb_dex_transaction_fee_V12(c, &method->basic.set_vtb_dex_transaction_fee_V12))
+        CHECK_ERROR(_readMethod_set_vtb_dex_transaction_fee_V12(c, &method->nested.set_vtb_dex_transaction_fee_V12))
         break;
     case 3072: /* module 12 call 0 */
-        CHECK_ERROR(_readMethod_set_vtb_dex_fee_collector_account_V12(c, &method->basic.set_vtb_dex_fee_collector_account_V12))
+        CHECK_ERROR(_readMethod_set_vtb_dex_fee_collector_account_V12(c, &method->nested.set_vtb_dex_fee_collector_account_V12))
         break;
     case 1794: /* module 7 call 2 */
-        CHECK_ERROR(_readMethod_set_key_V12(c, &method->basic.set_key_V12))
+        CHECK_ERROR(_readMethod_set_key_V12(c, &method->nested.set_key_V12))
         break;
     case 1793: /* module 7 call 1 */
         CHECK_ERROR(_readMethod_sudo_unchecked_weight_V12(c, &method->basic.sudo_unchecked_weight_V12))
@@ -212,7 +212,7 @@ parser_error_t _readMethod_V12(
         CHECK_ERROR(_readMethod_sudo_call_V12(c, &method->basic.sudo_call_V12))
         break;
     case 3: /* module 0 call 3 */
-        CHECK_ERROR(_readMethod_set_code_V12(c, &method->basic.set_code_V12))
+        CHECK_ERROR(_readMethod_set_code_V12(c, &method->nested.set_code_V12))
         break;
     default:
         return parser_unexpected_callIndex;
@@ -629,12 +629,12 @@ parser_error_t _getMethod_ItemValue_V12(
         {
         case 0: /* check_and_remove_from_pending_list - dest */;
             return _toStringLookupasStaticLookupAddress_V12(
-                &m->basic.check_and_remove_from_pending_list_V12.dest,
+                &m->nested.check_and_remove_from_pending_list_V12.dest,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* check_and_remove_from_pending_list - id */
             return _toStringId_V12(
-                &m->basic.check_and_remove_from_pending_list_V12.id,
+                &m->nested.check_and_remove_from_pending_list_V12.id,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -645,12 +645,12 @@ parser_error_t _getMethod_ItemValue_V12(
         {
         case 0: /* check_and_return_withdraw_pending_amount - dest */;
             return _toStringLookupasStaticLookupAddress_V12(
-                &m->basic.check_and_return_withdraw_pending_amount_V12.dest,
+                &m->nested.check_and_return_withdraw_pending_amount_V12.dest,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* check_and_return_withdraw_pending_amount - id */
             return _toStringId_V12(
-                &m->basic.check_and_return_withdraw_pending_amount_V12.id,
+                &m->nested.check_and_return_withdraw_pending_amount_V12.id,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -661,7 +661,7 @@ parser_error_t _getMethod_ItemValue_V12(
         {
         case 0: /* set_vbt_dex_transaction_fee - fee amount */
             return _toStringCompactAmount(
-                &m->basic.set_vtb_dex_transaction_fee_V12.value,
+                &m->nested.set_vtb_dex_transaction_fee_V12.value,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -672,7 +672,7 @@ parser_error_t _getMethod_ItemValue_V12(
         {
         case 0: /* set_vtb_dex_collector_fee_account - dest */
             return _toStringLookupasStaticLookupAddress_V12(
-                &m->basic.set_vtb_dex_fee_collector_account_V12.dest,
+                &m->nested.set_vtb_dex_fee_collector_account_V12.dest,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -683,7 +683,7 @@ parser_error_t _getMethod_ItemValue_V12(
         {
         case 0: /* set_key - dest */
             return _toStringLookupasStaticLookupAddress_V12(
-                &m->basic.set_key_V12.dest,
+                &m->nested.set_key_V12.dest,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -721,7 +721,7 @@ parser_error_t _getMethod_ItemValue_V12(
        {
         case 0: /* set_code - id */
             return _toStringBytes(
-                &m->basic.set_code_V12.code,
+                &m->nested.set_code_V12.code,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

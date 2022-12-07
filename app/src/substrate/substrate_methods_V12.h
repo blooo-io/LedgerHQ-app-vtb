@@ -27,64 +27,12 @@ extern "C"
 #include <stddef.h>
 #include <stdint.h>
 
-#define PD_SET_CODE_V12 3
-    typedef struct
-    {
-        pd_Bytes_t code;
-    } pd_set_code_V12_t;
-
 #define PD_SUDO_UNCHECKED_WEIGHT 1793
     typedef struct 
     {
         pd_Call_t call;
         pd_u64_t weight;
     } pd_sudo_unchecked_weight_V12_t;
-
-#define PD_SET_KEY_V12 1794
-    typedef struct
-    {
-        pd_LookupCryptoAddress_V12_t dest;
-    } pd_set_key_V12_t;
-
-#define PD_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT_V12 3072
-    typedef struct
-    {
-        pd_LookupCryptoAddress_V12_t dest;
-    } pd_set_vtb_dex_fee_collector_account_V12_t;
-
-#define PD_SET_VTB_DEX_TRANSACTION_FEE_V12 3073
-    typedef struct
-    {
-        compactInt_t value;
-    } pd_set_vtb_dex_transaction_fee_V12_t;
-
-#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 3074
-    typedef struct
-    {
-        pd_LookupCryptoAddress_V12_t dest;
-        pd_LookupId_V12_t id;
-    } pd_check_and_return_withdraw_pending_amount_V12_t;
-
-#define PD_SET_CHECK_AND_REMOVE_FROM_LIST 3075
-    typedef struct
-    {
-        pd_LookupCryptoAddress_V12_t dest;
-        pd_LookupId_V12_t id;
-    } pd_check_and_remove_from_pending_list_V12_t;
-
-#define PD_STOP_CRYPTO_FUNCTIONALITY_V12 3078
-    typedef struct
-    {
-        compactInt_t value;
-        pd_LookupCryptoTokenType_V12_t crypto_type;
-    } pd_stop_crypto_functionality_V12_t;
-
-#define PD_RESUME_CRYPTO_FUNCTIONALITY_V12 3079
-    typedef struct
-    {
-        compactInt_t value;
-        pd_LookupCryptoTokenType_V12_t crypto_type;
-    } pd_resume_crypto_functionality_V12_t;
 
 #define PD_BUY_VTBC_V12 3080
     typedef struct
@@ -145,6 +93,10 @@ extern "C"
         pd_Call_t call;
     } pd_sudo_call_V12_t;
 
+#ifdef SUBSTRATE_PARSER_FULL
+
+#endif
+
     typedef union
     {
         pd_buy_vtbc_V12_t buy_vtbc_V12;
@@ -155,20 +107,81 @@ extern "C"
         pd_claim_distribution_V12_t claim_distribution_V12;
         pd_initiate_convert_vtbc_to_vtbt_substrate_V12_t initiate_convert_vtbc_to_vtbt_substrate_V12;
         pd_initiate_convert_vtbt_to_vtbc_substrate_V12_t initiate_convert_vtbt_to_vtbc_substrate_V12;
+        pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
+        pd_cancel_vtbc_order_V12_t cancel_vtbc_order_V12;
+
+#ifdef SUBSTRATE_PARSER_FULL
+#endif
+    } pd_MethodBasic_V12_t;
+
+#define PD_SET_CODE_V12 3
+    typedef struct
+    {
+        pd_Bytes_t code;
+    } pd_set_code_V12_t;
+
+#define PD_SET_KEY_V12 1794
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+    } pd_set_key_V12_t;
+
+#define PD_SET_VTB_DEX_FEE_COLLECTOR_ACCOUNT_V12 3072
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+    } pd_set_vtb_dex_fee_collector_account_V12_t;
+
+#define PD_SET_VTB_DEX_TRANSACTION_FEE_V12 3073
+    typedef struct
+    {
+        compactInt_t value;
+    } pd_set_vtb_dex_transaction_fee_V12_t;
+
+#define PD_SET_CHECK_AND_RETURN_WITHDRAW_PENDING_AMOUNT 3074
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+        pd_LookupId_V12_t id;
+    } pd_check_and_return_withdraw_pending_amount_V12_t;
+
+#define PD_SET_CHECK_AND_REMOVE_FROM_LIST 3075
+    typedef struct
+    {
+        pd_LookupCryptoAddress_V12_t dest;
+        pd_LookupId_V12_t id;
+    } pd_check_and_remove_from_pending_list_V12_t;
+
+#define PD_STOP_CRYPTO_FUNCTIONALITY_V12 3078
+    typedef struct
+    {
+        compactInt_t value;
+        pd_LookupCryptoTokenType_V12_t crypto_type;
+    } pd_stop_crypto_functionality_V12_t;
+
+#define PD_RESUME_CRYPTO_FUNCTIONALITY_V12 3079
+    typedef struct
+    {
+        compactInt_t value;
+        pd_LookupCryptoTokenType_V12_t crypto_type;
+    } pd_resume_crypto_functionality_V12_t;
+
+#ifdef SUBSTRATE_PARSER_FULL
+#endif
+
+    typedef union
+    {
         pd_set_code_V12_t set_code_V12;
         pd_set_key_V12_t set_key_V12;
         pd_set_vtb_dex_transaction_fee_V12_t set_vtb_dex_transaction_fee_V12;
         pd_set_vtb_dex_fee_collector_account_V12_t set_vtb_dex_fee_collector_account_V12;
         pd_check_and_return_withdraw_pending_amount_V12_t check_and_return_withdraw_pending_amount_V12;
         pd_check_and_remove_from_pending_list_V12_t check_and_remove_from_pending_list_V12;
-        pd_initiate_transfer_of_vtbt_substrate_V12_t initiate_transfer_of_vtbt_substrate_V12;
         pd_resume_crypto_functionality_V12_t resume_crypto_functionality_V12;
         pd_stop_crypto_functionality_V12_t stop_crypto_functionality_V12;
-        pd_cancel_vtbc_order_V12_t cancel_vtbc_order_V12;
-    } pd_MethodBasic_V12_t;
 
-    typedef union
-    {
+#ifdef SUBSTRATE_PARSER_FULL
+#endif
     } pd_MethodNested_V12_t;
 
     typedef union
