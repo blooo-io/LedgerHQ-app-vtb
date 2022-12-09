@@ -36,6 +36,10 @@ typedef struct {
 } pd_LookupCryptoTokenType_V12_t;
 
 typedef struct {
+    uint8_t value;
+} pd_LookupTradeType_V12_t;
+
+typedef struct {
     const uint8_t* _ptr;
     uint8_t len;
 } pd_LookupCryptoAddress_V12_t;
@@ -63,6 +67,11 @@ typedef enum {
     USDT,
     USDC
 } pd_TokenType_V12_t;
+
+typedef enum {
+    BUY,
+    SELL,
+} pd_TradeType_V12_t;
 
 typedef struct {
     const uint8_t* _ptr;

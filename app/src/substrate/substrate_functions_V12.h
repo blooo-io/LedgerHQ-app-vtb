@@ -27,6 +27,7 @@ extern "C" {
 
 // Read functions
 parser_error_t _readLookupCryptoTokenType_V12(parser_context_t* c,pd_LookupCryptoTokenType_V12_t* v);
+parser_error_t _readLookupTradeType_V12(parser_context_t* c,pd_LookupTradeType_V12_t* v);
 parser_error_t _readLookupCryptoAmount_V12(parser_context_t* c,compactInt_t* v);
 parser_error_t _readLookupOrder_V12(parser_context_t* c,pd_LookupCryptoOrder_V12_t* v);
 parser_error_t _readUncheckedWeight_V12(parser_context_t* c, pd_Weight_t* v);
@@ -131,6 +132,13 @@ parser_error_t _readschedulePriority_V12(parser_context_t* c, pd_schedulePriorit
 // toString functions
 parser_error_t _toStringLookupCryptoTokenType_V12(
     const pd_LookupCryptoTokenType_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringLookupTradeType_V12(
+    const pd_LookupTradeType_V12_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

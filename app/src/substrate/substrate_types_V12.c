@@ -698,6 +698,26 @@ parser_error_t _toStringLookupCryptoTokenType_V12(
     }
 }
 
+parser_error_t _toStringLookupTradeType_V12(
+    const pd_LookupTradeType_V12_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    switch (v->value)
+    {
+    case BUY:
+        pageString(outValue, outValueLen, "Buy", pageIdx, pageCount);
+        return parser_ok;
+    case SELL:
+        pageString(outValue, outValueLen, "Sell", pageIdx, pageCount);
+        return parser_ok;
+    default:
+        return parser_unexpected_address_type;
+    }
+}
+
 parser_error_t _toStringAccountIndex_V12(
     const pd_AccountIndex_V12_t* v,
     char* outValue,
@@ -1128,6 +1148,20 @@ parser_error_t _readLookupCryptoTokenType_V12(
     case VTBT: // VTBT
     case USDT: // USDT
     case USDC: // USDC
+        return parser_ok;
+    default:
+        return parser_unexpected_address_type;
+    }
+    return parser_ok;
+}
+
+parser_error_t _readLookupTradeType_V12(
+    parser_context_t* c,
+    pd_LookupTradeType_V12_t* v)
+{
+    switch (v->value) {
+    case BUY: // BUY
+    case SELL: // SELL
         return parser_ok;
     default:
         return parser_unexpected_address_type;
