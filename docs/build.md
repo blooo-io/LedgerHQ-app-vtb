@@ -67,12 +67,12 @@ If you see conan is not found, check that you installed the package in the same 
 
   If you installed what is described above, just run:
   
-    Main :
+    Mainnet :
     ```bash
     make
     ```
 
-    Test : 
+    Testnet : 
     ```bash
     make TEST=1
     ```
@@ -179,10 +179,15 @@ The Makefile will build the firmware in a docker container and leave the binary 
 
 - Build
 
-   ```
-   make                # Builds the app
-   ```
-   ```
+    Mainnet :
+    ```bash
+    make
+    ```
+
+    Testnet : 
+    ```bash
+    make TEST=1
+    ```
 
 - Upload to a device
 

@@ -687,6 +687,12 @@ parser_error_t _toStringLookupCryptoTokenType_V12(
     case VTBT:
         pageString(outValue, outValueLen, "VTBT", pageIdx, pageCount);
         return parser_ok;
+    case USDT:
+        pageString(outValue, outValueLen, "USDT", pageIdx, pageCount);
+        return parser_ok;
+    case USDC:
+        pageString(outValue, outValueLen, "USDC", pageIdx, pageCount);
+        return parser_ok;
     default:
         return parser_unexpected_address_type;
     }
@@ -1140,6 +1146,8 @@ parser_error_t _readLookupCryptoTokenType_V12(
     case ETH: // ETH
     case VTBC: // VTBC
     case VTBT: // VTBT
+    case USDT: // USDT
+    case USDC: // USDC
         return parser_ok;
     default:
         return parser_unexpected_address_type;
