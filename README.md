@@ -20,17 +20,16 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# VTB  1.107.x (Main) & VTB v1.143.x (Test)
+# VTB  1.107.x (Mainnet) & VTB v1.143.x (Testnet)
 
 ## vtbDex
 
 | Name        | Arguments |
 | :---------- |:--------|
-|Buy Vtbc | `TokenType` crypto_type <br/> `u256` crypto_amount <br/> |
-|Sell Vtbc | `TokenType` crypto_type <br/> `u256` crypto_amount <br/> |
-|Cancel buy Vtbc order | `Vecu8` order_id <br/> |
-|Cancel sell Vtbc order | `Vecu8` order_id <br/> |
-|Claim distribution | `TokenType` crypto_type <br/> |
+|Buy Vtbc | `TokenType` PalletVtbdexCryptosTypesTokenType <br/> `u256` crypto_amount <br/> |
+|Sell Vtbc | `TokenType` PalletVtbdexCryptosTypesTokenType <br/> `u256` crypto_amount <br/> |
+|Cancel Vtbc order | `tradeType` PalletVtbdexTradeTypesTradeType <br/> `Vecu8` order_id <br/> `tokenType` PalletVtbdexCryptosTypesTokenType <br/> |
+|Claim distribution | `TokenType` PalletVtbdexCryptosTypesTokenType <br/> |
 |Initiate convert Vtbc to Vtbt substrate | `u256` crypto_amount <br/> |
 |Initiate convert Vtbt to Vtbc substrate | `u256` crypto_amount <br/> |
 |Initiate transfer of Vtbt substrate | `AccountId` address <br/>`u256` crypto_amount <br/> |
@@ -40,8 +39,6 @@ Please:
 |Resume VTBDex functionality | none |
 |Check and return withdraw pending amount | `AccountId` user <br/> `Bytes` id <br/> |
 |Check and remove from pending list | `AccountId` user <br/> `Bytes` id <br/> |
-|Resume crypto functionality | `TokenType` token <br/> |
-|Stop crypto functionality | `TokenType` token <br/> |
 
 ## Sudo
 

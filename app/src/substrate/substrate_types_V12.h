@@ -59,7 +59,9 @@ typedef enum {
     EOS,
     ETH,
     VTBC,
-    VTBT
+    VTBT,
+    USDT,
+    USDC
 } pd_TokenType_V12_t;
 
 typedef struct {
