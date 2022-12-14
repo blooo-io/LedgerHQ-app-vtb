@@ -44,22 +44,24 @@
   {
     "index": 3,
     "name": "Withdraw_Initiate",
-    "blob": "0c0a01000064a7b3b6e00d000000000000000000000000000000000000000000000000450100006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f5a5f5db21bb13df05f79d2140f24b969b1dad27426108731ef8e15a3b3811746",
+    "blob": "0c0a01000064a7b3b6e00d0000000000000000000000000000000000000000000000001c56789987656780450100006b00000001000000286bc8414c7000ce1d6ee6a834e29a54c1784814b76243eb77ed0b2c5573c60f5a5f5db21bb13df05f79d2140f24b969b1dad27426108731ef8e15a3b3811746",
     "output": [
       "0 | VtbDex : Withdraw Initiate",
       "1 | Crypto type : ETH",
-      "2 | Crypto amount : VTB 1.0"
+      "2 | Crypto amount : VTB 1.0",
+      "3 | Receiver address : 56789987656780"
     ],
     "output_expert": [
       "0 | VtbDex : Withdraw Initiate",
       "1 | Crypto type : ETH",
       "2 | Crypto amount : VTB 1.0",
-      "3 | Chain : VTB",
-      "4 | Nonce : 0",
-      "5 | Era Phase : 20",
-      "6 | Era Period : 64",
-      "7 | Block [1/2] : 5a5f5db21bb13df05f79d2140f24b969b1dad2",
-      "7 | Block [2/2] : 7426108731ef8e15a3b3811746"
+      "3 | Receiver address : 56789987656780",
+      "4 | Chain : VTB",
+      "5 | Nonce : 0",
+      "6 | Era Phase : 20",
+      "7 | Era Period : 64",
+      "8 | Block [1/2] : 5a5f5db21bb13df05f79d2140f24b969b1dad2",
+      "8 | Block [2/2] : 7426108731ef8e15a3b3811746"
     ]
   },
   {
