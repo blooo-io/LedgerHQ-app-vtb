@@ -55,6 +55,7 @@ __Z_INLINE parser_error_t _readMethod_withdraw_initiate_V12(
     CHECK_ERROR(_readUInt8(c, &m->crypto_type.value))
     CHECK_ERROR(_readLookupCryptoTokenType_V12(c, &m->crypto_type))
     CHECK_ERROR(_readLookupCryptoAmount_V12(c, &m->value))
+    CHECK_ERROR(_readBytes(c, &m->receiverAddress))
     return parser_ok;
 }
 
@@ -308,7 +309,7 @@ uint8_t _getMethod_NumItems_V12(uint8_t moduleIdx, uint8_t callIdx)
     case 3083: /* module 12 call 11 */
         return 1;
     case 3082: /* module 12 call 10 */
-        return 2;
+        return 3;
     case 3081: /* module 12 call 9 */
         return 3;
     case 3080: /* module 12 call 8 */
@@ -385,6 +386,8 @@ const char* _getMethod_ItemName_V12(uint8_t moduleIdx, uint8_t callIdx, uint8_t 
             return STR_IT_crypto_type;
         case 1:
             return STR_IT_crypto_amount;
+        case 2:
+            return STR_IT_receiver_address;
         default:
             return NULL;
         }
@@ -566,6 +569,11 @@ parser_error_t _getMethod_ItemValue_V12(
         case 1: /* withdraw_initiate - amount */;
             return _toStringCompactAmount(
                 &m->basic.withdraw_initiate_V12.value,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* withdraw_initiate - receiver address */;
+            return _toStringBytes(
+                &m->basic.withdraw_initiate_V12.receiverAddress,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

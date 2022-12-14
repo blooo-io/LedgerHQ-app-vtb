@@ -61,6 +61,7 @@ extern "C"
     {
         compactInt_t value;
         pd_LookupCryptoTokenType_V12_t crypto_type;
+        pd_Bytes_t receiverAddress;
     } pd_withdraw_initiate_V12_t;
 
 #define PD_CLAIM_DISTRIBUTION_V12 3092

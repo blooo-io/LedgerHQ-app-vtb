@@ -281,6 +281,7 @@ extern "C"
 
     // Items names
     static const char* STR_IT_crypto_amount = "Crypto amount";
+    static const char* STR_IT_receiver_address = "Receiver address";
     static const char* STR_IT_trade_type = "Trade type";
     static const char* STR_IT_crypto_type = "Crypto type";
     static const char* STR_IT_fee_amount = "Fee amount";
